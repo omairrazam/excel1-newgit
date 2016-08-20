@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', '~> 0.10.0', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -51,12 +51,12 @@ gem  'twitter'
 group :production do
   gem 'pg', '0.18.4'
 end
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 gem 'roo', '~> 2.4.0'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'kaminari', '~> 0.17.0'
-gem 'contact_us', '~> 1.1'
+gem 'contact_us', '~> 1.1.0'
 gem 'ckeditor'
 gem "cocoon"
 
