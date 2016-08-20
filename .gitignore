@@ -18,7 +18,7 @@
 .byebug_history
 
 /test
-/public/
+
 
 /excelsheet/*
 config/database.yml
