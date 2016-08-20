@@ -13,13 +13,15 @@
   <div class="blog-masthead">
 
     <div class="container-content logo">
-    <span class = "pull-left " ><%= link_to "Stock Cloud <br /> Research".html_safe, root_path %></span>
+    <span class = "pull-left " ><%= link_to image_tag('logo.jpeg'), root_path %></span>
     <div class = "container">
     
       <nav class="blog-nav">
         <%= nav_link 'Market Studies', root_path %>
         <%= nav_link 'Active Studies', active_studies_path %>
-        <%#= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
+        <% if Category.first.present? %>
+        <%= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
+        <% end %>
         <%= nav_link 'Market Internals', market_internals_path %>
         <%= nav_link 'General Market Studies', general_market_studies_path %>
         <%#= nav_link 'Interested?', interesteds_path %>

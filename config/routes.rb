@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :excelsheets
   ActiveAdmin.routes(self)
   devise_for :users,controllers: { registrations: 'registrations' }
   resources :categories do

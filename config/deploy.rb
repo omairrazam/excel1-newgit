@@ -3,7 +3,7 @@
 lock '3.6.0'
 
 set :application, 'excel1'
-set :repo_url, 'git@github.com:omairrazam/excel1.git' # Edit this to match your repository
+set :repo_url, 'git@github.com:omairrazam/excel1-newgit.git' # Edit this to match your repository
 set :branch, :master
 set :deploy_to, '/home/deploy/excel1'
 set :pty, true
