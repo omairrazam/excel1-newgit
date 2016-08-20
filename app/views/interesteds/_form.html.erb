@@ -1,0 +1,24 @@
+<%= form_for(@interested) do |f| %>
+  <% if @interested.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@interested.errors.count, "error") %> prohibited this interested from being saved:</h2>
+
+      <ul>
+      <% @interested.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.cktext_area :content %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary"%>
+  </div>
+<% end %>
+
+

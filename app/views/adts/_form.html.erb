@@ -1,0 +1,62 @@
+
+ <%#= f.label :name %>
+ <%#= f.text_field :name, class:  "form-control field" %>
+
+ <%#= f.label :Sheetname %>
+ <%#= f.text_field :sheetname, class:  "form-control field" %>
+
+ <%#= f.label :X_column_name %>
+ <%#= f.text_field :x_colname, class:  "form-control field" %>
+
+ 
+
+ <!--  <div class="col-md-6">
+  	 <%#= f.label "Dataset1 Column Name" %>
+	 <%#= f.text_field :y1_colname, class:  "form-control field" %>
+	  <%#= f.label "Dataset1 Legend Name" %>
+	 <%#= f.text_field :y1_legend, class:  "form-control field" %>
+	 <%#= f.color_field :color_y1 %>
+ </div> -->
+
+ 
+  
+ <br>
+
+
+<%= form_for [@category,@graph,@adt] do |f| %>
+  <% if @graph.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@graph.errors.count, "error") %> prohibited this graph from being saved:</h2>
+
+      <ul>
+      <% @graph.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.label :name %>
+ 	  <%= f.text_field :name, class:  "form-control field" %>
+
+    <%= f.label :sheetname %>
+    <%= f.text_field :sheetname, class:  "form-control field" %>
+
+    <%= f.label :x_colname %>
+    <%= f.text_field :x_colname, class:  "form-control field" %>
+
+    <%= f.label :y_colname %>
+    <%= f.text_field :y_colname, class:  "form-control field" %>
+
+    <%= f.label "Legend Name" %>
+    <%= f.text_field :y_legend, class:  "form-control field" %>
+
+    <%= f.label :color_y %>
+    <%= f.color_field :color_y,class:  "form-control field " %>
+
+    <%= f.submit %>
+  </div>
+<% end %>
+
+

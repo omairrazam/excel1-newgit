@@ -1,0 +1,32 @@
+<div class="row profile">
+	<div class="col-md-3">
+    <%= render :partial=> 'profile_sidebar'%>
+    </div>
+
+	<div  class="col-md-9" >
+	<div  id="tab1" class="profile-content">
+		<div class="tab-content clearfix col-md-9">
+            <div class="" >
+
+                <p><strong>Full Name : </strong> <span><%= @user.username %></span></p> 
+                 <hr>
+                <p><strong>Email : </strong><span><%= @user.email %></span></p>
+                 <hr>
+            </div>
+			
+        <!-- <div class="tab-pane" >
+            <p>Owners Name : <span>Marcus Joe</span></p> 
+             <hr>
+            <p>Card Number :<span>09-865434-8765433-34</span></p>
+             <hr>
+            <p>Created On:<span>21-07-2106</span></p>
+             <hr>
+            <p>Expires On:<span>21-07-2120</span></p>
+            <hr>
+		</div> -->
+		</div>
+    </div>
+	</div>
+</div>
+<br>
+<br>

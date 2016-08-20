@@ -1,0 +1,116 @@
+
+<script type="text/javascript">
+
+
+$(function () {
+    var seriesOptions = [],
+        seriesCounter = 0,
+        names = <%= raw names %>,
+        d  = <%= raw data %>,
+        c  = <%= raw colors %>,
+        title = <%= raw tit %>;
+      //alert(d.length);
+        //alert(names.length);
+    /**
+     * Create the chart when all data is loaded
+     * @returns {undefined}
+     */
+    function createChart() {
+
+        $(<%= divId %>).highcharts('StockChart', {
+
+            rangeSelector: {
+                selected: 4
+            },
+
+            yAxis: {
+                labels: {
+                    formatter: function () {
+                        return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                    }
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 2,
+                    color: 'silver'
+                }]
+            },
+            title: titleOptions,
+            legend: {
+            enabled: true,
+            align: 'right',
+            backgroundColor: '#FCFFC5',
+            borderColor: 'black',
+            borderWidth: 2,
+            layout: 'vertical',
+            verticalAlign: 'top',
+            floating:'true',
+            y: 100, 
+            shadow: true
+            },
+            plotOptions: {
+                series: {
+                    compare: 'percent'
+                }
+            },
+
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                valueDecimals: 2
+            },
+
+            series: seriesOptions
+        });
+    }
+
+    
+
+    $.each(names, function (i, name) {
+       //alert(name);
+      seriesOptions[i] = {
+                   name: name,
+                   data:  d[i],
+                   color: c[i]
+        };
+        
+        // if (i == 0){
+        //   seriesOptions[i] = {
+        //            name: name,
+        //            data:  d[i],
+        //            color: <%=raw "'"+color_y1+"'" %>
+                   
+        //   };
+        // }else{
+        //   seriesOptions[i] = {
+        //       name: name,
+        //       data:  d[i],
+        //       color: <%=raw "'"+color_y2+"'" %>,
+        //       visible:false
+        //   };
+        // }
+        seriesCounter += 1
+        if (seriesCounter === names.length) {
+          titleOptions = {
+            text: <%= raw tit %>,
+            
+            style: {
+              color: '#333333',
+              font: '16px Arial',
+              fontWeight:'bold'
+            }
+
+            };
+          createChart();
+        }
+        
+    });
+});
+
+
+
+
+
+
+
+</script>
+

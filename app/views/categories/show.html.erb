@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-md-2 well">
+		<center><strong>Category Info</strong></center><hr>
+		<ul class="list-group">
+		    <li class="list-group-item"><strong>Name:</strong><%= @category.name %></li>
+		    <li class="list-group-item"><strong>Open-col:</strong><%= @category.open_colname %></li>
+		    <li class="list-group-item"><strong>Close-col:</strong><%= @category.close_colname %></li>
+		    <li class="list-group-item"><strong>High-col:</strong><%= @category.high_colname %></li>
+		    <li class="list-group-item"><strong>Low-col:</strong><%= @category.high_colname %></li>
+		    <li class="list-group-item"><strong>SP-col:</strong><%= @category.sp_x_colname %></li>
+		 </ul>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+		<div class="panel-heading"><strong>Graphs Table</strong><span class = "pull-right"><%= link_to 'Create Graph', new_category_graph_path(@category) %></span></div>
+
+		<div class="panel-body">
+			<table class="table table-bordered">
+				<thead>
+				  <tr>
+				    <th>Name</th>
+				    <th>Sheetname</th>
+				    <th>X Colname</th>
+				    <th>Y1 Colname</th>
+				    <th>Y1 Legend</th>
+				    <th>Y2 Col</th>
+				    <th>Y2 Legend</th>
+				    <th></th>
+				    <th></th>
+				    <th></th>
+				  
+				  </tr>
+				</thead>
+				<tbody>
+				 <% @category.graphs.each do |graph| %>
+				  <tr>
+				  	<td><%= graph.name %></td>
+				  	<td><%= graph.sheetname %></td>
+				  	<td><%= graph.x_colname %></td>
+				  	<td><%= graph.y1_colname %></td>
+				  	<td><%= graph.y1_legend %></td>
+				  	<td><%= graph.y2_colname %></td>
+				  	<td><%= graph.y2_legend %></td>
+				  	<td><%= link_to 'Show', category_graph_path(@category,graph) %></td>
+				  	<td><%= link_to 'Edit', edit_category_graph_path(@category,graph) %></td>
+				  	<td><%= link_to 'Update', graph_update_data_path(graph) %></td>
+				  	<td><%= link_to 'Destroy', category_graph_path(@category,graph), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				  	
+				  </tr>
+				  <% end %>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	 
+
+	</div>
+</div>
+<%= link_to 'Back', categories_path %>
+
+<style type="text/css">
+	.container-content {
+    width: 1370px;
+}
+</style>

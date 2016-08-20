@@ -1,0 +1,2 @@
+module AdtsHelper
+end

@@ -1,0 +1,2 @@
+module InteractiveChartsHelper
+end

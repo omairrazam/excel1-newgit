@@ -1,0 +1,59 @@
+
+
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+<div class="container">
+  <div class="row">
+<h2><%= t('.contact_us') %></h2>
+<hr>
+  <%= form_for @contact, :url => contacts_path, :html => {:class => 'contact-form'} do |f| %>
+    
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+          <%= f.text_field :name, :class => "form-control", :placeholder => "Name" %>
+            <% if f.object.errors[:name].present? %>
+              <p class='inline-error'><%= f.object.errors[:name].join(' and ') %></p>
+            <% end %>
+                
+          </div>
+        </div>
+          <div class="col-md-6">
+          <div class="form-group">
+                <%= f.text_field :email, :class => "form-control", :placeholder => "Email" %>
+                  <% if f.object.errors[:email].present? %>
+                    <p class='inline-error'><%= f.object.errors[:email].join(' and ') %></p>
+                  <% end %>
+          </div>
+        </div>
+      </div>
+       <div class="row">
+        <div class="col-md-12">
+        <div class="form-group">
+          <%= f.text_field :subject, :class => "form-control", :placeholder => "Subject" %>
+          <% if f.object.errors[:subject].present? %>
+            <p class='inline-error'><%= f.object.errors[:subject].join(' and ') %></p>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <div class="form-group">
+          <%= f.text_area :message, :class => "form-control textarea", :placeholder => "Message", :rows => "10"  %>
+          <% if f.object.errors[:message].present? %>
+            <p class='inline-error'><%= f.object.errors[:message].join(' and ') %></p>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
+      <%= f.submit "Send a Message" , :class => 'btn btn-primary btn-block' %>
+      
+    </div>
+    </div>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dev</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= yield :head %>
+</head>
+
+<body>
+  <div class="blog-masthead">
+
+    <div class="container-content logo">
+    <span class = "pull-left " ><%= link_to "Stock Cloud <br /> Research".html_safe, root_path %></span>
+    <div class = "container">
+    
+      <nav class="blog-nav">
+        <%= nav_link 'Market Studies', root_path %>
+        <%= nav_link 'Active Studies', active_studies_path %>
+        <%#= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
+        <%= nav_link 'Market Internals', market_internals_path %>
+        <%= nav_link 'General Market Studies', general_market_studies_path %>
+        <%#= nav_link 'Interested?', interesteds_path %>
+        <%= nav_link 'Contact Us', contact_us_path %>
+       
+        <% if user_signed_in? %>
+          <span class="dropdown navbar-right">
+            <a class="blog-nav-item "  data-toggle="dropdown">Settings
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "MyAccount", user_path(current_user),:class => ""%></li>
+              <li><%= link_to "Log out", destroy_user_session_path,:class => "", :method => :delete %></li>
+             
+              <% if current_user.is_admin? %>
+                <li class="divider"></li>
+                
+                <li><%= link_to "Create Market Study", new_market_study_path,:class => ""%></li>
+                <li><%= link_to 'Create Market Internal', new_market_internal_path %></li>
+                <li><%= link_to 'Create General Market Study', new_general_market_study_path %></li>
+                <li><%= link_to 'Categories', categories_path %></li>
+                <li><%= link_to "Panel", admin_dashboard_path,:class => ""%></li>
+              <% end %>
+            </ul>
+          </span>
+        <% end %>
+
+      </nav>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container container-content">
+    <div class="row">
+    	<%= render :partial => "/print_flash_messages" %>
+    </div>
+    
+     <%= yield %>
+  </div>
+</body>
+</html>

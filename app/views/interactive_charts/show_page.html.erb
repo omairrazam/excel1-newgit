@@ -1,0 +1,81 @@
+
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag  'interactive_charts', media: 'all' %>
+    <%#= stylesheet_link_tag  'bootstrap-select'  , media: 'all' %>
+    <%#= javascript_tag 'interactive_charts', media: 'all' %>
+<% end %>
+<a class="btn btn-large btn-success" href="javascript:void(0);" onclick="javascript:introJs().setOption('showBullets', false).start();">Guide</a>
+<div class="row">
+	<div class="col-md-2">
+	<%= render :partial => "right_sidebar" %>
+	</div>
+
+
+
+
+
+	<div class="col-md-10">
+   
+        <div id="container_static" style=" height: 300px; min-width: 1110px; z-index:10"></div>
+        <br>
+        <br>
+
+        <% @graphs.each do |graph| %>
+        <div id=<%= "container_graph" + graph.id.to_s %>>
+          <div class="dropdown">
+            <!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Pick Your ADT
+            <span class="caret"></span></button> -->
+            <ul class="dropdown-menu">
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">JavaScript</a></li>
+            </ul>
+          </div>
+		      <div id=<%= "container" + graph.id.to_s %> style="height: 300px; min-width: 310px;"></div>
+        </div>
+        <br>
+        <br>
+        <% end %>
+	</div>
+</div>
+<%= render partial: "sp_static_chart" , locals: {divId: 'container_static', data:@sp_graph_data} %>
+<%= render @graphs if @graphs.present?%>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<script type="text/javascript">
+
+var options = {
+  top: 0, // This represents the buffer you want between the top of the page and the div in px. Default is 0.
+  min_screen_width:0, // This represents the minimum screen width that the stickiness will be applied to. Default is 0.
+  bottom: 0, // This represents the buffer you want between the bottom of the page and the div in px. Default is 0.
+  outer_div: null // This is a jquery or DOM element whose height needs to be greater than the div in order to make it sticky. Default is null.
+};
+$('#container_static').sticky_div(options);
+// Set the datepicker's date format
+$(function(){
+    $.datepicker.setDefaults({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(dateText) {
+          var id = $(this).attr('id');
+          
+          if (id == "info_box_datepicker"){
+
+          }else{
+            this.onchange();
+            this.onblur();
+          }
+        }
+    });
+});
+    
+</script>

@@ -1,0 +1,113 @@
+/* notification styling */
+
+.info-display {
+  margin: 8px 8px;
+}
+
+.message {
+ 
+  margin: 0 auto;   
+  padding: 7px;
+  margin: 0 auto;
+  background-color: #FFFFFF; 
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.error {
+  background-color: rgba(217, 80, 80, 0.2); 
+  border-top-right-radius: 31px;
+  border-right-color: #CC3333; /* Side Effect Colors */
+  border-left-color: #CC3333; /* Side Effect Colors */
+  border: 1px solid #CC3333;
+  border-right-width: 19px;
+  border-left-width: 19px;
+}
+.error strong {
+  color:  #FF3333;
+}
+
+.warning {
+  border-right-color: #FF9933;
+  border-bottom-right-radius: 31px;
+  background-color: rgba(240, 173, 78, 0.2);
+  border-right-color: #FF9933; /* Side Effect Colors */
+  border-left-color: #FF9933; /* Side Effect Colors */
+  border: 1px solid #FF9933;
+  border-right-width: 19px;
+  border-left-width: 19px;
+}
+.warning strong {
+  color: #FF9900;
+}
+
+.info {
+  border-right-color: #5bc0de;
+  border-bottom-right-radius: 31px;
+  border-top-right-radius: 31px;
+  background-color: rgba(91, 192, 222, 0.2);
+  border-right-color: #5bc0de; /* Side Effect Colors */
+  border-left-color: #5bc0de; /* Side Effect Colors */
+  border: 1px solid #5bc0de;
+  border-right-width: 19px;
+  border-left-width: 19px;
+}
+.info strong {
+  color: #5bc0de;
+}
+
+.success {
+  border-right-color: #2b542c;
+  border-radius: 31px;
+  background-color: rgba(43, 84, 44, 0.2);
+  border-right-color: #2b542c; /* Side Effect Colors */
+  border-left-color: #2b542c; /* Side Effect Colors */
+  border: 1px solid #2b542c;
+  border-right-width: 19px;
+  border-left-width: 19px;
+}
+.success strong {
+  color: #2b542c;
+}
+
+
+/* notification styling end */
+
+.dropdown{
+  cursor: pointer;
+}
+
+.blog-masthead {
+  margin-bottom: 3rem;
+}
+
+.logo{
+  color:white; 
+  margin-left:50px;
+  text-decoration: none;
+}
+
+.logo a{
+  color: white;
+}
+
+.logo a:link {
+    text-decoration: none;
+}
+
+.logo a:visited {
+    text-decoration: none;
+}
+
+.logo a:hover {
+    text-decoration: none;
+}
+
+.logo a:active {
+    text-decoration: none;
+}
+
+.panel-heading-custom{
+  background-color: #4f5b69 !important;
+  color: white !important;
+}

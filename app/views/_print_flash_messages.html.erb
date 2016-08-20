@@ -1,0 +1,11 @@
+
+<% flash.each do  |name,msg| %>
+
+	<div class="row">
+        <div class="info-display">
+          <div class="message <%= get_notification_class name %>">
+            <strong><%= msg %></strong> 
+          </div>
+        </div>
+    </div>
+<% end %>

@@ -1,0 +1,43 @@
+
+<%= form_for(@category) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :category_name %>
+  <%= f.text_field :name, class:  "form-control field" %>
+  <%= f.label :sheetname %>
+  <%= f.text_field :sheetname, class:  "form-control field" %>
+  <%= f.label :sp_x_colname %>
+  <%= f.text_field :sp_x_colname, class:  "form-control field" %>
+  <%= f.label :open_colname %>
+  <%= f.text_field :open_colname, class:  "form-control field" %>
+  <%= f.label :close_colname %>
+  <%= f.text_field :close_colname, class:  "form-control field" %>
+  <%= f.label :high_colname %>
+  <%= f.text_field :high_colname, class:  "form-control field" %>
+  <%= f.label :low_colname %>
+  <%= f.text_field :low_colname, class:  "form-control field" %>
+  
+  <div id = "graphs" class="">
+    <% f.fields_for :graphs do |graph| %>
+       <%= render 'graph_fields', f:graph %>
+    <% end %> 
+
+   
+  </div>
+
+
+  <div class="actions">
+
+    <%= f.submit %>|  <%= link_to_add_association 'Add Graph', f, :graphs %>
+  </div>
+<% end %>

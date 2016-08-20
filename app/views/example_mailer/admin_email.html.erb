@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+  	<div class="panel panel-default col-md-6 col-md-offset-2">
+  		<div class="panel-heading">New Subscription Notification</div>
+  		<div class="panel-body">
+  			<h5>Hi, <%= @user.username %> <span class = "label label-success">Admin</span></h5>
+  			<br>
+  			<p>We have new subscription on our site. Please see details below:-</p>
+  			<hr>
+  			<table class="table">
+			    <thead>
+			      <tr>
+			        <th>Name</th>
+			        <th>Email</th>
+			        <th>Payer Status</th>
+			        <th>Timestamp</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td><%= @new_user.username%></td>
+			        <td><%= @new_user.email %></td>
+			        <td><span class = "label label-info"><%= @new_user.transactions.where('txn_type=?', "subscr_signup").first.payer_status rescue '-'%></span></td>
+			        <td><span class = "label label-info"><%=@new_user.transactions.where('txn_type=?', "subscr_signup").created_at rescue '-' %></span></td>
+			      </tr>
+			      
+			    </tbody>
+			  </table>
+  			
+  		</div>
+  	</div>
+    	
+  </body>
+</html>

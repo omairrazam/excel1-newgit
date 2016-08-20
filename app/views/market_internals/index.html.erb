@@ -1,0 +1,43 @@
+
+<div class="row narrow-container">
+
+  <h2>Market Internals</h2>
+  <hr>
+  
+  <table class="table table-striped">
+  <thead>
+    <thead>
+      <tr>
+        <th>Date of Post</th>
+        <th>Post Title</th>
+        <th>Content</th>
+        
+        <% if current_user.present? and current_user.is_admin? %>
+          <th></th>
+          <th></th>
+        <% end %>
+      </tr>
+    </thead>
+  </thead>
+  <tbody>
+    <% @market_internals.each do |internal| %>
+      <tr>
+      <td><%= internal.created_at.strftime("%B %d, %Y") %></td>
+      <td><%= link_to internal.title, market_internal_path(internal) %></td>
+      <td><%= internal.content.html_safe %></td>
+
+
+      <% if current_user.present? and current_user.is_admin? %>
+        <td><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> &nbsp;&nbsp;<%= link_to 'Edit', edit_market_internal_path(internal) %></td>
+
+        <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> &nbsp;&nbsp;<%= link_to 'Delete', internal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+      <% end %>
+    
+  </tbody>
+
+  </table>
+
+  <center><%= paginate @market_internals %></center>
+</div>

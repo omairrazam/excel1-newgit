@@ -1,0 +1,33 @@
+
+<br>
+<br>
+<div class="panel panel-default">
+  <div class="panel-body">
+	<p>
+  		<strong>Title:</strong>
+  		<%= @commentary.title %>
+	</p>
+
+	<p>
+  		<strong>Type:</strong>
+  		<%= @commentary.typee %>
+	</p>
+
+	<p>
+  		<strong>Pricetarget:</strong>
+  		<%= @commentary.priceTarget %>
+	</p>
+
+	<p>
+	  <strong>Content:</strong>
+	  <div class="well">
+	  	<%= @commentary.body.html_safe %>
+	  </div>
+	</p>
+
+	<% if current_user.is_admin? %>
+		<%= link_to 'Edit', edit_commentary_path(@commentary) %> |
+	<% end %> 	
+	<%= link_to 'Back', commentaries_path %> 
+  </div>
+</div>

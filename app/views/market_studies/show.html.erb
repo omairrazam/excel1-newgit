@@ -1,0 +1,33 @@
+
+<br>
+<br>
+<div class="panel panel-default">
+  <div class="panel-body">
+	<p>
+  		<strong>Title:</strong>
+  		<%= @market_study.title %>
+	</p>
+
+	<p>
+  		<strong>Type:</strong>
+  		<%= @market_study.typee %>
+	</p>
+
+	<p>
+  		<strong>Pricetarget:</strong>
+  		<%= @market_study.price_target %>
+	</p>
+
+	<p>
+	  <strong>Content:</strong>
+	  <div class="well">
+	  	<%= @market_study.content.html_safe %>
+	  </div>
+	</p>
+
+	<% if current_user.is_admin? %>
+		<%= link_to 'Edit', edit_market_study_path(@market_study) %> |
+	<% end %> 	
+	<%= link_to 'Back', market_studies_path %> 
+  </div>
+</div>

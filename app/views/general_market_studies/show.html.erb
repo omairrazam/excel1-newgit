@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @general_market_study.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @general_market_study.content.html_safe %>
+</p>
+
+<%= link_to 'Edit', edit_general_market_study_path(@general_market_study) %> |
+<%= link_to 'Back', general_market_studies_path %>

@@ -1,0 +1,12 @@
+
+<br>
+<br>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<p>
+		  <%= @interested.content.html_safe %>
+		</p>
+		<%= link_to 'Edit', edit_interested_path(@interested) %> |
+		<%= link_to 'Back', interesteds_path %>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+
+<div class="panel panel-default narrow-container">
+  <div class="panel-body">
+    <p id="notice"><%= notice %></p>
+    <%= @interested.content.html_safe %><br>
+    <% if current_user.present? and current_user.is_admin?  %>
+      <%= link_to 'Edit', edit_interested_path(@interested) %>
+    <% end %>
+  </div>
+</div>

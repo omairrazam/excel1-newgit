@@ -1,0 +1,15 @@
+<div class="blog-post">
+
+  <h2 class="blog-post-title"><%= market_study.title %></h2>
+  <p class="blog-post-meta"><%= time_ago_in_words(market_study.created_at) %> ago by <a href="#"><%= market_study.user.email %></a></p>
+  <% if user_signed_in? and current_user.is_admin? %>
+  <div >
+    <%= link_to 'Show', market_study , :class =>"btn btn-info btn-xs"%>
+    <%= link_to 'Edit', edit_market_study_path(market_study) , :class =>"btn btn-info btn-xs"%>
+    <%= link_to 'Destroy', market_study, :class =>"btn btn-info btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+  <% end %>
+  <p>
+    <%= market_study.content[0..150].gsub(/\s\w+\s*$/,'...').html_safe  %><span class = "read_more"><%= link_to 'read more >>>', market_study %></span>
+  </p>
+</div><!-- /.blog-post -->

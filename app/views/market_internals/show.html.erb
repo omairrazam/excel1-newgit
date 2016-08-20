@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @market_internal.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @market_internal.content.html_safe %>
+</p>
+
+<%= link_to 'Edit', edit_market_internal_path(@market_internal) %> |
+<%= link_to 'Back', market_internals_path %>

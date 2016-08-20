@@ -1,0 +1,80 @@
+<div class="row profile">
+  <div class="col-md-3">
+    <%= render :partial=> 'profile_sidebar'%>
+    </div>
+
+  
+<div  class="col-md-9" >
+  <div  id="tab1" class="profile-content">
+    <div class="tab-content clearfix ">
+      <div class="" >
+      <div class="row">
+        <div class="well col-md-6 col-md-offset-6">
+        <center><div class="label label-info" style="font-size:15px;">Basic Subscription  Info</div></center>
+        <br>
+        <table>
+        <table class="table table-striped">
+          <thead>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Charged</th>
+                <th>Rate</th>
+              </tr>
+            </thead>
+          </thead>
+          <tbody>
+            
+              <tr>
+              <td>Recurring</td>
+              <td>Monthly</td>
+              <td>$12</td>
+
+            </tr>
+          
+            
+          </tbody>
+
+          </table>
+        
+        </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading"><center><h3>Your Transactions </h3></center></div>
+        </div>
+        <table class="table table-striped">
+
+          <thead>
+            <thead>
+              <tr>
+                <th>Payment Date</th>
+                <th>Payment Type</th>
+                <th>Payer Status</th>
+                <th>Payment Status</th>
+                <th>Payment Amount</th>
+                
+               
+              </tr>
+            </thead>
+          </thead>
+          <tbody>
+            <% @payments.each do |payment| %>
+              <tr>
+              <td><%= payment.payment_date.to_date %></td>
+              <td><%= payment.txn_type %></td>
+              <td><%= payment.payer_status %></td>
+               <td><%= payment.payment_status %></td>
+               <td>$<%= payment.payment_gross %></td>
+            </tr>
+              <% end %>
+            
+          </tbody>
+
+          </table>
+        <center><%= paginate @payments %></center>        
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

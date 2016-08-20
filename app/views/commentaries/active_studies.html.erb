@@ -1,0 +1,39 @@
+
+<div class="row narrow-container">
+
+	<h2>Active Studies</h2>
+	<hr>
+	
+	<table class="table table-striped">
+	<thead>
+	  <thead>
+      <tr>
+        <th>Date of Post</th>
+        <th>Post Title</th>
+        <th>Positive/negative</th>
+        <th>Price targets</th>
+        <% if current_user.present? and current_user.is_admin? %>
+        	<th></th>
+        <% end %>
+      </tr>
+    </thead>
+	</thead>
+	<tbody>
+	  <% @active_studies.each do |study| %>
+	  	<tr>
+	  		<td><%= study.created_at.strftime("%B %d, %Y") %></td>
+			<td><%= link_to study.title, commentary_path(study) %></td>
+			<td><%= study.typee %></td>
+			<td><%= study.priceTarget %></td>
+			<% if current_user.present? and current_user.is_admin? %>
+				<td><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> &nbsp;&nbsp;<%= link_to 'Edit', edit_commentary_path(study) %></td>
+			<% end %>
+		</tr>
+  	  <% end %>
+	  
+	</tbody>
+
+	</table>
+
+	<center><%= paginate @active_studies %></center>
+</div>

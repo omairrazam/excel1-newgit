@@ -1,0 +1,2 @@
+module MarketStudiesHelper
+end
