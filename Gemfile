@@ -60,7 +60,7 @@ gem 'contact_us', '~> 1.1.0'
 gem 'ckeditor'
 gem "cocoon"
 
-gem 'figaro'
+#gem 'figaro'
 gem 'puma'
 group :development do
   gem 'capistrano'
