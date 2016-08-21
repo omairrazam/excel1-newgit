@@ -28,6 +28,7 @@ class AdtsController < ApplicationController
     @adt      =  @graph.adts.new(adt_params)
 
     if @adt.save
+      AdtWorker.perform_async(@adt.id)
       redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully created.'}
     else
       render :new
@@ -51,17 +52,8 @@ class AdtsController < ApplicationController
   end
 
   def update_data
-    adt = Adt.find(params[:adt_id])
-    status = adt.update_data
+    AdtWorker.perform_async(params[:adt_id])
 
-    if status == -1
-      redirect_to category_graph_path(params[:category_id],adt.graph), alert: "Sheet (#{adt.sheetname}) Not found"
-    else
-      
-      redirect_to category_graph_path(params[:category_id],adt.graph),  :flash => { :success => 'Adt data has been loaded'}
-    end
-    #debugger
-    
   end 
 
   private

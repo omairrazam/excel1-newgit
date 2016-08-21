@@ -26,6 +26,7 @@ class GraphsController < ApplicationController
     @graph      =  @category.graphs.new(graph_params)
 
     if @graph.save
+      GraphWorker.perform_async(@graph.id)
       redirect_to category_path(@category), notice: 'Graph was successfully created.'
     else
       render :new
@@ -49,9 +50,8 @@ class GraphsController < ApplicationController
   end
 
   def update_data
-    graph = Graph.find(params[:graph_id])
-    graph.update_data
-    redirect_to category_path(graph.category), success: 'Graph data has loaded'
+    GraphWorker.perform_async(params[:graph_id])
+    #redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully updated.'}
   end 
 
   private

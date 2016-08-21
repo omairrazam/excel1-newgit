@@ -70,4 +70,8 @@ group :development do
   gem 'capistrano-rvm'
 end
 
+gem 'capistrano-sidekiq' , group: :development
 gem "carrierwave"
+gem "sidekiq"
+gem 'sinatra', require: false
+gem 'slim'

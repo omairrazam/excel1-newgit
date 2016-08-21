@@ -6,9 +6,9 @@ class Adt < ActiveRecord::Base
 		xls     = Roo::Spreadsheet.open(Rails.root.to_s +  "/excelsheet/actual.xlsm")
 		current_sheet = xls.sheet(sheetname) rescue nil
 		
-		if current_sheet == nil
-			return -1
-		end
+		# if current_sheet == nil
+		# 	return -1
+		# end
 
 		AdtDatum.transaction do
 		    header = current_sheet.row(5)
@@ -38,7 +38,7 @@ class Adt < ActiveRecord::Base
 				d.save!
 			end
 		end
-		return 0
+		#return 0
 
 	end
 

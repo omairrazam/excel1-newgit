@@ -3,7 +3,7 @@ class Graph < ActiveRecord::Base
 	has_many   :adts, :dependent => :destroy
 	has_many   :graph_datums, :dependent => :destroy
 	#after_create :update_data
-	
+
 	def update_data
 		#xls     = Roo::Excelx.open(Rails.root.to_s +  "/excelsheet/actual.xlsm")
 		xls     = Roo::Spreadsheet.open(Rails.root.to_s +  "/excelsheet/actual.xlsm")
