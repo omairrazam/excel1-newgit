@@ -17,6 +17,11 @@ class Category < ActiveRecord::Base
 			row = Hash[[header, current_sheet.row(i)].transpose]
 				d 			  = SpGraph.new
 				date 		  = row[sp_x_colname].to_s
+
+				if date.blank?
+					next
+				end
+				
 				d.x_values    = date
 				d.open   	  = row[open_colname]
 				d.close   	  = row[close_colname]

@@ -16,7 +16,7 @@ class Adt < ActiveRecord::Base
 				#debugger
 				row = Hash[[header, current_sheet.row(i)].transpose]
 
-				if row[y_colname].blank? 
+				if row[y_colname].blank? or row[x_colname].blank? 
 					next
 				end
 
