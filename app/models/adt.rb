@@ -1,6 +1,6 @@
 class Adt < ActiveRecord::Base
 	belongs_to :graph
-	has_many :adt_datums
+	has_many :adt_datums, :dependent => :destroy
 
 	def update_data
 		xls     = Roo::Spreadsheet.open(Rails.root.to_s +  "/excelsheet/actual.xlsm")
