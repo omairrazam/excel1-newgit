@@ -1,12 +1,15 @@
 class Category < ActiveRecord::Base
-	has_many :graphs, :dependent => :destroy
-	has_many  :sp_graphs, :dependent => :destroy
-	after_create :t
+
+	has_many     :graphs, :dependent => :destroy
+	has_many     :sp_graphs, :dependent => :destroy
+	after_create :fetch_sp_csv
+
 	accepts_nested_attributes_for :graphs, reject_if: :all_blank, allow_destroy: true
 
 	require 'csv'
 	require 'active_record'
-	 require "activerecord-import/base"
+	require "activerecord-import/base"
+	
 	def fetch_sp_graph
 		xls     = Roo::Spreadsheet.open(Rails.root.to_s +  "/excelsheet/actual.xlsm")
 		#debugger
