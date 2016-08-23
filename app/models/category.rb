@@ -45,7 +45,7 @@ class Category < ActiveRecord::Base
 
 	def fetch_sp_csv
 		
-		    data = CSV.read("#{Rails.root}/excelsheet/actual.csv")
+		    data = CSV.read(Rails.root.to_s +  "/excelsheet/actual.xlsm")
 		   	spgraphs = []
 		   	header   = data[0]
 
