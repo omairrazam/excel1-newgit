@@ -48,20 +48,18 @@ end
 
 
 namespace :rails do
-  desc "Remote console"
-  task :console, :roles => :app do
-    run_interactively "bundle exec rails console #{rails_env}"
-  end
+  desc 'Open a rails console `cap [staging] rails:console [server_index default: 0]`'
+  task :console do    
+    server = roles(:app)[ARGV[2].to_i]
 
-  desc "Remote dbconsole"
-  task :dbconsole, :roles => :app do
-    run_interactively "bundle exec rails dbconsole #{rails_env}"
-  end
-end
+    puts "Opening a console on: #{server.hostname}...."
 
-def run_interactively(command)
-  server ||= find_servers_for_task(current_task).first
-  exec %Q(ssh #{user}@#{myproductionhost} -t '#{command}')
+    cmd = "ssh #{server.user}@#{server.hostname} -t 'cd #{fetch(:deploy_to)}/current && RAILS_ENV=#{fetch(:rails_env)} bundle exec rails console'"
+
+    puts cmd
+
+    exec cmd
+  end
 end
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
