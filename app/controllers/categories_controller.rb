@@ -26,7 +26,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     #debugger
     if @category.save
-      CategoryWorker.perform_async(@category.id)
+      #CategoryWorker.perform_async(@category.id)
       redirect_to @category, notice: 'Category was successfully created.'
     else
       render :new
@@ -64,6 +64,7 @@ class CategoriesController < ApplicationController
                                        :low_colname,
                                        :sp_x_colname,
                                        :sheetname,
+                                       :order_num,
                                        graphs_attributes: [:id, 
                                                            :name,
                                                            :x_colname,

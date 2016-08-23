@@ -7,7 +7,7 @@ class InteractiveChartsController < ApplicationController
 		@selected_category = Category.first
 	
 		if @selected_category.present?
-			@graphs 		   = @selected_category.graphs 
+			@graphs 		   = @selected_category.graphs .order('order_num asc')
 			@sp_graph_data     = @selected_category.sp_graphs.pluck(:timestamp_ms, :open, :high, :low, :close)
 		else
 			flash.now[:notice] = "No Categories found"
@@ -24,7 +24,8 @@ class InteractiveChartsController < ApplicationController
 		end
 
 		if @selected_category.present?
-			@graphs 		   =  @selected_category.graphs 
+			@graphs 		   =  @selected_category.graphs.order('order_num asc')
+			#debugger
 			@sp_graph_data     =  @selected_category.sp_graphs.order('timestamp_ms asc').pluck(:timestamp_ms, :open, :high, :low, :close)	
 		end
 
@@ -34,7 +35,7 @@ class InteractiveChartsController < ApplicationController
 
 	private
 	def get_all_categories
-		@categories = Category.all
+		@categories = Category.all.order('order_num asc')
 	end
 end
 

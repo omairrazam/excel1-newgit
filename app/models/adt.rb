@@ -1,6 +1,7 @@
 class Adt < ActiveRecord::Base
 	belongs_to :graph
 	has_many :adt_datums, :dependent => :destroy
+	after_create :update_data_csv
 
 	def update_data
 		xls     = Roo::Spreadsheet.open(Rails.root.to_s +  "/excelsheet/actual.xlsm")
@@ -41,5 +42,39 @@ class Adt < ActiveRecord::Base
 		#return 0
 
 	end
+
+	def update_data_csv
+		
+	    data = CSV.read("#{Rails.root}/excelsheet/actual.csv")
+	   	adtdatums = []
+	   	header    = data[0]
+	   
+	    (1..data.count).each do |i| 
+	        if data[i].blank?
+	    		next
+	    	end
+
+			row = Hash[[header, data[i]].transpose]
+
+			if row[y_colname].blank? or row[x_colname].blank? 
+				next
+			end
+
+			date  = row[x_colname].to_s
+			datee = date[0..3] + '-' + date[4..5] + '-' + date[6..7]
+			datee = datee.to_datetime.strftime('%s').to_i * 1000
+
+			d = self.adt_datums.find_or_initialize_by(timestamp_ms: datee)
+
+			d.x_values     = date
+			d.y1_values    = row[y_colname].to_f.round(8)
+			d.adt_id       = self.id
+			d.timestamp_ms = datee
+
+			adtdatums << d
+		end
+	    AdtDatum.import adtdatums
+	end
+
 
 end

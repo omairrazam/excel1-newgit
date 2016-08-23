@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820165443) do
+ActiveRecord::Schema.define(version: 20160822144102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20160820165443) do
     t.string   "sheetname"
     t.string   "y_legend"
     t.string   "color_y"
+    t.integer  "order_num"
   end
 
   add_index "adts", ["graph_id"], name: "index_adts_on_graph_id", using: :btree
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160820165443) do
     t.string   "high_colname"
     t.string   "low_colname"
     t.string   "sp_x_colname"
+    t.integer  "order_num"
   end
 
   create_table "commentaries", force: :cascade do |t|
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(version: 20160820165443) do
     t.string   "y2_legend"
     t.string   "color_y1"
     t.string   "color_y2"
+    t.integer  "order_num"
   end
 
   add_index "graphs", ["category_id"], name: "index_graphs_on_category_id", using: :btree

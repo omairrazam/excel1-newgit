@@ -1,5 +1,7 @@
 
-server '52.6.141.29', user: 'deploy', roles: %w{web app db}
+server '52.6.141.29', user: 'deploy', roles: %w{web app db} #large
+#server '54.227.206.8', user: 'deploy', roles: %w{web app db} #medium
+
 
 # server-based syntax
 # ======================

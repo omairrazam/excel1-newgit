@@ -26,6 +26,8 @@
   <%= f.text_field :high_colname, class:  "form-control field" %>
   <%= f.label :low_colname %>
   <%= f.text_field :low_colname, class:  "form-control field" %>
+   <%= f.label :order_position %>
+  <%= f.number_field :order_num, class:  "form-control field" %>
   
   <div id = "graphs" class="">
     <% f.fields_for :graphs do |graph| %>

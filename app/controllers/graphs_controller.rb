@@ -26,7 +26,7 @@ class GraphsController < ApplicationController
     @graph      =  @category.graphs.new(graph_params)
 
     if @graph.save
-      GraphWorker.perform_async(@graph.id)
+      #GraphWorker.perform_async(@graph.id)
       redirect_to category_path(@category), notice: 'Graph was successfully created.'
     else
       render :new
@@ -74,7 +74,8 @@ class GraphsController < ApplicationController
                                                            :y1_legend,
                                                            :y2_legend, 
                                                            :color_y1,
-                                                           :color_y2])
+                                                           :color_y2,
+                                                           :order_num])
       
     end
 end

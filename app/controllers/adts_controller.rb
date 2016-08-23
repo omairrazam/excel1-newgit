@@ -28,7 +28,7 @@ class AdtsController < ApplicationController
     @adt      =  @graph.adts.new(adt_params)
 
     if @adt.save
-      AdtWorker.perform_async(@adt.id)
+      #AdtWorker.perform_async(@adt.id)
       redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully created.'}
     else
       render :new
@@ -72,7 +72,8 @@ class AdtsController < ApplicationController
                                    :y_colname,
                                    :sheetname,
                                    :y_legend,
-                                   :color_y
+                                   :color_y,
+                                   :order_num
                                    ])
       
     end

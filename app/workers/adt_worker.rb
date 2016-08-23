@@ -1,4 +1,4 @@
-class AdtWorker
+class AdtWorker 
 	include Sidekiq::Worker
 
 	def perform(adt_id)

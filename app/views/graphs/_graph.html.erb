@@ -23,7 +23,7 @@
 	<%  @colors.push(@color_y1) %>
 <% end %>
 
-<% adts=graph.adts %>
+<% adts= graph.adts.order('order_num asc') %>
 <% adts.each do |a| %>
 	<%#= debugger %>
 	<% @names.push(a.y_legend) %>

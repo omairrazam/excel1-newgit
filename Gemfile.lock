@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: cc178ad0ebe1b74729eeaa59d5c7ad9b82ed7837
+  revision: c69ace35722c57f956a59445733f61e81f946003
   specs:
     activeadmin (1.0.0.pre4)
       arbre (~> 1.0, >= 1.0.2)
@@ -49,6 +49,8 @@ GEM
       activemodel (= 4.2.6)
       activesupport (= 4.2.6)
       arel (~> 6.0)
+    activerecord-import (0.15.0)
+      activerecord (>= 3.2)
     activesupport (4.2.6)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -61,7 +63,7 @@ GEM
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (6.0.3)
-    autoprefixer-rails (6.4.0.2)
+    autoprefixer-rails (6.4.0.3)
       execjs
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
@@ -317,6 +319,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  activerecord-import
   bootstrap-sass (~> 3.3.6)
   byebug
   capistrano

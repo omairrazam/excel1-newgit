@@ -30,8 +30,8 @@
                 <div class="panel-heading panel-heading-custom">Hide/Show Graphs</div>
             
                 <ul class="list-group" id = "switch_graph_list">
-                  <% if @selected_category.present? and @selected_category.graphs.present? %>
-                  <% @selected_category.graphs.each do |graph| %>
+                  <% if @graphs.present? and @graphs.present? %>
+                  <% @graphs.each do |graph| %>
                     <li class="list-group-item">
                           <%= graph.name %>
                           <div class="material-switch pull-right">
