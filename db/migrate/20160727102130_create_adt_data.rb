@@ -4,7 +4,8 @@ class CreateAdtData < ActiveRecord::Migration
       t.string :x_values
       t.string :y1_values
       t.string :y2_values
-      t.references :adt, index: true, foreign_key: true
+      t.integer :adt_id, index:true
+      #t.references :adt, index: true, foreign_key: true
 
       t.timestamps null: false
     end

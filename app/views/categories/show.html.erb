@@ -45,7 +45,8 @@
 				  	<td><%= graph.order_num %></td>
 				  	<td><%= link_to 'Show', category_graph_path(@category,graph) %></td>
 				  	<td><%= link_to 'Edit', edit_category_graph_path(@category,graph) %></td>
-				  	<td><%= link_to 'Update', graph_update_data_path(graph) %></td>
+				  	<td><%= link_to 'update', category_graph_update_data_path(@category,graph) %></td>
+				  
 				  	<td><%= link_to 'Destroy', category_graph_path(@category,graph), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				  	
 				  </tr>

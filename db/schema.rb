@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 20160822144102) do
     t.integer  "order_num"
   end
 
-  add_index "adts", ["graph_id"], name: "index_adts_on_graph_id", using: :btree
-
   create_table "categories", force: :cascade do |t|
     t.string   "sheetname"
     t.datetime "created_at",    null: false
@@ -121,8 +119,6 @@ ActiveRecord::Schema.define(version: 20160822144102) do
     t.string   "color_y2"
     t.integer  "order_num"
   end
-
-  add_index "graphs", ["category_id"], name: "index_graphs_on_category_id", using: :btree
 
   create_table "interesteds", force: :cascade do |t|
     t.text     "content"
@@ -234,9 +230,4 @@ ActiveRecord::Schema.define(version: 20160822144102) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "adt_data", "adts"
-  add_foreign_key "adts", "graphs"
-  add_foreign_key "graph_data", "graphs"
-  add_foreign_key "graphs", "categories"
-  add_foreign_key "sp_graphs", "categories"
 end

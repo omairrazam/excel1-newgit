@@ -1,6 +1,6 @@
 class AdtsController < ApplicationController
 	before_action :set_adt, only: [:show, :edit, :update, :destroy]
-
+  before_action :verify_sheet_exists, only: [:create, :update_data]
   # GET /graphs
   def index
     #@graphs = Graph.all
@@ -52,9 +52,31 @@ class AdtsController < ApplicationController
   end
 
   def update_data
-    AdtWorker.perform_async(params[:adt_id])
+    @category = Category.find(params[:category_id])
+    @graph    = Graph.find(params[:graph_id])
+    @adt      = Adt.find(params[:adt_id])
 
+    @new_adt     = Adt.new
+    @new_adt.id  = @adt.id
+
+    @new_adt.graph_id  = @adt.graph_id
+    @new_adt.name      = @adt.name
+    @new_adt.x_colname = @adt.x_colname
+    @new_adt.y_colname = @adt.y_colname
+    @new_adt.sheetname = @adt.sheetname
+    @new_adt.y_legend  = @adt.y_legend
+    @new_adt.color_y   = @adt.color_y
+    @new_adt.order_num = @adt.order_num
+
+    @adt.destroy
+
+    if @new_adt.save
+    #GraphWorker.perform_async(params[:graph_id])
+      redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt Data was successfully updated.'}
+    end
+                                   
   end 
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -62,6 +84,13 @@ class AdtsController < ApplicationController
       @category = Category.find(params[:category_id])
       @graph    = @category.graphs.find(params[:graph_id])
       @adt      = @graph.adts.find(params[:id])
+    end
+
+    def verify_sheet_exists
+      if File.exist?(Rails.root.to_s +  "/excelsheet/actual.csv") 
+      else 
+        redirect_to categories_path,  :flash => { :alert => 'No File.'}
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

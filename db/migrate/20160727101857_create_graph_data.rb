@@ -4,7 +4,8 @@ class CreateGraphData < ActiveRecord::Migration
       t.string :x_values
       t.string :y1_values
       t.string :y2_values
-      t.references :graph, index: true, foreign_key: true
+      t.integer :graph_id, index:true
+      #t.references :graph, index: true, foreign_key: true
 
       t.timestamps null: false
     end

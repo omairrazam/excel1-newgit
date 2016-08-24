@@ -27,6 +27,7 @@ class GraphsController < ApplicationController
 
     if @graph.save
       #GraphWorker.perform_async(@graph.id)
+      @graph.update_data_csv
       redirect_to category_path(@category), notice: 'Graph was successfully created.'
     else
       render :new
@@ -50,9 +51,34 @@ class GraphsController < ApplicationController
   end
 
   def update_data
-    GraphWorker.perform_async(params[:graph_id])
-    #redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully updated.'}
+    @category = Category.find(params[:category_id])
+    @graph    = Graph.find(params[:graph_id])
+   
+    @new_graph      = Graph.new
+
+    @new_graph.name = @graph.name
+    @new_graph.id   = @graph.id
+    @new_graph.x_colname  = @graph.x_colname
+    @new_graph.y1_colname = @graph.y1_colname
+    @new_graph.y2_colname = @graph.y2_colname
+    @new_graph.color_y1   = @graph.color_y1
+    @new_graph.color_y2   = @graph.color_y2
+    @new_graph.order_num  = @graph.order_num
+    @new_graph.sheetname  = @graph.sheetname
+    @new_graph.y1_legend  = @graph.y1_legend
+    @new_graph.y2_legend  = @graph.y2_legend
+    @new_graph.category_id = @graph.category_id
+   
+    @graph.destroy
+
+    if @new_graph.save
+      @new_graph.update_data_csv
+      redirect_to category_path(@category),  :flash => { :success => 'Graph Data was successfully updated.'}
+    end
+    
   end 
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -60,6 +86,13 @@ class GraphsController < ApplicationController
       #debugger
       @category = Category.find(params[:category_id])
       @graph    = @category.graphs.find(params[:id])
+    end
+
+    def verify_sheet_exists
+      if File.exist?(Rails.root.to_s +  "/excelsheet/actual.csv") 
+      else 
+        redirect_to categories_path,  :flash => { :alert => 'No File.'}
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

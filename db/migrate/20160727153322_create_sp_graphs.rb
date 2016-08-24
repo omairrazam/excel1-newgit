@@ -6,7 +6,7 @@ class CreateSpGraphs < ActiveRecord::Migration
       t.float :low
       t.float :close
       t.bigint :timestamp_ms
-      t.references :category, index: true, foreign_key: true
+      t.integer :category_id, index: true
 
       t.timestamps null: false
     end

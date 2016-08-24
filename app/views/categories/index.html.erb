@@ -48,6 +48,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
        
       </tr>
     </thead>
@@ -64,6 +65,7 @@
        <td><%= category.order_num%></td>
 
         <td><%= link_to 'Show', category %></td>
+        <td><%= link_to 'update', category_update_data_path(category) %></td>
         
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
         <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
