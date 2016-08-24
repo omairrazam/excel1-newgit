@@ -28,6 +28,7 @@ class AdtsController < ApplicationController
     @adt      =  @graph.adts.new(adt_params)
 
     if @adt.save
+      @adt.update_data_csv
       #AdtWorker.perform_async(@adt.id)
       redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully created.'}
     else
@@ -71,6 +72,7 @@ class AdtsController < ApplicationController
     @adt.destroy
 
     if @new_adt.save
+      @new_adt.update_data_csv
     #GraphWorker.perform_async(params[:graph_id])
       redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt Data was successfully updated.'}
     end

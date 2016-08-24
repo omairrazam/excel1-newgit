@@ -24,12 +24,12 @@
 
 
 <%= form_for [@category,@graph,@adt] do |f| %>
-  <% if @graph.errors.any? %>
+  <% if @adt.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@graph.errors.count, "error") %> prohibited this graph from being saved:</h2>
+      <h2><%= pluralize(@adt.errors.count, "error") %> prohibited this graph from being saved:</h2>
 
       <ul>
-      <% @graph.errors.full_messages.each do |message| %>
+      <% @adt.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
