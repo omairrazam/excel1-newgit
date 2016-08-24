@@ -47,7 +47,7 @@ class ExcelsheetUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
    def filename
      #{}"something.jpg" if original_filename
-     "actual.xlsm"
+     "actual.csv"
    end
 
 end

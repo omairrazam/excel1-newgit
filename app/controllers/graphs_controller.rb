@@ -1,6 +1,6 @@
 class GraphsController < ApplicationController
   before_action :set_graph, only: [:show, :edit, :update, :destroy]
-
+  before_action :verify_sheet_exists, only: [:create, :update_data]
   # GET /graphs
   def index
     @graphs = Graph.all
