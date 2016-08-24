@@ -48,6 +48,6 @@ class Adt < ActiveRecord::Base
     		errors.add(:x_colname, "doesn't exist")
 	    elsif !header.include?(y_colname)
 	    	errors.add(:y_colname, "doesn't exist")
-	   
+	    end 
 	end
 end
