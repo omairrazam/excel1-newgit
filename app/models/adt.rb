@@ -1,4 +1,6 @@
 class Adt < ActiveRecord::Base
+	validate :verify_cols_exist
+
 	belongs_to :graph
 	has_many :adt_datums, :dependent => :nullify
 
@@ -35,5 +37,17 @@ class Adt < ActiveRecord::Base
 			adtdatums << d
 		end
 	    AdtDatum.import adtdatums
+	end
+
+	def verify_cols_exist
+		data     = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
+	   	
+	   	header   = data[0]
+
+    	if !header.include?(x_colname)
+    		errors.add(:x_colname, "doesn't exist")
+	    elsif !header.include?(y_colname)
+	    	errors.add(:y_colname, "doesn't exist")
+	   
 	end
 end
