@@ -50,7 +50,7 @@ class Graph < ActiveRecord::Base
 	def verify_cols_exist
 		data     = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
 	   	header   = data[0]
-
+	   	
 	    if y2_colname.present? and !header.include?(y2_colname)
 	    	errors.add(:y2_colname, "doesn't exist")
 	    elsif !header.include?(y1_colname)

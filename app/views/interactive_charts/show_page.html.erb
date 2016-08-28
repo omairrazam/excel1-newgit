@@ -15,12 +15,12 @@
 
 	<div class="col-md-10">
    
-        <div id="container_static" style=" height: 300px; min-width: 1110px; z-index:10"></div>
+        <!-- <div id="container_static" style=" height: 300px; min-width: 1110px; z-index:10"></div> -->
         <br>
         <br>
 
         <% @graphs.each do |graph| %>
-        <div id=<%= "container_graph" + graph.id.to_s %>>
+        <div id=<%= "container_graph" + graph.id.to_s %> >
           <div class="dropdown">
             <!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Pick Your ADT
             <span class="caret"></span></button> -->
@@ -30,14 +30,14 @@
               <li><a href="#">JavaScript</a></li>
             </ul>
           </div>
-		      <div id=<%= "container" + graph.id.to_s %> style="height: 300px; min-width: 310px;"></div>
+		      <div id=<%= "container" + graph.id.to_s %> style="height: 500px; min-width: 310px;"></div>
         </div>
         <br>
         <br>
         <% end %>
 	</div>
 </div>
-<%= render partial: "sp_static_chart" , locals: {divId: 'container_static', data:@sp_graph_data} %>
+<%#= render partial: "sp_static_chart" , locals: {divId: 'container_static', data:@sp_graph_data} %>
 <%= render @graphs if @graphs.present?%>
 
 

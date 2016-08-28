@@ -3,12 +3,29 @@
 
 
 $(function () {
+
+
     var seriesOptions = [],
+
         seriesCounter = 0,
         names = <%= raw names %>,
-        d  = <%= raw data %>,
-        c  = <%= raw colors %>,
+        d     = <%= raw data %>,
+        c     = <%= raw colors %>,
         title = <%= raw tit %>;
+
+         groupingUnits = [[
+                            'week',       
+                            [1]                             
+                          ], [
+                            'month',
+                          [1, 2, 3, 4, 6]
+                          ]];
+
+          seriesOptions[0] = {
+                    type: 'candlestick',
+                     name: "S&P500",
+                     data:  <%= @sp_graph_data %>,
+          };
       //alert(d.length);
         //alert(names.length);
     /**
@@ -23,41 +40,48 @@ $(function () {
                 selected: 4
             },
 
-            yAxis: {
+            yAxis:[{
                 labels: {
-                    formatter: function () {
+                    align: 'left',
+                    x: -3
+                },
+                title: {formatter: function () {
                         return (this.value > 0 ? ' + ' : '') + this.value + '%';
                     }
+                  },
+                height: '40%',
+                lineWidth: 2
+            }, {
+
+                  labels: {
+                    align: 'left',
+                    x: -3
                 },
-                plotLines: [{
-                    value: 0,
-                    width: 2,
-                    color: 'silver'
-                }]
-            },
+                //title: titleOptionsStatic,
+                top: '50%',
+                height: '50%',
+                offset: 0,
+                lineWidth: 2
+            }],
+
             title: titleOptions,
+
             legend: {
-            enabled: true,
-            align: 'right',
-            backgroundColor: '#FCFFC5',
-            borderColor: 'black',
-            borderWidth: 2,
-            layout: 'vertical',
-            verticalAlign: 'top',
-            floating:'true',
-            y: 100, 
-            shadow: true
-            },
-            plotOptions: {
-                series: {
-                    compare: 'percent'
-                }
+                 enabled: true,
+            
+               
             },
 
-            tooltip: {
-                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-                valueDecimals: 2
-            },
+            // plotOptions: {
+            //     series: {
+            //         compare: 'percent'
+            //     }
+            // },
+
+            // tooltip: {
+            //     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+            //     valueDecimals: 2
+            // },
 
             series: seriesOptions
         });
@@ -67,36 +91,39 @@ $(function () {
 
     $.each(names, function (i, name) {
        //alert(name);
-      seriesOptions[i] = {
+      seriesOptions[i+1] = {
+              type: 'line',
                    name: name,
                    data:  d[i],
-                   color: c[i]
+                   color: c[i],
+                   yAxis:1
         };
         
-        // if (i == 0){
-        //   seriesOptions[i] = {
-        //            name: name,
-        //            data:  d[i],
-        //            color: <%=raw "'"+color_y1+"'" %>
-                   
-        //   };
-        // }else{
-        //   seriesOptions[i] = {
-        //       name: name,
-        //       data:  d[i],
-        //       color: <%=raw "'"+color_y2+"'" %>,
-        //       visible:false
-        //   };
-        // }
         seriesCounter += 1
-        if (seriesCounter === names.length) {
+          if (seriesCounter === names.length) {
+            
           titleOptions = {
             text: <%= raw tit %>,
             
             style: {
+              
               color: '#333333',
               font: '16px Arial',
-              fontWeight:'bold'
+              fontWeight:'bold',
+             
+            }
+
+            };
+
+            titleOptionsStatic = {
+            text: <%= raw tit %>,
+            
+            style: {
+              
+              color: '#333333',
+              font: '16px Arial',
+              fontWeight:'bold',
+             
             }
 
             };
@@ -105,10 +132,6 @@ $(function () {
         
     });
 });
-
-
-
-
 
 
 
