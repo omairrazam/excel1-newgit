@@ -20,16 +20,14 @@
         <br>
 
         <% @graphs.each do |graph| %>
-        <div id=<%= "container_graph" + graph.id.to_s %> >
-          <div class="dropdown">
-            <!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Pick Your ADT
-            <span class="caret"></span></button> -->
-            <ul class="dropdown-menu">
-              <li><a href="#">HTML</a></li>
-              <li><a href="#">CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
-            </ul>
+             <div class="well">
+            
+              <strong><%= graph.name %></strong> is Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
           </div>
+        <div id=<%= "container_graph" + graph.id.to_s %> >
+     
+
 		      <div id=<%= "container" + graph.id.to_s %> style="height: 500px; min-width: 310px;"></div>
         </div>
         <br>
