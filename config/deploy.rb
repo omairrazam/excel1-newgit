@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 
-lock '3.6.0'
+lock '3.6.1'
 
 set :application, 'excel1'
 set :repo_url, 'git@github.com:omairrazam/excel1-newgit.git' # Edit this to match your repository

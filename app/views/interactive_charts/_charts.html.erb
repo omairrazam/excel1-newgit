@@ -8,13 +8,12 @@ $(function () {
         names    = <%= raw @names %>,
         c        = <%= raw @colors %>,
         title    = <%= raw @title %>,
-        sp_id    = 3;
-
-        base_url = "http://localhost:4011/";
-        adt_path = "adt/api_get_adt_data/";
-        static_graph_path = "category/api_get_sp_data/";
+        sp_id    = <%= raw @sp_graph_id %>;
+        var base_url = window.location.origin;
+        var adt_path = "/adt/api_get_adt_data/";
+        var static_graph_path = "/category/api_get_sp_data/";
         
-       //alert(seriesOptions); 
+      
     /**
      * Create the chart when all data is loaded
      * @returns {undefined}
