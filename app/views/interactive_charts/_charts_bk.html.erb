@@ -1,0 +1,139 @@
+
+<script type="text/javascript">
+
+
+$(function () {
+
+
+    var seriesOptions = [],
+
+        seriesCounter = 0,
+        names = <%= raw names %>,
+        d     = <%= raw data %>,
+        c     = <%= raw colors %>,
+        title = <%= raw tit %>;
+
+         groupingUnits = [[
+                            'week',       
+                            [1]                             
+                          ], [
+                            'month',
+                          [1, 2, 3, 4, 6]
+                          ]];
+
+          seriesOptions[0] = {
+                    type: 'candlestick',
+                     name: "S&P500",
+                     data:  <%= @sp_graph_data %>,
+          };
+      //alert(d.length);
+        //alert(names.length);
+    /**
+     * Create the chart when all data is loaded
+     * @returns {undefined}
+     */
+    function createChart() {
+
+        $(<%= divId %>).highcharts('StockChart', {
+
+            rangeSelector: {
+                selected: 4
+            },
+
+            yAxis:[{
+                labels: {
+                    align: 'left',
+                    x: -3
+                },
+                title: {formatter: function () {
+                        return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                    }
+                  },
+                height: '40%',
+                lineWidth: 2
+            }, {
+
+                  labels: {
+                    align: 'left',
+                    x: -3
+                },
+                //title: titleOptionsStatic,
+                top: '50%',
+                height: '50%',
+                offset: 0,
+                lineWidth: 2
+            }],
+
+            title: titleOptions,
+
+            legend: {
+                 enabled: true,
+            
+               
+            },
+
+            // plotOptions: {
+            //     series: {
+            //         compare: 'percent'
+            //     }
+            // },
+
+            // tooltip: {
+            //     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+            //     valueDecimals: 2
+            // },
+
+            series: seriesOptions
+        });
+    }
+
+    
+
+    $.each(names, function (i, name) {
+       //alert(name);
+      seriesOptions[i+1] = {
+              type: 'line',
+                   name: name,
+                   data:  d[i],
+                   color: c[i],
+                   yAxis:1
+        };
+        
+        seriesCounter += 1
+          if (seriesCounter === names.length) {
+            
+          titleOptions = {
+            text: <%= raw tit %>,
+            
+            style: {
+              
+              color: '#333333',
+              font: '16px Arial',
+              fontWeight:'bold',
+             
+            }
+
+            };
+
+            titleOptionsStatic = {
+            text: <%= raw tit %>,
+            
+            style: {
+              
+              color: '#333333',
+              font: '16px Arial',
+              fontWeight:'bold',
+             
+            }
+
+            };
+          createChart();
+        }
+        
+    });
+});
+
+
+
+</script>
+

@@ -79,6 +79,17 @@ class AdtsController < ApplicationController
                                    
   end 
 
+  def api_get_adt_data
+    @data   = []
+    
+    adt   = Adt.find(params[:adt_id])
+
+    data = adt.adt_datums.order('timestamp_ms asc').pluck(:timestamp_ms,:y1_values)
+      
+    respond_to do |format|
+      format.json  { render :json => data } 
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

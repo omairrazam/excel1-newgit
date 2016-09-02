@@ -1,44 +1,32 @@
 
 <script type="text/javascript">
 
-
 $(function () {
-
-
     var seriesOptions = [],
-
+        ids = <%= raw @ids %>,
         seriesCounter = 0,
-        names = <%= raw names %>,
-        d     = <%= raw data %>,
-        c     = <%= raw colors %>,
-        title = <%= raw tit %>;
+        names    = <%= raw @names %>,
+        c        = <%= raw @colors %>,
+        title    = <%= raw @title %>,
+        sp_id    = 3;
 
-         groupingUnits = [[
-                            'week',       
-                            [1]                             
-                          ], [
-                            'month',
-                          [1, 2, 3, 4, 6]
-                          ]];
-
-          seriesOptions[0] = {
-                    type: 'candlestick',
-                     name: "S&P500",
-                     data:  <%= @sp_graph_data %>,
-          };
-      //alert(d.length);
-        //alert(names.length);
+        base_url = "http://localhost:4011/";
+        adt_path = "adt/api_get_adt_data/";
+        static_graph_path = "category/api_get_sp_data/";
+        
+       //alert(seriesOptions); 
     /**
      * Create the chart when all data is loaded
      * @returns {undefined}
      */
     function createChart() {
 
-        $(<%= divId %>).highcharts('StockChart', {
+        $(<%= @divId %>).highcharts('StockChart', {
 
             rangeSelector: {
-                selected: 4
+                selected: 1
             },
+
 
             yAxis:[{
                 labels: {
@@ -64,76 +52,70 @@ $(function () {
                 lineWidth: 2
             }],
 
-            title: titleOptions,
 
+            title: titleOptions,
             legend: {
-                 enabled: true,
-            
-               
+                enabled: true, 
             },
 
-            // plotOptions: {
-            //     series: {
-            //         compare: 'percent'
-            //     }
-            // },
-
-            // tooltip: {
-            //     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-            //     valueDecimals: 2
-            // },
 
             series: seriesOptions
         });
     }
 
+
+     /***************  static graph fetching *************/
+
+    $.getJSON(base_url + static_graph_path + sp_id,    function (data) {
     
-
-    $.each(names, function (i, name) {
-       //alert(name);
-      seriesOptions[i+1] = {
-              type: 'line',
-                   name: name,
-                   data:  d[i],
-                   color: c[i],
-                   yAxis:1
+        seriesOptions[0] = {
+            type: 'candlestick',
+            name: "S&P500",
+            data: data,
         };
-        
-        seriesCounter += 1
-          if (seriesCounter === names.length) {
-            
-          titleOptions = {
-            text: <%= raw tit %>,
-            
-            style: {
-              
-              color: '#333333',
-              font: '16px Arial',
-              fontWeight:'bold',
-             
-            }
 
-            };
 
-            titleOptionsStatic = {
-            text: <%= raw tit %>,
-            
-            style: {
-              
-              color: '#333333',
-              font: '16px Arial',
-              fontWeight:'bold',
-             
-            }
+        /*************** graphs data **********************/
 
-            };
-          createChart();
-        }
-        
+        $.each(ids, function (i, val) {
+
+            //alert('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?');
+            $.getJSON(base_url + adt_path + val,    function (data) {
+
+
+                seriesOptions[i+1] = {
+                    type: 'line',
+                    name: name[i],
+                    data: data,
+                    color: c[i],
+                    yAxis:1
+                };
+
+                // As we're loading the data asynchronously, we don't know what order it will arrive. So
+                // we keep a counter and create the chart when all the data is loaded.
+                seriesCounter += 1;
+
+                if (seriesCounter === ids.length) {
+
+                    titleOptions = {
+                        text: title,
+                        
+                        style: {
+                          color: '#333333',
+                          font: '16px Arial',
+                          fontWeight:'bold',
+                         
+                        }
+                    };
+
+                    createChart();
+                }
+            });
+        });
+
     });
+   
 });
-
-
 
 </script>
 

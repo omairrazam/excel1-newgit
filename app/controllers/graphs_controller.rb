@@ -78,8 +78,8 @@ class GraphsController < ApplicationController
     
   end 
 
+ 
   
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_graph
@@ -108,7 +108,8 @@ class GraphsController < ApplicationController
                                                            :y2_legend, 
                                                            :color_y1,
                                                            :color_y2,
-                                                           :order_num])
+                                                           :order_num,
+                                                           :definition])
       
     end
 end

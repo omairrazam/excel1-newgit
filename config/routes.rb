@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :categories do
     match "/update_data/:category_id" => "categories#update_data", as: :update_data, via: :get
     match "/graph/update_data/:graph_id" => "graphs#update_data",  as: :graph_update_data, via: :get
+
     resources :graphs do
         resources :adts
         match "/adt/update_data/:adt_id" => "adts#update_data", as: :adt_update_data, via: :get
@@ -22,6 +23,9 @@ Rails.application.routes.draw do
   resources :transactions
   resources :users
 
+  match "/category/api_get_sp_data/:category_id" => "categories#api_get_sp_data",  as: :api_get_adt_data, via: :get
+  match "/adt/api_get_adt_data/:adt_id" => "adts#api_get_adt_data",  as: :api_get_sp_data, via: :get
+
   get "/paypal_return" => "transactions#paypal_return"
   post "/hook" => "transactions#paypal_hook"
   get "/active_studies" => "market_studies#active_studies"
@@ -30,6 +34,7 @@ Rails.application.routes.draw do
   get "show_paypal_info" => "users#show_paypal_info"
   
   mount Sidekiq::Web, at: '/sidekiq'
+
 
   
   root 'market_studies#index'

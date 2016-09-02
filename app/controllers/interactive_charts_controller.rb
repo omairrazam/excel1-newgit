@@ -25,7 +25,6 @@ class InteractiveChartsController < ApplicationController
 
 		if @selected_category.present?
 			@graphs 		   =  @selected_category.graphs.order('order_num asc')
-			#debugger
 			@sp_graph_data     =  @selected_category.sp_graphs.order('timestamp_ms asc').pluck(:timestamp_ms, :open, :high, :low, :close)	
 		end
 

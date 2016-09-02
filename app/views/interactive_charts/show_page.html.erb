@@ -20,15 +20,10 @@
         <br>
 
         <% @graphs.each do |graph| %>
-             <div class="well">
             
-              <strong><%= graph.name %></strong> is Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-
-          </div>
         <div id=<%= "container_graph" + graph.id.to_s %> >
-     
-
 		      <div id=<%= "container" + graph.id.to_s %> style="height: 500px; min-width: 310px;"></div>
+          <div class="well"><p> <%= graph.try(:definition).html_safe rescue 'No Definition Found'  %></p></div>
         </div>
         <br>
         <br>
@@ -56,21 +51,21 @@ var options = {
 };
 $('#container_static').sticky_div(options);
 // Set the datepicker's date format
-$(function(){
-    $.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd',
-        onSelect: function(dateText) {
-          var id = $(this).attr('id');
+// $(function(){
+//     $.datepicker.setDefaults({
+//         dateFormat: 'yy-mm-dd',
+//         onSelect: function(dateText) {
+//           var id = $(this).attr('id');
           
-          if (id == "info_box_datepicker"){
+//           if (id == "info_box_datepicker"){
 
-          }else{
-            this.onchange();
-            this.onblur();
-          }
-        }
-    });
-});
+//           }else{
+//             this.onchange();
+//             this.onblur();
+//           }
+//         }
+//     });
+// });
 
 
     

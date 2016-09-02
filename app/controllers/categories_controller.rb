@@ -74,6 +74,18 @@ class CategoriesController < ApplicationController
     end
   end 
 
+   def api_get_sp_data
+    @data   = []
+    
+    category   = Category.find(params[:category_id])
+
+    data    = category.sp_graphs.order('timestamp_ms asc').pluck(:timestamp_ms, :open, :high, :low, :close)
+    
+    respond_to do |format|
+      format.json  { render :json => data } 
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

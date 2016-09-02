@@ -1,0 +1,41 @@
+
+
+<%  @data1    =  graph.graph_datums.order('timestamp_ms asc').pluck(:timestamp_ms,:y1_values) %>
+<%  @data2    =  graph.graph_datums.order('timestamp_ms asc').pluck(:timestamp_ms,:y2_values) %>
+
+<%  @divId    = 'container' + graph.id.to_s %>
+<%  @color_y1 =  graph.color_y1  %>
+<%  @color_y2 =  graph.color_y2 %>
+<%  @t        =  [graph.name] %>
+
+<% @names   = [] %>
+<% @data    = [] %>
+<% @colors  = [] %>
+<% @ids		= [] %>
+
+<%#= debugger %>
+
+<% if graph.graph_datums.present? and graph.graph_datums.first.y2_values.present? %>
+	<%  @names.push(graph.y1_legend,graph.y2_legend) %>
+	<%  @data.push(@data1,@data2) %>
+	<%  @colors.push(@color_y1,@color_y2) %>
+	
+<% elsif graph.graph_datums.present? and graph.graph_datums.first.y1_values.present?%>
+	<%  @names.push(graph.y1_legend) %>
+	<%  @data.push(@data1) %>
+	<%  @colors.push(@color_y1) %>
+<% end %>
+
+<% adts = graph.adts.order('order_num asc') %>
+<% adts.each do |a| %>
+	<%#= debugger %>
+	<%  @names.push(a.y_legend) %>
+	<%  @d   =  a.adt_datums.order('timestamp_ms asc').pluck(:timestamp_ms,:y1_values) %>
+	<%  @data.push(@d) %>
+    <%  @colors.push(a.color_y) %>
+    <%  @ids.push(a.id) %>
+<% end %>
+
+<%# make object array here %>
+<%#= debugger %>
+<%= render :partial => "charts", :locals => { :data1 => @data1, :data2 => @data2, :divId => @divId, :names => @names,:tit=> @t, :color_y1 => @color_y1, :color_y2 => @color_y2, :data => @data, :colors => @colors } %>

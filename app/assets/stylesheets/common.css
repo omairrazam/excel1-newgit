@@ -115,3 +115,8 @@
 #switch_graph_list .list-group-item{
   min-height: 90px;
 }
+
+/* hide graph footer */
+.highcharts-tooltip + text{
+  display: none;
+} 
