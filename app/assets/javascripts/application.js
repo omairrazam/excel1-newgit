@@ -17,5 +17,6 @@
 //= require ckeditor/init
 //= require jquery.sticky-div
 //= require intro
+//= require jquery-ui.js
 // require turbolinks
 // require_tree .
