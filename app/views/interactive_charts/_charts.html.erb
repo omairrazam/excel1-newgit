@@ -1,31 +1,37 @@
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" />
 
 <script type="text/javascript">
 
 $(function () {
-    var seriesOptions = [],
-        ids = <%= raw @ids %>,
-        seriesCounter = 0,
-        names    = <%= raw @names %>,
-        c        = <%= raw @colors %>,
-        title    = <%= raw @title %>,
-        sp_id    = <%= raw @sp_graph_id %>;
-        var base_url = window.location.origin;
-        var adt_path = "/adt/api_get_adt_data/";
-        var static_graph_path = "/category/api_get_sp_data/";
-        
-      
+    var seriesOptions = [];
+    var ids = <%= raw @ids %>;
+    var seriesCounter = 0;
+    var names    = <%= raw @names %>;
+    var c        = <%= raw @colors %>;
+    var title    = <%= raw @title %>;
+    var sp_id    = <%= raw @sp_graph_id %>;
+    var base_url = window.location.origin;
+    var adt_path = "/adt/api_get_adt_data/";
+    var static_graph_path = "/category/api_get_sp_data/";
+    
+      //alert(<%= @divId%>);
     /**
      * Create the chart when all data is loaded
      * @returns {undefined}
      */
     function createChart() {
 
-        $(<%= @divId %>).highcharts('StockChart', {
+       window.chart = new Highcharts.StockChart({
+
+            chart: {
+                renderTo: "<%= @divId %>" 
+            },
 
             rangeSelector: {
                 selected: 1
             },
-
 
             yAxis:[{
                 labels: {
@@ -36,7 +42,7 @@ $(function () {
                         return (this.value > 0 ? ' + ' : '') + this.value + '%';
                     }
                   },
-                height: '40%',
+                height: '50%',
                 lineWidth: 2
             }, {
 
@@ -45,28 +51,41 @@ $(function () {
                     x: -3
                 },
                 //title: titleOptionsStatic,
-                top: '50%',
-                height: '50%',
+                top: '60%',
+                height: '40%',
                 offset: 0,
                 lineWidth: 2
             }],
-
 
             title: titleOptions,
             legend: {
                 enabled: true, 
             },
 
-
             series: seriesOptions
+        }, function(chart) {
+
+            // apply the date pickers
+            setTimeout(function() {
+                $('input.highcharts-range-selector', $('#' + chart.options.chart.renderTo)).datepicker()
+            }, 0)
         });
-    }
+
+        // Set the datepicker's date format
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd',
+            onSelect: function(dateText) {
+                this.onchange();
+                this.onblur();
+            }
+        });
+    } 
 
 
-     /***************  static graph fetching *************/
+    /***************  static graph fetching *************/
 
     $.getJSON(base_url + static_graph_path + sp_id,    function (data) {
-    
+       
         seriesOptions[0] = {
             type: 'candlestick',
             name: "S&P500",
@@ -81,10 +100,10 @@ $(function () {
             //alert('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?');
             $.getJSON(base_url + adt_path + val,    function (data) {
 
-
+                
                 seriesOptions[i+1] = {
                     type: 'line',
-                    name: name[i],
+                    name: names[i],
                     data: data,
                     color: c[i],
                     yAxis:1
@@ -106,7 +125,8 @@ $(function () {
                          
                         }
                     };
-
+                    
+                    $('<%= "#" + @divId + "_processor" %>').hide();
                     createChart();
                 }
             });
@@ -117,4 +137,6 @@ $(function () {
 });
 
 </script>
+
+
 

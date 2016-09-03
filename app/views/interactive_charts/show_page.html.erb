@@ -16,13 +16,14 @@
 	<div class="col-md-10">
    
         <!-- <div id="container_static" style=" height: 300px; min-width: 1110px; z-index:10"></div> -->
-        <br>
-        <br>
+        <!-- <br>
+        <br> -->
 
         <% @graphs.each do |graph| %>
             
         <div id=<%= "container_graph" + graph.id.to_s %> >
-		      <div id=<%= "container" + graph.id.to_s %> style="height: 500px; min-width: 310px;"></div>
+          <div class = 'processor' id=<%= "container" + graph.id.to_s + "_processor" %>><%= image_tag "processing.gif" %></div>
+		      <div id=<%= "container" + graph.id.to_s %> style="height: 700px; min-width: 310px;"></div>
           <div class="well"><p> <%= graph.try(:definition).html_safe rescue 'No Definition Found'  %></p></div>
         </div>
         <br>
