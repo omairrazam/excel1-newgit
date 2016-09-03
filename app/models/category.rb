@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	validate :verify_cols_exist
-
+	has_one      :excelsheet
 	has_many     :graphs#, :dependent => :nullify
 	has_many     :sp_graphs#, :dependent => :nullify
 	#after_create :fetch_sp_csv
@@ -14,7 +14,7 @@ class Category < ActiveRecord::Base
 	
 	def fetch_sp_csv
 		
-	    data     = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
+	    data     = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.id}.csv")
 	   	spgraphs = []
 	   	header   = data[0]
 

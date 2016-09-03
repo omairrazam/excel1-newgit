@@ -6,7 +6,7 @@ class Adt < ActiveRecord::Base
 
 	def update_data_csv
 		
-	    data = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
+	    data = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.graph.category.id}.csv")
 	   	adtdatums = []
 	   	header    = data[0]
 	   

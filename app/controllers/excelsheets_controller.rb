@@ -12,7 +12,11 @@ class ExcelsheetsController < ApplicationController
 
   # GET /excelsheets/new
   def new
-    @excelsheet = Excelsheet.new
+    @category   = Category.find(params[:category_id])
+    if @category.excelsheet.present?
+      @category.excelsheet.delete
+    end
+    @excelsheet = @category.build_excelsheet
   end
 
   # GET /excelsheets/1/edit
@@ -21,10 +25,11 @@ class ExcelsheetsController < ApplicationController
 
   # POST /excelsheets
   def create
-    @excelsheet = Excelsheet.new(excelsheet_params)
+    @category   = Category.find(params[:category_id])
+    @excelsheet = @category.build_excelsheet(excelsheet_params)
 
     if @excelsheet.save
-      redirect_to @excelsheet, notice: 'Excelsheet was successfully created.'
+      redirect_to category_path(@category), notice: 'Excelsheet was successfully created.'
     else
       render :new
     end

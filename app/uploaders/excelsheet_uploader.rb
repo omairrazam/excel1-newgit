@@ -14,6 +14,7 @@ class ExcelsheetUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "#{Rails.root}/excelsheet/"
+
     
   end
 
@@ -47,7 +48,9 @@ class ExcelsheetUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
    def filename
      #{}"something.jpg" if original_filename
-     "actual.csv"
+     #{}"actual.csv"
+     "category_#{model.category.id}.csv" if original_filename
+
    end
 
 end

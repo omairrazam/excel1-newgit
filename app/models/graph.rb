@@ -7,7 +7,7 @@ class Graph < ActiveRecord::Base
 	#after_create :update_data_csv
 
 	def update_data_csv
-	    data     = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
+	    data     = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.category.id}.csv")
 	   	datums   = []
 	   	header   = data[0]
 

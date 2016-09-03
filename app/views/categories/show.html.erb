@@ -12,7 +12,12 @@
 	</div>
 	<div class="col-md-9">
 		<div class="panel panel-default">
-		<div class="panel-heading"><strong>Graphs Table</strong><span class = "pull-right"><%= link_to 'Create Graph', new_category_graph_path(@category) %></span></div>
+		<div class="panel-heading"><strong>Graphs Table</strong>
+			<span class = "pull-right">
+				<%= link_to 'Load CSV', new_category_excelsheet_path(@category) %>&nbsp;&nbsp;|&nbsp;&nbsp;
+				<%= link_to 'Create Graph', new_category_graph_path(@category) %>
+			</span>
+		</div>
 
 		<div class="panel-body">
 			<table class="table table-bordered">
