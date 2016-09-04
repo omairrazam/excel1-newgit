@@ -12,9 +12,9 @@
   <tbody>
     <% @graphs.each do |graph| %>
       <tr>
-        <td><%= link_to 'Show', graph %></td>
-        <td><%= link_to 'Edit', edit_graph_path(graph) %></td>
-        <td><%= link_to 'Destroy', graph, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', category_graph_path(@category,graph) %></td>
+        <td><%= link_to 'Edit', edit_category_graph_path(@category,graph) %></td>
+        <td><%= link_to 'Destroy', category_graph_path(@category,graph), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Graph', new_graph_path %>
+<%#= link_to 'New Graph', new_graph_path %>

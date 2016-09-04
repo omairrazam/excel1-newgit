@@ -127,3 +127,6 @@
   z-index:1;
   background-color:white;
 }
+.container {
+    width: 1440px !important;
+  }

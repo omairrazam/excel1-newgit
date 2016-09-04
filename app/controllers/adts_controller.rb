@@ -1,6 +1,9 @@
 class AdtsController < ApplicationController
 	before_action :set_adt, only: [:show, :edit, :update, :destroy]
   before_action :verify_sheet_exists, only: [:create, :update_data]
+
+  add_breadcrumb "Categories", :categories_path
+
   # GET /graphs
   def index
     #@graphs = Graph.all
@@ -19,6 +22,8 @@ class AdtsController < ApplicationController
 
   # GET /graphs/1/edit
   def edit
+    add_breadcrumb "Graphs", category_path(@category)
+    add_breadcrumb "Adts", category_graph_path(@category, @graph)
   end
 
   # POST /graphs

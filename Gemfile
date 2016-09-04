@@ -76,5 +76,7 @@ gem "sidekiq"
 gem 'sinatra', require: false
 gem 'slim'
 
+gem "breadcrumbs_on_rails"
+
 gem "activerecord-import"
 

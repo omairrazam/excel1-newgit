@@ -88,6 +88,9 @@ $(function () {
             type: 'candlestick',
             name: "S&P500",
             data: data,
+            dataGrouping: {
+                units: [ ['day', [1] ] ]
+            }
         };
 
 
@@ -104,7 +107,10 @@ $(function () {
                     name: names[i],
                     data: data,
                     color: c[i],
-                    yAxis:1
+                    yAxis:1,
+                    dataGrouping: {
+                        units: [ ['day', [1] ] ]
+                    }
                 };
 
                 // As we're loading the data asynchronously, we don't know what order it will arrive. So
@@ -133,7 +139,7 @@ $(function () {
     });
    
 });
-
+Highcharts.Scroller.prototype.drawHandle = function () {};
 </script>
 
 

@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :verify_sheet_exists, only: [:create, :update_data]
+  
+  
   # GET /categories
   def index
     @categories = Category.all
@@ -9,7 +11,8 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
-    
+    add_breadcrumb "Categories", :categories_path
+    add_breadcrumb "Graphs", category_path(@category)
   end
 
   # GET /categories/new

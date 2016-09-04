@@ -57,7 +57,15 @@
     <div class="row">
     	<%= render :partial => "/print_flash_messages" %>
     </div>
-    
+
+    <!-- ONly for Admin panel -->
+    <% if params["controller"] == "categories" or  params["controller"] == "graphs" or params["controller"] == "adts" %>
+      <ol class="breadcrumb">
+       <%= render_breadcrumbs :tag => :li, :separator => "" %>
+      </ol>
+    <% end %>
+    <!-- end breadcrumbs -->
+
      <%= yield %>
   </div>
 </body>

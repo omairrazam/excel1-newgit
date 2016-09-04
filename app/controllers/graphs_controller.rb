@@ -1,13 +1,19 @@
 class GraphsController < ApplicationController
   before_action :set_graph, only: [:show, :edit, :update, :destroy]
   before_action :verify_sheet_exists, only: [:create, :update_data]
+
+  add_breadcrumb "Categories", :categories_path
+
   # GET /graphs
   def index
-    @graphs = Graph.all
+    @category = Category.find(params[:category_id])
+    @graphs = @category.graphs
   end
 
   # GET /graphs/1
   def show
+    add_breadcrumb "Graphs", category_path(@category)
+    add_breadcrumb "Adts", category_graph_path(@category, @graph)
   end
 
   # GET /graphs/new
@@ -18,6 +24,8 @@ class GraphsController < ApplicationController
 
   # GET /graphs/1/edit
   def edit
+    add_breadcrumb "Graphs", category_path(@category)
+    
   end
 
   # POST /graphs
