@@ -26,9 +26,64 @@ $(function () {
             chart: {
                 renderTo: "<%= @divId %>" 
             },
-
-            rangeSelector: {
-                selected: 1
+            navigator: {
+                enabled: false
+            },
+            rangeSelector : {
+                allButtonsEnabled: true,
+                buttons: [{
+                    type: 'month',
+                    count: 1,
+                    text: '1M',
+                    dataGrouping: {
+                        forced: true,
+                        units: [['day', [1]]]
+                    }
+                }, {
+                    type: 'month',
+                    count: 3,
+                    text: '3M',
+                    dataGrouping: {
+                        forced: true,
+                        units: [['day', [1]]]
+                    }
+                },{
+                    type: 'year',
+                    count: 1,
+                    text: '1Y',
+                    dataGrouping: {
+                        forced: true,
+                        units: [['day', [1]]]
+                    }
+                }, {
+                    type: 'year',
+                    count: 2,
+                    text: '2Y',
+                    dataGrouping: {
+                        forced: true,
+                        units: [['day', [1]]]
+                    }
+                }, {
+                    type: 'year',
+                    count: 3,
+                    text: '3Y',
+                    dataGrouping: {
+                        forced: true,
+                        units: [['day', [1]]]
+                    }
+                }, {
+                    type: 'year',
+                    count: 4,
+                    text: '4Y',
+                    dataGrouping: {
+                        forced: true,
+                        units: [['day', [1]]]
+                    }
+                }],
+                buttonTheme: {
+                    width: 60
+                },
+                selected: 2
             },
 
             yAxis:[{
