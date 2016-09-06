@@ -8,6 +8,24 @@
     <%#= javascript_tag 'interactive_charts', media: 'all' %>
 <% end %>
 
+
+ <div id = "nav">
+   <center>
+      <nav class="blog-nav">
+        <% if @categories.present? %>
+          <% @categories.each do |cat| %>
+            <%= link_to cat.name, show_by_category_path(cat), class:'blog-nav-item ' + ic_sidebar_link_class( cat.name,show_by_category_path(cat))  %>
+          <% end %>
+        <% end %>
+      </nav>
+    </center>
+  </div>
+
+
+               
+
+
+
 <div class="row">
 	<div class="col-md-2">
 	<%#= render :partial => "right_sidebar" %>
