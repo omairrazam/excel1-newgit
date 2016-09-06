@@ -1,10 +1,8 @@
 class Graph < ActiveRecord::Base
-	validate :verify_cols_exist
-	
 	belongs_to   :category
 	has_many     :adts#, :dependent => :nullify
 	has_many     :graph_datums#, :dependent => :nullify
-	#after_create :update_data_csv
+	
 
 	def update_data_csv
 	    data     = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.category.id}.csv")
@@ -47,17 +45,5 @@ class Graph < ActiveRecord::Base
 	    GraphDatum.import datums
 	end
 
-	def verify_cols_exist
-		data     = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
-	   	header   = data[0]
-	   	
-	    if y2_colname.present? and !header.include?(y2_colname)
-	    	errors.add(:y2_colname, "doesn't exist")
-	    elsif !header.include?(y1_colname)
-	    	errors.add(:y1_colname, "doesn't exist")
-	    elsif !header.include?(x_colname) 
-	    	errors.add(:x_colname, "doesn't exist")
-	    end
-	end
 	
 end

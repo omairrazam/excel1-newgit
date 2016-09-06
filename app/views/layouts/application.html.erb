@@ -16,7 +16,7 @@
       <span><i class="fa fa-twitter" aria-hidden="true"></i><%= link_to "@indextresearch", 'https://twitter.com/IndextResearch', :target => "_blank"%></span> &nbsp;&nbsp;&nbsp;
       <span><i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;<%= mail_to "info@indextresearch.com" %></span>
     </div>
-    <div class="col-md-4  col-md-offset-0 md-center"><%= image_tag('indexT-circle.jpg') %></div>
+    <div class="col-md-4  col-md-offset-0 md-center"><%= link_to image_tag('indexT-circle.jpg'),root_path %></div>
     <div class="col-md-3  col-md-offset-1 links md-center">
       <% if current_user.present? %>
       <span>Signed in as <span class = "site-label"><%= current_user.email %>
@@ -53,7 +53,7 @@
   <div class="container">
     <div class="row">
       <div id = "logo" class="md-center">
-        <%= image_tag('indext-logo2.jpg') %>
+        <%= link_to image_tag('indext-logo2.jpg'),root_path %>
       </div>
     </div>
   </div>
@@ -76,6 +76,20 @@
     </center>
   </div>
 
+  <% if params["controller"] == "interactive_charts" %>
+     <div id = "nav">
+     <center>
+        <nav class="blog-nav">
+          <% if @categories.present? %>
+            <% @categories.each do |cat| %>
+              <%= link_to cat.name, show_by_category_path(cat), class:'blog-nav-item ' + ic_sidebar_link_class( cat.name,show_by_category_path(cat))  %>
+            <% end %>
+          <% end %>
+        </nav>
+      </center>
+    </div>
+  <% end %>
+
 
 
   
@@ -85,7 +99,7 @@
     </div>
 
     <!-- ONly for Admin panel -->
-    <% if params["controller"] == "categories" or  params["controller"] == "graphs" or params["controller"] == "adts" %>
+    <% if  (params["controller"] == "categories" and params["action"] != "index") or params["controller"] == "graphs" or params["controller"] == "adts" %>
       <ol class="breadcrumb">
        <%= render_breadcrumbs :tag => :li, :separator => "" %>
       </ol>

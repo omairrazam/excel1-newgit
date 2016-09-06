@@ -48,19 +48,19 @@ h6, .h6 {
   padding: 10px;
   font-weight: 500;
   /*color: #cdddeb;*/
-  color: black;
+  color: #5F5F5F;
 }
 
 .blog-nav-item:hover,
 .blog-nav-item:focus {
-  color: rgb(0,123,197);
+  color: #085589;
   text-decoration: none;
 }
 
 /* Active state gets a caret at the bottom */
 .blog-nav .active {
   /*color: #fff;*/
-  color: rgb(0,123,197);
+  color: #085589;
 }
 
 .blog-nav .active:after {

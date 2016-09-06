@@ -6,8 +6,9 @@
 		    <li class="list-group-item"><strong>Open-col:</strong><%= @category.open_colname %></li>
 		    <li class="list-group-item"><strong>Close-col:</strong><%= @category.close_colname %></li>
 		    <li class="list-group-item"><strong>High-col:</strong><%= @category.high_colname %></li>
-		    <li class="list-group-item"><strong>Low-col:</strong><%= @category.high_colname %></li>
+		    <li class="list-group-item"><strong>Low-col:</strong><%= @category.low_colname %></li>
 		    <li class="list-group-item"><strong>SP-col:</strong><%= @category.sp_x_colname %></li>
+		    <li class="list-group-item"><%= link_to 'update', category_update_data_path(@category), class: 'btn btn-primary btn-block' %></li>
 		 </ul>
 	</div>
 	<div class="col-md-9">
@@ -24,16 +25,12 @@
 				<thead>
 				  <tr>
 				    <th>Name</th>
-				    <th>Sheetname</th>
-				    <th>X Colname</th>
-				    <th>Y1 Colname</th>
-				    <th>Y1 Legend</th>
-				    <th>Y2 Col</th>
-				    <th>Y2 Legend</th>
+				    
 				    <th>Order</th>
 				    <th></th>
 				    <th></th>
 				    <th></th>
+				    
 				  
 				  </tr>
 				</thead>
@@ -41,17 +38,9 @@
 				 <% @category.graphs.each do |graph| %>
 				  <tr>
 				  	<td><%= graph.name %></td>
-				  	<td><%= graph.sheetname %></td>
-				  	<td><%= graph.x_colname %></td>
-				  	<td><%= graph.y1_colname %></td>
-				  	<td><%= graph.y1_legend %></td>
-				  	<td><%= graph.y2_colname %></td>
-				  	<td><%= graph.y2_legend %></td>
 				  	<td><%= graph.order_num %></td>
 				  	<td><%= link_to 'Show', category_graph_path(@category,graph) %></td>
 				  	<td><%= link_to 'Edit', edit_category_graph_path(@category,graph) %></td>
-				  	<td><%= link_to 'update', category_graph_update_data_path(@category,graph) %></td>
-				  
 				  	<td><%= link_to 'Destroy', category_graph_path(@category,graph), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				  	
 				  </tr>

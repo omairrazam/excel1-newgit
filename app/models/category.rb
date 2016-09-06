@@ -1,5 +1,6 @@
 class Category < ActiveRecord::Base
-	validate :verify_cols_exist
+	#validate :verify_sheet_exists 
+	#validate :verify_cols_exist , on: :fetch_sp_csv
 	has_one      :excelsheet
 	has_many     :graphs#, :dependent => :nullify
 	has_many     :sp_graphs#, :dependent => :nullify
@@ -11,9 +12,14 @@ class Category < ActiveRecord::Base
 	require 'active_record'
 	require "activerecord-import/base"
 
-	
 	def fetch_sp_csv
-		
+
+		if !verify_sheet_exists
+			return -1
+		elsif !verify_cols_exist
+			return -2
+		end
+
 	    data     = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.id}.csv")
 	   	spgraphs = []
 	   	header   = data[0]
@@ -53,23 +59,35 @@ class Category < ActiveRecord::Base
   		
 	end
 
-	def verify_cols_exist
-		data     = CSV.read(Rails.root.to_s +  "/excelsheet/actual.csv")
+
+    def verify_cols_exist
+		data     = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.id}.csv")
 	   	
 	   	header   = data[0]
 
     	if !header.include?(open_colname)
-    		errors.add(:open_colname, "doesn't exist")
+    		return false
 	    elsif !header.include?(close_colname)
-	    	errors.add(:close_colname, "doesn't exist")
+	    	return false
 	    elsif !header.include?(high_colname)
-	    	errors.add(:high_colname, "doesn't exist")
+	    	return false
 	    elsif !header.include?(low_colname)
-	    	errors.add(:low_colname, "doesn't exist")
+	    	return false
 	    elsif !header.include?(sp_x_colname) 
-	    	errors.add(:sp_x_colname, "doesn't exist")
+	    	return false
+	    else
+	    	return true
 	    end
 	end
+
+	def verify_sheet_exists
+      if !File.exist?(Rails.root.to_s +  "/excelsheet/category_#{self.id}.csv") 
+      	return false
+      else 
+      	return true
+      end
+    end
+	
 
 end
 

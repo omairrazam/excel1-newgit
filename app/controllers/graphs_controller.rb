@@ -30,6 +30,7 @@ class GraphsController < ApplicationController
 
   # POST /graphs
   def create
+    #debugger
     @category   =  Category.find(params[:category_id])
     @graph      =  @category.graphs.new(graph_params)
 

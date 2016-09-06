@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :verify_sheet_exists, only: [:create, :update_data]
+  
   
   
   # GET /categories
@@ -17,11 +17,13 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
+    add_breadcrumb "Categories", :categories_path
     @category = Category.new
   end
 
   # GET /categories/1/edit
   def edit
+    add_breadcrumb "Categories", :categories_path
   end
 
   # POST /categories
@@ -71,9 +73,16 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     if @new_category.save
-      @new_category.fetch_sp_csv
+      status = @new_category.fetch_sp_csv
+      if status == -1
+        redirect_to category_path(@category),  :flash => { :alert => "Sheet doesn't exist"}
+      elsif status == -2
+        redirect_to category_path(@category),  :flash => { :alert => 'Column name(s) not correct'}
+      else
+        redirect_to category_path(@category),  :flash => { :success => 'Category Data was successfully updated.'}
+      end
     #GraphWorker.perform_async(params[:graph_id])
-      redirect_to categories_path,  :flash => { :success => 'Category Data was successfully updated.'}
+      
     end
   end 
 
@@ -95,12 +104,7 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
     end
 
-    def verify_sheet_exists
-      if File.exist?(Rails.root.to_s +  "/excelsheet/actual.csv") 
-      else 
-        redirect_to categories_path,  :flash => { :alert => 'No File.'}
-      end
-    end
+    
     # Only allow a trusted parameter "white list" through.
     def category_params
       

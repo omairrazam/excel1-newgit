@@ -1,5 +1,6 @@
 class AdtsController < ApplicationController
 	before_action :set_adt, only: [:show, :edit, :update, :destroy]
+  after_action :set_breadcrumb, only: [:new, :edit]
   before_action :verify_sheet_exists, only: [:create, :update_data]
 
   add_breadcrumb "Categories", :categories_path
@@ -15,9 +16,15 @@ class AdtsController < ApplicationController
 
   # GET /graphs/new
   def new
+
   	@category =  Category.find(params[:category_id])
     @graph    =  @category.graphs.find(params[:graph_id])
     @adt      =  @graph.adts.new
+    add_breadcrumb "Graphs", category_path(@category)
+    add_breadcrumb "Adts", category_graph_path(@category, @graph)
+
+   
+    
   end
 
   # GET /graphs/1/edit
@@ -99,6 +106,12 @@ class AdtsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def set_breadcrumb
+      add_breadcrumb "Graphs", category_path(@category)
+      add_breadcrumb "Adts", category_graph_path(@category, @graph)
+    end
+
     def set_adt
       @category = Category.find(params[:category_id])
       @graph    = @category.graphs.find(params[:graph_id])
