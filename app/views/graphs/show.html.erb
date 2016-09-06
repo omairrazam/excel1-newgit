@@ -31,11 +31,11 @@
 				<thead>
 				  <tr>
 				    <th>Name</th>
-				    <th>Sheetname</th>
+				    
 				    <th>X Colname</th>
 				    <th>Y Colname</th>
 				    <th>Y Legend</th>
-				    <th>Order Number</th>
+				   
 				    
 				    
 				    <th></th>
@@ -48,11 +48,11 @@
 				 <% @graph.adts.each do |adt| %>
 				  <tr>
 				  	<td><%= adt.name %></td>
-				  	<td><%= adt.sheetname %></td>
+				  	
 				  	<td><%= adt.x_colname %></td>
 				  	<td><%= adt.y_colname %></td>
 				  	<td><%= adt.y_legend %></td>
-				  	<td><%= adt.order_num %></td>
+				  
 				  	
 				  	<td><%= link_to 'Edit', edit_category_graph_adt_path(@category,@graph,adt) %></td>
 				  	<td><%= link_to 'Update', category_graph_adt_update_data_path(@category,@graph,adt) %></td>
