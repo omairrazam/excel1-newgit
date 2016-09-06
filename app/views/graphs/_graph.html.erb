@@ -5,17 +5,18 @@
 <%  @title    	 =  [graph.name] %>
 <%  @sp_graph_id =  @selected_category.id %>
 
-<% @names     = [] %>
-<% @data      = [] %>
-<% @colors    = [] %>
-<% @ids		  = [] %>
+<% @names        = [] %>
+<% @graph_types   = [] %>
+<% @colors       = [] %>
+<% @ids		     = [] %>
 
 <% adts = graph.adts.order('order_num asc') %>
 <% adts.each do |a| %>
+	<%#= debugger %>
 	<%  @names.push(a.y_legend) %>
-	<%  @data.push(@d) %>
     <%  @colors.push(a.color_y) %>
     <%  @ids.push(a.id) %>
+    <%  @graph_types.push(a.graph_type?) %>
 <% end %>
 
 

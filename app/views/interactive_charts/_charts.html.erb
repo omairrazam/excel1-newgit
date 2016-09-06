@@ -5,6 +5,7 @@
 $(function () {
     var seriesOptions = [];
     var ids = <%= raw @ids %>;
+    var graph_types = <%= raw @graph_types %>;
     var seriesCounter = 0;
     var names    = <%= raw @names %>;
     var c        = <%= raw @colors %>;
@@ -174,7 +175,7 @@ $(function () {
 
                 
                 seriesOptions[i+1] = {
-                    type: 'line',
+                    type: graph_types[i],
                     name: names[i],
                     data: data,
                     color: c[i],

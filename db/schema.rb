@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903102940) do
+ActiveRecord::Schema.define(version: 20160904150307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160903102940) do
     t.string   "y_legend"
     t.string   "color_y"
     t.integer  "order_num"
+    t.string   "graph_type"
   end
 
   create_table "categories", force: :cascade do |t|

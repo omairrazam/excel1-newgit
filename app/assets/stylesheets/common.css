@@ -128,5 +128,54 @@
   background-color:white;
 }
 .container {
-    width: 1440px !important;
-  }
+  width: 1440px !important;
+}
+
+.hr{
+  margin-top: 5px;
+}
+
+#header-top .links{
+  margin-top: 8px;
+}
+
+.site-label{
+  color: #007bc5;
+}
+
+@media screen and (min-width: 1200px) {
+    .md-center{
+      text-align: center;
+    }
+}
+
+#header-top .navbar-right{
+  float: none !important;
+}
+
+#logo{
+  margin: 2px;
+}
+
+#nav{
+  margin-bottom: 60px;
+}
+
+.footer {
+  /*position: absolute;*/
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  line-height: 40px; /* Vertically center the text there */
+  /*background-color: #f5f5f5;*/
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  font-size: 10px;
+}
+.container-content {
+    width: 1270px;
+    margin: 0 auto;
+    min-height: 500px;
+}
+

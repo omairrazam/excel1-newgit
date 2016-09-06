@@ -35,7 +35,7 @@ class GraphsController < ApplicationController
 
     if @graph.save
       #GraphWorker.perform_async(@graph.id)
-      @graph.update_data_csv
+      #@graph.update_data_csv
       redirect_to category_path(@category), notice: 'Graph was successfully created.'
     else
       render :new

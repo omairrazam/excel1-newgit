@@ -10,26 +10,20 @@
 </head>
 
 <body>
-<div class="container" style="">
-<div class = 'row'id = "header-top" style=" border-bottom:2px solid grey;">
-  <label>hello1</label>
-</div>
-</div>
+<div class="container" style="margin-top:3px;">
+  <div class = 'row' id = "header-top" >
+    <div class="col-md-4 links">
+      <span><i class="fa fa-twitter" aria-hidden="true"></i><%= link_to "@indextresearch", 'https://twitter.com/IndextResearch', :target => "_blank"%></span> &nbsp;&nbsp;&nbsp;
+      <span><i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;<%= mail_to "info@indextresearch.com" %></span>
+    </div>
+    <div class="col-md-4  col-md-offset-0 md-center"><%= image_tag('indexT-circle.jpg') %></div>
+    <div class="col-md-3  col-md-offset-1 links md-center">
+      <% if current_user.present? %>
+      <span>Signed in as <span class = "site-label"><%= current_user.email %>
+      </span></span>
 
- <center><nav class="blog-nav">
-        <%= nav_link 'Market Studies', root_path %>
-        <%= nav_link 'Active Studies', active_studies_path %>
-        <% if Category.first.present? %>
-        <%= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
-        <% end %>
-        <%= nav_link 'Market Internals', market_internals_path %>
-        <%= nav_link 'General Market Studies', general_market_studies_path %>
-        <%#= nav_link 'Interested?', interesteds_path %>
-        <%= nav_link 'Contact Us', contact_us_path %>
-       
-        <% if user_signed_in? %>
-          <span class="dropdown navbar-right">
-            <a class="blog-nav-item "  data-toggle="dropdown">Settings
+                <span class="dropdown navbar-right">
+            <a class=" "  data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i>
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to "MyAccount", user_path(current_user),:class => ""%></li>
@@ -46,54 +40,46 @@
               <% end %>
             </ul>
           </span>
-        <% end %>
 
-      </nav></center>
 
- <!--  <div class="blog-masthead">
+     
+      <% end %>
+    </div>
+    </div>
+</div>
 
-    <div class="container-content logo">
-    <span class = "pull-left " ><%= link_to image_tag('/assets/logo.jpeg'), root_path %></span>
-    <div class = "container">
-    
-      <nav class="blog-nav">
-        <%= nav_link 'Market Studies', root_path %>
-        <%= nav_link 'Active Studies', active_studies_path %>
-        <% if Category.first.present? %>
-        <%= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
-        <% end %>
-        <%= nav_link 'Market Internals', market_internals_path %>
-        <%= nav_link 'General Market Studies', general_market_studies_path %>
-        <%#= nav_link 'Interested?', interesteds_path %>
-        <%= nav_link 'Contact Us', contact_us_path %>
-       
-        <% if user_signed_in? %>
-          <span class="dropdown navbar-right">
-            <a class="blog-nav-item "  data-toggle="dropdown">Settings
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "MyAccount", user_path(current_user),:class => ""%></li>
-              <li><%= link_to "Log out", destroy_user_session_path,:class => "", :method => :delete %></li>
-             
-              <% if current_user.is_admin? %>
-                <li class="divider"></li>
-                
-                <li><%= link_to "Create Market Study", new_market_study_path,:class => ""%></li>
-                <li><%= link_to 'Create Market Internal', new_market_internal_path %></li>
-                <li><%= link_to 'Create General Market Study', new_general_market_study_path %></li>
-                <li><%= link_to 'Categories', categories_path %></li>
-                <li><%= link_to "Panel", admin_dashboard_path,:class => ""%></li>
-              <% end %>
-            </ul>
-          </span>
-        <% end %>
+<hr class="hr">
 
-      </nav>
+  <div class="container">
+    <div class="row">
+      <div id = "logo" class="md-center">
+        <%= image_tag('indext-logo2.jpg') %>
       </div>
     </div>
-  </div> -->
+  </div>
+
+  <br>
+
+  <div id = "nav">
+   <center>
+      <nav class="blog-nav">
+            <%= nav_link 'Market Studies', root_path %>
+            <%= nav_link 'Active Studies', active_studies_path %>
+            <% if Category.first.present? %>
+            <%= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
+            <% end %>
+            <%= nav_link 'Market Internals', market_internals_path %>
+            <%= nav_link 'General Market Studies', general_market_studies_path %>
+            <%#= nav_link 'Interested?', interesteds_path %>
+            <%= nav_link 'Contact Us', contact_us_path %>
+      </nav>
+    </center>
+  </div>
+
+
+
   
-  <div class="container container-content">
+  <div class="container-content">
     <div class="row">
     	<%= render :partial => "/print_flash_messages" %>
     </div>
@@ -108,5 +94,11 @@
 
      <%= yield %>
   </div>
+
+  <footer class="footer">
+    <div class="container">
+      <span class=""><i class="fa fa-copyright" aria-hidden="true"></i> &nbsp;Copyright 2016 Index Research, LLC. All Rights Reserverd</span>
+    </div>
+  </footer>
 </body>
 </html>

@@ -47,19 +47,39 @@ h6, .h6 {
   display: inline-block;
   padding: 10px;
   font-weight: 500;
-  color: #cdddeb;
+  /*color: #cdddeb;*/
+  color: black;
 }
+
 .blog-nav-item:hover,
 .blog-nav-item:focus {
-  color: #fff;
+  color: rgb(0,123,197);
   text-decoration: none;
 }
 
 /* Active state gets a caret at the bottom */
 .blog-nav .active {
-  color: #fff;
+  /*color: #fff;*/
+  color: rgb(0,123,197);
 }
+
 .blog-nav .active:after {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 80%;
+    height: 0;
+    margin-left: -5px;
+    vertical-align: middle;
+    content: " ";
+    border-right: 2px solid;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+}
+
+
+/*.blog-nav .active:after {
+
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -69,9 +89,9 @@ h6, .h6 {
   vertical-align: middle;
   content: " ";
   border-right: 5px solid transparent;
-  border-bottom: 5px solid;
   border-left: 5px solid transparent;
-}
+  border-bottom: 5px solid;
+}*/
 
 
 /*
@@ -99,7 +119,7 @@ h6, .h6 {
  */
 
 .blog-main {
-  font-size: 18px;
+  /*font-size: 18px;*/
   line-height: 1.5;
 }
 
@@ -142,7 +162,7 @@ h6, .h6 {
 }
 .blog-post-title {
   margin-bottom: 5px;
-  font-size: 40px;
+  /*font-size: 40px;*/
 }
 .blog-post-meta {
   margin-bottom: 20px;

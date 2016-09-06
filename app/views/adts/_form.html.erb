@@ -57,6 +57,10 @@
 
     <%= f.label :order_position %>
     <%= f.number_field :order_num, class:  "form-control field" %>
+
+    <%= f.label :graph_type %>
+    <%= f.select :graph_type, ['line', 'column'] %><br><br>
+    
   
 
     <%= f.submit %>

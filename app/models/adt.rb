@@ -50,4 +50,13 @@ class Adt < ActiveRecord::Base
 	    	errors.add(:y_colname, "doesn't exist")
 	    end 
 	end
+
+	def graph_type?
+		if graph_type.blank?
+			'line'
+		else
+			self.graph_type
+		end
+		
+	end
 end

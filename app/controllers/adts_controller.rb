@@ -58,6 +58,7 @@ class AdtsController < ApplicationController
   end
 
   def update_data
+
     @category = Category.find(params[:category_id])
     @graph    = Graph.find(params[:graph_id])
     @adt      = Adt.find(params[:adt_id])
@@ -120,7 +121,8 @@ class AdtsController < ApplicationController
                                    :sheetname,
                                    :y_legend,
                                    :color_y,
-                                   :order_num
+                                   :order_num,
+                                   :graph_type
                                    ])
       
     end

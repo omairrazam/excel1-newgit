@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
     #debugger
     if @category.save
       #CategoryWorker.perform_async(@category.id)
-      @category.fetch_sp_csv
+      #@category.fetch_sp_csv
       redirect_to @category, notice: 'Category was successfully created.'
     else
       render :new
