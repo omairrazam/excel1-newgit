@@ -1,6 +1,5 @@
 class GraphsController < ApplicationController
   before_action :set_graph, only: [:show, :edit, :update, :destroy]
-  before_action :verify_sheet_exists, only: [:create, :update_data]
 
   add_breadcrumb "Categories", :categories_path
 
@@ -95,13 +94,6 @@ class GraphsController < ApplicationController
       #debugger
       @category = Category.find(params[:category_id])
       @graph    = @category.graphs.find(params[:id])
-    end
-
-    def verify_sheet_exists
-      if File.exist?(Rails.root.to_s +  "/excelsheet/actual.csv") 
-      else 
-        redirect_to categories_path,  :flash => { :alert => 'No File.'}
-      end
     end
 
     # Only allow a trusted parameter "white list" through.
