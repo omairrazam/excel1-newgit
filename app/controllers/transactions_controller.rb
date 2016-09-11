@@ -9,24 +9,43 @@ class TransactionsController < ApplicationController
 		#debugger
 		params.permit! # Permit all Paypal input params
 		status = params[:payment_status]
-		type = params[:txn_type]
+		type   = params[:txn_type]
+		 u = User.find_by_email(params['item_name'])
 	    
-	    if status == "Completed" and type == "subscr_payment"
-	      u = User.find_by_email(params['item_name'])
-	      if u.present?
-		      u.transactions.build(paypal_hook_params)
-		   	  u.save!
-		   end
+	    if type == "subscr_payment"
+	    	#debugger
+			if u.present?
+				u.transactions.build(paypal_hook_params)
+				if status == "Completed"
+				else
+					u.account_active = false
+				end
+				 	u.save!
+			end
+			
 		elsif type == "subscr_signup"
-			u = User.find_by_email(params['item_name'])
+			#debugger
 			if u.present?
 				u.account_active = true
 				u.transactions.build(paypal_return_params)
 				u.save!
 			end
-
-		   	
+		elsif type == "subscr_eot"
+			#debugger
+			#deactivate account here
+			if u.present?
+				u.account_active = false
+				u.transactions.build(paypal_return_params)
+				u.save!
+			end	
+		elsif type == "subscr_cancel"
+			
+		elsif type == "subscr_failed"
+			#debugger
+			#trigger email to warn user
+			#3rd time subcr_eot will be called
 	    end
+
 	    render nothing: true
 	end
 
@@ -35,14 +54,13 @@ class TransactionsController < ApplicationController
 		auth = params["auth"]
 		if auth.present?
 			u = User.last
-			
 				u.account_active = true
 				u.transactions.build(:auth=> auth)
 				u.save!
 				# Sends email to user when user is created.
-      			ExampleMailer.sample_email(u).deliver
-      			admin = User.find_by_email("scr.ownerr@gmail.com")
-      			ExampleMailer.admin_email(admin,u).deliver
+      			#ExampleMailer.sample_email(u).deliver
+      			#admin = User.find_by_email("scr.ownerr@gmail.com")
+      			#ExampleMailer.admin_email(admin,u).deliver
 				flash.clear
 				flash[:success] =  "Thanks for subscribing, you can view your subscription details in Settings. You are now logged in"
 				sign_in_and_redirect(u)
@@ -53,8 +71,6 @@ class TransactionsController < ApplicationController
 			flash[:success] =  "Transaction was not processed"
 			redirect_to root_path
 		end
-		
-		
 		#redirect_to root_path , flash: {notice: "Please verify through email"}
 	end
 

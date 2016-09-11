@@ -17,31 +17,32 @@
       <span><i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;<%= mail_to "info@indextresearch.com" %></span>
     </div>
     <div class="col-md-4  col-md-offset-0 md-center"><%= link_to image_tag('indexT-circle.jpg'),root_path %></div>
-    <div class="col-md-3  col-md-offset-1 links md-center">
+    <div class="col-md-4  col-md-offset-0 links md-center">
       <% if current_user.present? %>
-      <span>Signed in as <span class = "site-label"><%= current_user.email %>
-      </span></span>
+        <span>Signed in as <span class = "site-label"><%= current_user.email %>
+        </span></span>
 
-                <span class="dropdown navbar-right">
-            <a class=" "  data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i>
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "MyAccount", user_path(current_user),:class => ""%></li>
-              <li><%= link_to "Log out", destroy_user_session_path,:class => "", :method => :delete %></li>
-             
-              <% if current_user.is_admin? %>
-                <li class="divider"></li>
-                
-                <li><%= link_to "Create Market Study", new_market_study_path,:class => ""%></li>
-                <li><%= link_to 'Create Market Internal', new_market_internal_path %></li>
-                <li><%= link_to 'Create General Market Study', new_general_market_study_path %></li>
-                <li><%= link_to 'Categories', categories_path %></li>
-                <li><%= link_to "Panel", admin_dashboard_path,:class => ""%></li>
-              <% end %>
-            </ul>
-          </span>
+        <span class="dropdown navbar-right">
+          <a class=" "  data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i>
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "MyAccount", user_path(current_user),:class => ""%></li>
+            <li><%= link_to "Log out", destroy_user_session_path,:class => "", :method => :delete %></li>
+           
+            <% if current_user.is_admin? %>
+              <li class="divider"></li>
+              
+              <li><%= link_to "Create Market Study", new_market_study_path,:class => ""%></li>
+              <li><%= link_to 'Create Market Internal', new_market_internal_path %></li>
+              <li><%= link_to 'Create General Market Study', new_general_market_study_path %></li>
+              <li><%= link_to 'Categories', categories_path %></li>
+              <li><%= link_to "Panel", admin_dashboard_path,:class => ""%></li>
+            <% end %>
+          </ul>
+        </span>
 
-
+       <% else %>
+       <%= render :partial => "devise/sessions/nav_login_form" %>
      
       <% end %>
     </div>
@@ -111,8 +112,17 @@
 
   <footer class="footer">
     <div class="container">
-      <span class=""><i class="fa fa-copyright" aria-hidden="true"></i> &nbsp;Copyright 2016 Index Research, LLC. All Rights Reserverd</span>
+      <span class=""><i class="fa fa-copyright" aria-hidden="true"></i> &nbsp;Copyright 2016 Index Research, LLC. All Rights Reserverd
+      </span>
+      <span class="pull-right" style = "left:-50px;"><a href="#" data-toggle="modal" data-target="#policy">Privacy Policy & Terms of Use</a> | <a href = "#" data-toggle="modal" data-target="#disclaimer">Disclaimer </a>
+      </span>
     </div>
+   
   </footer>
+ <%= render :partial => "shared/terms_modal" %>
+  
+
+
+
 </body>
 </html>

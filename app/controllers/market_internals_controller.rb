@@ -3,7 +3,7 @@ class MarketInternalsController < ApplicationController
 
   # GET /market_internals
   def index
-    @market_internals = MarketInternal.all.page(params[:page]).per(5)
+    @market_internals = MarketInternal.all.order("created_at desc").page(params[:page]).per(5)
   end
 
   # GET /market_internals/1

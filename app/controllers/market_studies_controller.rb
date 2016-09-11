@@ -5,7 +5,7 @@ class MarketStudiesController < ApplicationController
   # GET /market_studies
   def index
     
-    @market_studies = MarketStudy.all.page(params[:page]).per(5)
+    @market_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(5)
   end
 
   # GET /market_studies/1
@@ -52,7 +52,7 @@ class MarketStudiesController < ApplicationController
 
   def active_studies
     authenticate_user!
-    @active_studies = MarketStudy.all.page(params[:page]).per(20)
+    @active_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(20)
   end
 
   private

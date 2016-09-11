@@ -1,4 +1,6 @@
-
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<!-- optional -->
+<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
 
 <script type="text/javascript">
 
@@ -25,11 +27,27 @@ $(function () {
        window.chart = new Highcharts.StockChart({
 
             chart: {
-                renderTo: "<%= @divId %>" 
+                renderTo: "<%= @divId %>",
+                events: {
+                load: function() {
+                //this.renderer.image('http://indextresearch.com/assets/indexT-circle-e7b22bc0c72b0e9b7b86d76f4cd8a81cb69a8ff0d8ea1e6c765d6443432a1210.jpg', 80, 40, 143, 57).add();
+                }
+                }    
             },
+
             navigator: {
                 enabled: false
             },
+        exporting: {
+            sourceWidth: 1600,
+            sourceHeight: 800,
+            // scale: 2 (default)
+            chartOptions: {
+                subtitle:"Some Text",
+
+            },
+             enableImages: true
+        },
             rangeSelector : {
                 allButtonsEnabled: true,
                 buttons: [{
@@ -100,7 +118,13 @@ $(function () {
                 buttonTheme: {
                     width: 60
                 },
-                selected: 2
+                selected: 4
+            },
+
+            tooltip: {
+                positioner: function(boxWidth, boxHeight, point) {         
+                    return {x:point.plotX ,y:point.plotY+180};         
+                }
             },
 
             yAxis:[{
@@ -135,8 +159,10 @@ $(function () {
             series: seriesOptions
         }, function(chart) {
 
+
             // apply the date pickers
             setTimeout(function() {
+
                 $('input.highcharts-range-selector', $('#' + chart.options.chart.renderTo)).datepicker()
             }, 0)
         });
@@ -193,7 +219,6 @@ $(function () {
 
                     titleOptions = {
                         text: title,
-                        
                         style: {
                           color: '#333333',
                           font: '16px Arial',
@@ -211,7 +236,7 @@ $(function () {
     });
    
 });
-Highcharts.Scroller.prototype.drawHandle = function () {};
+
 </script>
 
 

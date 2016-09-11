@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160904150307) do
+ActiveRecord::Schema.define(version: 20160909024915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,13 @@ ActiveRecord::Schema.define(version: 20160904150307) do
     t.integer  "user_id"
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.string   "code"
+    t.float    "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sp_graphs", force: :cascade do |t|
     t.float    "open"
     t.float    "high"
@@ -228,6 +235,7 @@ ActiveRecord::Schema.define(version: 20160904150307) do
     t.string   "period",                 default: "Month"
     t.integer  "cycles",                 default: 12
     t.string   "username"
+    t.boolean  "agreed"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

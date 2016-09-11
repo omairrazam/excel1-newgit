@@ -1,6 +1,6 @@
 <div class="blog-post">
 
-  <h2 class="blog-post-title"><%= market_study.title %></h2>
+  <h2 class="blog-post-title"><%=link_to  market_study.title, market_study %></h2>
   <p class="blog-post-meta"><%= time_ago_in_words(market_study.created_at) %> ago by <a href="#"><%= market_study.user.email %></a></p>
   <% if user_signed_in? and current_user.is_admin? %>
   <div >

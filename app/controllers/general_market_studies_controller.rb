@@ -3,7 +3,7 @@ class GeneralMarketStudiesController < ApplicationController
 
   # GET /general_market_studies
   def index
-    @general_market_studies = GeneralMarketStudy.all.page(params[:page]).per(5)
+    @general_market_studies = GeneralMarketStudy.all.order("created_at desc").page(params[:page]).per(5)
   end
 
   # GET /general_market_studies/1

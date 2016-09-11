@@ -22,7 +22,7 @@
 	  <% @active_studies.each do |study| %>
 	  	<tr>
 	  		<td><%= study.created_at.strftime("%B %d, %Y") %></td>
-			<td><%= link_to study.title, commentary_path(study) %></td>
+			<td><%= link_to study.title, study %></td>
 			<td><%= study.typee %></td>
 			<td><%= study.price_target %></td>
 			<% if current_user.present? and current_user.is_admin? %>

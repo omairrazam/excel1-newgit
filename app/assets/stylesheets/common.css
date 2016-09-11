@@ -1,5 +1,10 @@
 /* notification styling */
 
+body {
+    font-family: arial !important;
+}
+
+
 .info-display {
   margin: 8px 8px;
 }
@@ -128,7 +133,7 @@
   background-color:white;
 }
 .container {
-  width: 1440px !important;
+  width: 1400px !important;
 }
 
 .hr{
@@ -199,4 +204,26 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 p{
   color: #5F5F5F !important;
+}
+
+.panel-info > .panel-heading {
+    color: white;
+    background-color: #855589 !important;
+    border-color: #bce8f1 !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #855589 !important;
+    border-color: #2e6da4;
+}
+.footer a{
+  color: white;
+}
+.form-control-nav{
+  margin-bottom: 0 !important;
+}
+.navbar-form {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
