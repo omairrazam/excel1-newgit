@@ -1,6 +1,4 @@
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
-<!-- optional -->
-<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+
 
 <script type="text/javascript">
 
@@ -28,11 +26,7 @@ $(function () {
 
             chart: {
                 renderTo: "<%= @divId %>",
-                events: {
-                load: function() {
-                //this.renderer.image('http://indextresearch.com/assets/indexT-circle-e7b22bc0c72b0e9b7b86d76f4cd8a81cb69a8ff0d8ea1e6c765d6443432a1210.jpg', 80, 40, 143, 57).add();
-                }
-                }    
+                
             },
 
             navigator: {
@@ -41,12 +35,9 @@ $(function () {
         exporting: {
             sourceWidth: 1600,
             sourceHeight: 800,
-            // scale: 2 (default)
-            chartOptions: {
-                subtitle:"Some Text",
 
-            },
-             enableImages: true
+            // scale: 2 (default)
+          
         },
             rangeSelector : {
                 allButtonsEnabled: true,
