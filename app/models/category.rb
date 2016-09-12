@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
 	#validate :verify_cols_exist , on: :fetch_sp_csv
 	has_one      :excelsheet
 	has_many     :graphs#, :dependent => :nullify
-	has_many     :sp_graphs#, :dependent => :nullify
+	has_many     :sp_graphs, :dependent => :nullify
 	#after_create :fetch_sp_csv
 
 	accepts_nested_attributes_for :graphs, reject_if: :all_blank, allow_destroy: true
@@ -32,7 +32,7 @@ class Category < ActiveRecord::Base
 
 	        row = Hash[[header, data[i]].transpose]
 	       
-	        d 	  = SpGraph.new
+	        d 	  = SpGraph.new 
 			date  = row[sp_x_colname].to_s
 
 			if date.blank?

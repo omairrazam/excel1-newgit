@@ -32,13 +32,14 @@ $(function () {
             navigator: {
                 enabled: false
             },
-        exporting: {
-            sourceWidth: 1600,
-            sourceHeight: 800,
+            
+            exporting: {
+                sourceWidth: 1600,
+                sourceHeight: 800,
 
-            // scale: 2 (default)
-          
-        },
+                // scale: 2 (default)
+              
+            },
             rangeSelector : {
                 allButtonsEnabled: true,
                 buttons: [{
@@ -113,9 +114,9 @@ $(function () {
             },
 
             tooltip: {
-                positioner: function(boxWidth, boxHeight, point) {         
-                    return {x:point.plotX ,y:point.plotY+180};         
-                }
+                // positioner: function(boxWidth, boxHeight, point) {         
+                //     return {x:point.plotX ,y:point.plotY+180};         
+                // }
             },
 
             yAxis:[{

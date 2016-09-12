@@ -57,33 +57,25 @@ class CategoriesController < ApplicationController
   def update_data
     @category     = Category.find(params[:category_id])
 
-    @new_category      = Category.new
-
-    @new_category.id   = @category.id
-    @new_category.name = @category.name
-
-    @new_category.open_colname  = @category.open_colname
-    @new_category.close_colname = @category.close_colname
-    @new_category.high_colname = @category.high_colname
-    @new_category.low_colname  = @category.low_colname
-    @new_category.sp_x_colname = @category.sp_x_colname
-    @new_category.sheetname    = @category.sheetname
-    @new_category.order_num    = @category.order_num
-
-    @category.destroy
-
-    if @new_category.save
-      status = @new_category.fetch_sp_csv
-      if status == -1
-        redirect_to category_path(@category),  :flash => { :alert => "Sheet doesn't exist"}
-      elsif status == -2
-        redirect_to category_path(@category),  :flash => { :alert => 'Column name(s) not correct'}
-      else
-        redirect_to category_path(@category),  :flash => { :success => 'Category Data was successfully updated.'}
-      end
-    #GraphWorker.perform_async(params[:graph_id])
-      
+    @category.sp_graphs.delete_all
+    status = @category.fetch_sp_csv
+    if status == -1
+      redirect_to category_path(@category),  :flash => { :alert => "Sheet doesn't exist"}
+      return
+    elsif status == -2
+      redirect_to category_path(@category),  :flash => { :alert => 'Column name(s) not correct'}
+      return
     end
+
+    @category.graphs.each do |g|
+      g.adts.each do |a|
+        a.adt_datums.delete_all
+        a.update_data_csv
+      end
+    end
+
+    redirect_to category_path(@category),  :flash => { :success => 'Category Data was successfully updated.'}
+    #GraphWorker.perform_async(params[:graph_id])
   end 
 
    def api_get_sp_data

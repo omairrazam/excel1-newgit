@@ -42,10 +42,6 @@ class Adt < ActiveRecord::Base
 	    AdtDatum.import adtdatums
 	end
 
-	def verify_sheet_exist
-		
-	end
-
 	def verify_cols_exist
 
 		if !File.exist?(Rails.root.to_s +  "/excelsheet/category_#{self.graph.category.id}.csv") 
