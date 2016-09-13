@@ -28,8 +28,6 @@ class Adt < ActiveRecord::Base
 			datee = date[0..3] + '-' + date[4..5] + '-' + date[6..7]
 			datee = datee.to_datetime.strftime('%s').to_i * 1000
 
-			
-
 			d = AdtDatum.new
 
 			d.x_values     = date

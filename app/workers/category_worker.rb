@@ -27,10 +27,15 @@ class CategoryWorker
 	      	return
 	    end
 
-	    at 20, "sp-graph updated"
+	    current_progress = 20
+	    at current_progress, "#{current_progress} %"
 	    
-	    total_graphs_count = category.graphs.count
-	    unit_progress = 80/total_graphs_count
+	    total_datasets_count = 0
+	    category.graphs.each do |g|
+	    	total_datasets_count += g.adts.count
+	    end
+	    
+	    unit_progress = 80/total_datasets_count
 
 	    category.graphs.each do |g|
 	      g.adts.each do |a|
@@ -39,7 +44,8 @@ class CategoryWorker
 	        "-----------------update of ADT #{a.name} starts------------"
 	        a.update_data_csv
 	        "----------------- ADT #{a.name} data updates end------------"
-	        at 20+unit_progress, "#{a.name} updated"
+	        current_progress += unit_progress
+	        at current_progress, "#{current_progress}%"
 	      end
 	    end
 

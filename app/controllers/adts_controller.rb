@@ -65,26 +65,26 @@ class AdtsController < ApplicationController
     @category = Category.find(params[:category_id])
     @graph    = Graph.find(params[:graph_id])
     @adt      = Adt.find(params[:adt_id])
+    @adt.adt_datums.delete_all
+    # @new_adt     = Adt.new
+    # @new_adt.id  = @adt.id
 
-    @new_adt     = Adt.new
-    @new_adt.id  = @adt.id
+    # @new_adt.graph_id  = @adt.graph_id
+    # @new_adt.name      = @adt.name
+    # @new_adt.x_colname = @adt.x_colname
+    # @new_adt.y_colname = @adt.y_colname
+    # @new_adt.sheetname = @adt.sheetname
+    # @new_adt.y_legend  = @adt.y_legend
+    # @new_adt.color_y   = @adt.color_y
+    # @new_adt.order_num = @adt.order_num
 
-    @new_adt.graph_id  = @adt.graph_id
-    @new_adt.name      = @adt.name
-    @new_adt.x_colname = @adt.x_colname
-    @new_adt.y_colname = @adt.y_colname
-    @new_adt.sheetname = @adt.sheetname
-    @new_adt.y_legend  = @adt.y_legend
-    @new_adt.color_y   = @adt.color_y
-    @new_adt.order_num = @adt.order_num
+    # @adt.destroy
 
-    @adt.destroy
-
-    if @new_adt.save
-      @new_adt.update_data_csv
+    # if @new_adt.save
+    @adt.update_data_csv
     #GraphWorker.perform_async(params[:graph_id])
-      redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt Data was successfully updated.'}
-    end
+    redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt Data was successfully updated.'}
+    #end
                                    
   end 
 
