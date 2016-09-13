@@ -81,4 +81,4 @@ gem 'slim'
 gem "breadcrumbs_on_rails"
 
 gem "activerecord-import"
-
+gem 'sidekiq-status'

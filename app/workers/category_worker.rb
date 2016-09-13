@@ -1,5 +1,6 @@
 class CategoryWorker
 	include Sidekiq::Worker
+	include Sidekiq::Status::Worker
 
 	def perform(c_id)
 		category     = Category.find(c_id)
@@ -29,3 +30,4 @@ class CategoryWorker
     	
 	end
 end
+

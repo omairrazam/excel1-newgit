@@ -56,7 +56,15 @@ class CategoriesController < ApplicationController
 
   def update_data
     #debugger
-    CategoryWorker.perform_async(params[:category_id])
+    job_id = CategoryWorker.perform_async(params[:category_id])
+
+    data = Sidekiq::Status::get_all job_id
+    data # => {status: 'complete', update_time: 1360006573, vino: 'veritas'}
+    Sidekiq::Status::get     job_id, :vino #=> 'veritas'
+    Sidekiq::Status::at      job_id #=> 5
+    Sidekiq::Status::total   job_id #=> 100
+    Sidekiq::Status::message job_id #=> "Almost done"
+    Sidekiq::Status::pct_complete job_id #=> 5
 
     category     = Category.find(params[:category_id])
     redirect_to category_path(category), notic: 'Category is updating in background'
