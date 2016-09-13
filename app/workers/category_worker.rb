@@ -3,6 +3,17 @@ class CategoryWorker
 	include Sidekiq::Status::Worker
 
 	def perform(c_id)
+		# the common idiom to track progress of your task
+	    total 100 # by default
+
+	    # a way to associate data with your job
+	    store vino: 'veritas'
+
+	    # a way of retrieving said data
+	    # remember that retrieved data is always String|nil
+	    vino = retrieve :vino
+
+
 		category     = Category.find(c_id)
 		puts "-----------------------------Updation of #{category.name} starts------------"
     	category.sp_graphs.delete_all
@@ -16,6 +27,11 @@ class CategoryWorker
 	      	return
 	    end
 
+	    at 20, "sp-graph updated"
+	    
+	    total_graphs_count = category.graphs.count
+	    unit_progress = 80/total_graphs_count
+
 	    category.graphs.each do |g|
 	      g.adts.each do |a|
 	      	"-----------------deleting old data of ADT #{a.name} starts------------"
@@ -23,11 +39,14 @@ class CategoryWorker
 	        "-----------------update of ADT #{a.name} starts------------"
 	        a.update_data_csv
 	        "----------------- ADT #{a.name} data updates end------------"
+	        at 20+unit_progress, "#{a.name} updated"
 	      end
 	    end
 
 	    puts "---------------------end of #{category.name} ends------------"
     	
+	    at 100, "Done"
+
 	end
 end
 
