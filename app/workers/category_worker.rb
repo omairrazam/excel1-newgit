@@ -1,8 +1,9 @@
 class CategoryWorker
 	include Sidekiq::Worker
-	def perform(category_id)
-		category     = Category.find(category_id)
 
+	def perform(c_id)
+		category     = Category.find(c_id)
+		puts "-----------------------------Updation of #{category.name} starts------------"
     	category.sp_graphs.delete_all
     	status = category.fetch_sp_csv
 
@@ -14,14 +15,17 @@ class CategoryWorker
 	      	return
 	    end
 
-	    @category.graphs.each do |g|
+	    category.graphs.each do |g|
 	      g.adts.each do |a|
+	      	"-----------------deleting old data of ADT #{a.name} starts------------"
 	        a.adt_datums.delete_all
+	        "-----------------update of ADT #{a.name} starts------------"
 	        a.update_data_csv
+	        "----------------- ADT #{a.name} data updates end------------"
 	      end
 	    end
 
-	    puts "---------------------end of category update worker------------"
+	    puts "---------------------end of #{category.name} ends------------"
     	
 	end
 end

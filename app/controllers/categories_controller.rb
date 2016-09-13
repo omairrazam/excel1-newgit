@@ -55,7 +55,11 @@ class CategoriesController < ApplicationController
   end
 
   def update_data
-    GraphWorker.perform_async(params[:category_id])
+    #debugger
+    CategoryWorker.perform_async(params[:category_id])
+
+    category     = Category.find(params[:category_id])
+    redirect_to category_path(category), notic: 'Category is updating in background'
   end 
 
    def api_get_sp_data
