@@ -227,3 +227,17 @@ p{
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.modal-dialog-full{
+  width: inherit !important;
+  margin: 5px;
+}
+
+.modal-content-full{
+  height: 720px !important;
+}
+
+.modal-header-full {
+    padding: 5px !important;
+    
+}
