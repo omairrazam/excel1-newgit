@@ -54,7 +54,7 @@
       <div class="modal-body">
          <center><div id="container" style="width:95%; height:90%;"></div></center>
          <br>
-         <div class="well"><p> <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <div class="well"><p> <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -62,9 +62,18 @@
     </div>
   </div>
 </div>
+</div>
+
+
 
 <script type="text/javascript">
   $(function () {
+
+    $('#demo').on('show.bs.modal', function () {
+    $('.modal .modal-body').css('overflow-y', 'auto'); 
+    $('.modal #container').css('height', $(window).height() * 0.95 );
+    $('.modal .modal-body').css('min-height', $(window).height() * 1.2);
+    });
     $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function (data) {
 
         // split the data set into ohlc and volume
