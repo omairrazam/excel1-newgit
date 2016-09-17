@@ -1,6 +1,4 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-<script src="http://code.highcharts.com/stock/highstock.js"></script>
-<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
 <% content_for :head do %>
     <%= stylesheet_link_tag  'interactive_charts', media: 'all' %>
@@ -19,14 +17,18 @@
               <th>Indicator</th>
               <th>Category</th>
               <th>Period</th>
+              <th></th>
           </tr>
         </thead>
         <tbody>
         <% @graphs.each do |graph| %>
             <tr>
                 <td><%= graph.name %></td>
-                <td><%= graph.category.name %></td>
+                <td><%= graph.category.try(:name) %></td>
                 <td><%= graph.period %></td>
+                <td><center>
+                <a href = "#" data-toggle="modal" class="btn btn-info btn-xs" data-target="#demo"><i class="fa fa-line-chart" aria-hidden="true"></i> See Chart </a>
+                </center></td>
             </tr>
           
         <% end %>
@@ -36,13 +38,19 @@
 </div>
 
 
+<%= render :partial => "chart_modal" %>
 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"  ></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#example').DataTable();
+       $('#example').dataTable( {
+    "aoColumnDefs": [
+      { "bSortable": false, "aTargets": [ 3 ] }
+    ] } );
+
+
     } );
 </script>

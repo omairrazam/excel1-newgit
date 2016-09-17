@@ -2,6 +2,7 @@ class InteractiveChartsController < ApplicationController
 	require 'roo'
 	before_action :get_all_categories
 
+
 	def show_page
 		
 		@selected_category = Category.first
@@ -17,17 +18,17 @@ class InteractiveChartsController < ApplicationController
 
 	def show_by_category
 		#debugger
-		if params[:category_id]
-			@selected_category = Category.find(params[:category_id])
-		else
-			@selected_category = Category.first
-		end
+		# if params[:category_id]
+		# 	@selected_category = Category.find(params[:category_id])
+		# else
+		# 	@selected_category = Category.first
+		# end
 
-		if @selected_category.present?
-			@graphs 		   =  @selected_category.graphs.order('order_num asc')
-			@sp_graph_data     =  @selected_category.sp_graphs.order('timestamp_ms asc').pluck(:timestamp_ms, :open, :high, :low, :close)	
-		end
-
+		# if @selected_category.present?
+		# 	@graphs 		   =  @selected_category.graphs.order('order_num asc')
+		# 	@sp_graph_data     =  @selected_category.sp_graphs.order('timestamp_ms asc').pluck(:timestamp_ms, :open, :high, :low, :close)	
+		# end
+		@graphs = Graph.all
 		render "show_page"
 	end
 

@@ -77,20 +77,7 @@
     </center>
   </div>
 
-  <% if params["controller"] == "interactive_charts" %>
-     <div id = "nav">
-     <center>
-        <nav class="blog-nav">
-          <% if @categories.present? %>
-            <% @categories.each do |cat| %>
-              <%= link_to cat.name, show_by_category_path(cat), class:'blog-nav-item ' + ic_sidebar_link_class( cat.name,show_by_category_path(cat))  %>
-            <% end %>
-          <% end %>
-        </nav>
-      </center>
-    </div>
-  <% end %>
-
+  
 
 
   
