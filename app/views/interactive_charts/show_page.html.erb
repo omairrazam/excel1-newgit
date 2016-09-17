@@ -1,81 +1,48 @@
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 <script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
 <% content_for :head do %>
     <%= stylesheet_link_tag  'interactive_charts', media: 'all' %>
-    <%#= stylesheet_link_tag  'bootstrap-select'  , media: 'all' %>
-    <%#= javascript_tag 'interactive_charts', media: 'all' %>
 <% end %>
 
 
-
-
-
-               
-
-
-
 <div class="row">
-	<div class="col-md-2">
-	<%#= render :partial => "right_sidebar" %>
-	</div>
 
 	<div class="col-md-12">
-   
-        <!-- <div id="container_static" style=" height: 300px; min-width: 1110px; z-index:10"></div> -->
-        <!-- <br>
-        <br> -->
-
+      <table id="example" class="display" cellspacing="0" width="100%">
+       <col width="400">
+       <col width="300">
+       <col width="300">
+        <thead>
+          <tr>
+              <th>Indicator</th>
+              <th>Category</th>
+              <th>Period</th>
+          </tr>
+        </thead>
+        <tbody>
         <% @graphs.each do |graph| %>
-            
-        <div id=<%= "container_graph" + graph.id.to_s %> class = "container_graph">
-          <div class = 'processor' id=<%= "container" + graph.id.to_s + "_processor" %>><%= image_tag "processing.gif" %></div>
-		      <div id=<%= "container" + graph.id.to_s %> style="height: 700px; min-width: 310px;"></div>
-          <div class="well"><p> <%= graph.try(:definition).html_safe rescue 'No Definition Found'  %></p></div>
-        </div>
-        <br>
-        <br>
+            <tr>
+                <td><%= graph.name %></td>
+                <td><%= graph.category.name %></td>
+                <td><%= graph.period %></td>
+            </tr>
+          
         <% end %>
+        </tbody>
+        </table>
 	</div>
 </div>
-<%#= render partial: "sp_static_chart" , locals: {divId: 'container_static', data:@sp_graph_data} %>
-<%= render @graphs if @graphs.present?%>
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"  ></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-
-var options = {
-  top: 0, // This represents the buffer you want between the top of the page and the div in px. Default is 0.
-  min_screen_width:0, // This represents the minimum screen width that the stickiness will be applied to. Default is 0.
-  bottom: 0, // This represents the buffer you want between the bottom of the page and the div in px. Default is 0.
-  outer_div: null // This is a jquery or DOM element whose height needs to be greater than the div in order to make it sticky. Default is null.
-};
-$('#container_static').sticky_div(options);
-// Set the datepicker's date format
-// $(function(){
-//     $.datepicker.setDefaults({
-//         dateFormat: 'yy-mm-dd',
-//         onSelect: function(dateText) {
-//           var id = $(this).attr('id');
-          
-//           if (id == "info_box_datepicker"){
-
-//           }else{
-//             this.onchange();
-//             this.onblur();
-//           }
-//         }
-//     });
-// });
-
-
-    
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
 </script>

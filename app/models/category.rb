@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
 	#validate :verify_sheet_exists 
 	#validate :verify_cols_exist , on: :fetch_sp_csv
 	has_one      :excelsheet
-	has_many     :graphs#, :dependent => :nullify
+	has_many     :graphs, :dependent => :nullify
 	has_many     :sp_graphs, :dependent => :nullify
 	#after_create :fetch_sp_csv
 

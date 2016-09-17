@@ -100,17 +100,18 @@ class GraphsController < ApplicationController
     def graph_params
       
       params.require(:graph).permit([
-                                                           :name,
-                                                           :x_colname,
-                                                           :y1_colname,
-                                                           :y2_colname,
-                                                           :sheetname,
-                                                           :y1_legend,
-                                                           :y2_legend, 
-                                                           :color_y1,
-                                                           :color_y2,
-                                                           :order_num,
-                                                           :definition])
+                                     :name,
+                                     :x_colname,
+                                     :y1_colname,
+                                     :y2_colname,
+                                     :sheetname,
+                                     :y1_legend,
+                                     :y2_legend, 
+                                     :color_y1,
+                                     :color_y2,
+                                     :order_num,
+                                     :definition,
+                                     :period])
       
     end
 end

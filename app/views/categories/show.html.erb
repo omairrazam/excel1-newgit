@@ -25,6 +25,7 @@
 				<thead>
 				  <tr>
 				    <th>Name</th>
+				    <th>Period</th>
 				    
 				    <th>Order</th>
 				    <th></th>
@@ -38,6 +39,7 @@
 				 <% @category.graphs.each do |graph| %>
 				  <tr>
 				  	<td><%= graph.name %></td>
+				  	<td><%= graph.period %></td>
 				  	<td><%= graph.order_num %></td>
 				  	<td><%= link_to 'Show', category_graph_path(@category,graph) %></td>
 				  	<td><%= link_to 'Edit', edit_category_graph_path(@category,graph) %></td>
