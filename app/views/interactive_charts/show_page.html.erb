@@ -12,6 +12,7 @@
        <col width="400">
        <col width="300">
        <col width="300">
+       <col width="100">
         <thead>
           <tr>
               <th>Indicator</th>
@@ -19,6 +20,10 @@
               <th>Period</th>
               <th >spids</th>
               <th >adtids</th>
+              <th >adtcolors</th>
+              <th >y_legends</th>
+              <th >graph_types</th>
+              <th >graph_definition</th>
               <th></th>
           </tr>
         </thead>
@@ -29,9 +34,13 @@
             <td><%= graph.category.try(:name) %></td>
             <td><%= graph.period %></td>
             <td ><%= graph.category.try(:id) %></td>
-            <td ><%= graph.adts.pluck(:id).map(&:to_s).join(", ")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:id).map(&:to_s).join(", ")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:color_y).map(&:to_s).join(", ")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:y_legend).map(&:to_s).join(", ")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:graph_type).map(&:to_s).join(", ")%></td>
+             <td ><%= graph.definition.html_safe rescue 'definition not found' %></td>
             <td><center>
-            <a href = "#" data-toggle="modal" class="btn btn-info btn-xs" data-target="#demo"><i class="fa fa-line-chart" aria-hidden="true"></i> See Chart </a>
+            <a href = "#" data-toggle="modal" class="btn btn-default btn-xs" data-target="#demo"><i class="fa fa-line-chart" aria-hidden="true"></i> See Chart </a>
             </center></td>
           </tr>
         <% end %>
@@ -39,6 +48,9 @@
         </table>
 	</div>
 </div>
+<br>
+<br>
+<br>
 
 
 <%= render :partial => "chart_modal" %>
@@ -59,20 +71,63 @@
 
     var table = $('#example').DataTable( {
         "aoColumnDefs": [
-        { "bSortable": false, "aTargets": [ 5 ] }
-        ] } );
+            { "bSortable": false, "aTargets": [ 9 ] 
+            },
+            {
+                "targets": [ 3 ],
+                "visible": false,
+                "searchable": false
+            },
+
+            {
+                "targets": [ 4 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 5 ],
+                "visible": false,
+                "searchable": false
+            },
+
+            {
+                "targets": [ 6 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 7 ],
+                "visible": false,
+                "searchable": false
+            },
+            
+            {
+                "targets": [ 8 ],
+                "visible": false,
+                "searchable": false
+            }
+        ]
+        
+        
+    } );
 
     $('#demo').on('show.bs.modal', function () {
       $('.modal .modal-body').css('overflow-y', 'auto'); 
       $('.modal #container').css('height', $(window).height() * 0.95 );
 
       $('.modal .modal-body').css('min-height', $(window).height() * 1.2);
-      window.chart.redraw();
+
+      
+
+      if (window.chart){
+          window.chart.redraw();
+      }
     });
 
     $('#demo').on('hidden.bs.modal', function () { 
        //$(this).data('bs.modal', null);
        //$("#container").html('');
+       $("#container_processor").show();
     });
 
     $('#example tbody').on( 'click', 'tr', function () {
@@ -80,12 +135,16 @@
        seriesOptions = [];
        seriesCounter = 0;
        
-    
-    
         var d      = table.row( this ).data();
-        sp_id = d[3];
+        sp_id      =  d[3];
         var ids    =  d[4].split(',');
-        
+        var colors =  d[5].split(',');
+        var legends =  d[6].split(',');
+        var graph_types =  d[7].split(',');
+        var graph_definition = d[8].replace(/&amp;/g, '&');
+        var graph_name = d[0].replace(/&amp;/g, '&');
+
+        $("#graph_definition").html("<p>"+graph_definition +"</p>");
     /***************  static graph fetching *************/
 
     $.getJSON(base_url + static_graph_path + sp_id,    function (data) {
@@ -110,9 +169,10 @@
                 
                 seriesOptions[i+1] = {
                     
-                    name: "test",
+                    name: legends[i],
                     data: data,
-                    
+                    color: colors[i],
+                    type: graph_types[i],
                     yAxis:1,
                     dataGrouping: {
                         units: [ ['day', [1] ] ]
@@ -126,7 +186,7 @@
                 if (seriesCounter === ids.length) {
 
                     titleOptions = {
-                        text: "test",
+                        text: graph_name,
                         style: {
                           color: '#333333',
                           font: '16px Arial',
@@ -136,6 +196,7 @@
                     
                     //if (window.chart) { window.chart.redraw();}else{
                     createChart();
+                    $("#container_processor").hide();
                     //};
                 }
             });
@@ -152,7 +213,8 @@
        window.chart = new Highcharts.StockChart({
 
             chart: {
-                renderTo: "container", 
+                renderTo: "container",
+
             },
 
             navigator: {
