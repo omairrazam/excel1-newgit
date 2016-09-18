@@ -34,10 +34,10 @@
             <td><%= graph.category.try(:name) %></td>
             <td><%= graph.period %></td>
             <td ><%= graph.category.try(:id) %></td>
-            <td ><%= graph.adts.order('id asc').pluck(:id).map(&:to_s).join(", ")%></td>
-            <td ><%= graph.adts.order('id asc').pluck(:color_y).map(&:to_s).join(", ")%></td>
-            <td ><%= graph.adts.order('id asc').pluck(:y_legend).map(&:to_s).join(", ")%></td>
-            <td ><%= graph.adts.order('id asc').pluck(:graph_type).map(&:to_s).join(", ")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:id).map(&:to_s).join(",")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:color_y).map(&:to_s).join(",")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:y_legend).map(&:to_s).join(",")%></td>
+            <td ><%= graph.adts.order('id asc').pluck(:graph_type).map(&:to_s).join(",")%></td>
              <td ><%= graph.definition.html_safe rescue 'definition not found' %></td>
             <td><center>
             <a href = "#" data-toggle="modal" class="btn btn-default btn-xs" data-target="#demo"><i class="fa fa-line-chart" aria-hidden="true"></i> See Chart </a>
@@ -98,7 +98,7 @@
             },
             {
                 "targets": [ 7 ],
-                "visible": true,
+                "visible": false,
                 "searchable": false
             },
             
@@ -167,10 +167,8 @@
             //alert('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?');
             $.getJSON(base_url + adt_path + val,    function (data) {
 
-                if (!graph_types[i]){
-                    graph_types[i] = 'line'
-                }
-
+                
+                
                 seriesOptions[i+1] = {
                     
                     name: legends[i],
