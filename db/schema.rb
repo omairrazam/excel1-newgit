@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917104955) do
+ActiveRecord::Schema.define(version: 20160918180332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20160917104955) do
   add_index "adt_data", ["adt_id"], name: "index_adt_data_on_adt_id", using: :btree
 
   create_table "adts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "graph_id"
     t.string   "name"
     t.string   "x_colname"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160917104955) do
     t.string   "y_legend"
     t.string   "color_y"
     t.integer  "order_num"
-    t.string   "graph_type"
+    t.string   "graph_type", default: "line"
   end
 
   create_table "categories", force: :cascade do |t|

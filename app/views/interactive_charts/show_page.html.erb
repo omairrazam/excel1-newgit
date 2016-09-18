@@ -166,13 +166,16 @@
             //alert('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?');
             $.getJSON(base_url + adt_path + val,    function (data) {
 
+                if (!graph_types[i]){
+                    graph_types[i] = 'line'
+                }
                 
                 seriesOptions[i+1] = {
                     
                     name: legends[i],
                     data: data,
                     color: colors[i],
-                    //type: graph_types[i],
+                    type: graph_types[i],
                     yAxis:1,
                     dataGrouping: {
                         units: [ ['day', [1] ] ]
