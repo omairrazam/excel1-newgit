@@ -1,5 +1,5 @@
 class Adt < ActiveRecord::Base
-	validate :verify_cols_exist
+	#validate :verify_cols_exist
 	validates :name, presence: true
 	validates :x_colname, presence: true
 	validates :y_colname, presence: true
