@@ -1,5 +1,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.1.2/css/rowReorder.dataTables.min.css">
+
+
+
 <% content_for :head do %>
     <%= stylesheet_link_tag  'interactive_charts', media: 'all' %>
 <% end %>
@@ -9,12 +13,15 @@
 
 	<div class="col-md-12">
       <table id="example" class="display" cellspacing="0" width="100%">
+      <col width="20">
        <col width="400">
        <col width="300">
        <col width="300">
        <col width="100">
         <thead>
           <tr>
+              <th>Seq.</th>
+              <th>id</th>
               <th>Indicator</th>
               <th>Category</th>
               <th>Period</th>
@@ -30,6 +37,8 @@
         <tbody>
         <% @graphs.each do |graph| %>
           <tr>
+            <td class = "table-handle"><%= graph.order_num %></td>
+            <td><%= graph.id %></td>
             <td><%= graph.name %></td>
             <td><%= graph.category.try(:name) %></td>
             <td><%= graph.period %></td>
@@ -39,6 +48,7 @@
             <td ><%= graph.adts.order('id asc').pluck(:y_legend).map(&:to_s).join(",")%></td>
             <td ><%= graph.adts.order('id asc').pluck(:graph_type).map(&:to_s).join(",")%></td>
              <td ><%= graph.definition.html_safe rescue 'definition not found' %></td>
+
             <td><center>
             <a href = "#" data-toggle="modal" class="btn btn-default btn-xs" data-target="#demo"><i class="fa fa-line-chart" aria-hidden="true"></i> See Chart </a>
             </center></td>
@@ -56,11 +66,10 @@
 <%= render :partial => "chart_modal" %>
 
 
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
 
 <script type="text/javascript">
   $(function () {
-   
     var seriesOptions = [];
     var seriesCounter = 0;
     var sp_id ;
@@ -71,20 +80,24 @@
 
     var table = $('#example').DataTable( {
         "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+        rowReorder: true,
         "aoColumnDefs": [
-            { "bSortable": false, "aTargets": [ 9 ] 
+            { 
+                "bSortable": false, "aTargets": [ 10 ] 
             },
+
             {
-                "targets": [ 3 ],
-                "visible": false,
+                "targets": [ 0 ],
+                "visible": <%= current_user.is_admin? %>,
                 "searchable": false
             },
 
             {
-                "targets": [ 4 ],
+                "targets": [ 1 ],
                 "visible": false,
                 "searchable": false
             },
+
             {
                 "targets": [ 5 ],
                 "visible": false,
@@ -101,24 +114,68 @@
                 "visible": false,
                 "searchable": false
             },
-            
+
             {
                 "targets": [ 8 ],
                 "visible": false,
                 "searchable": false
+            },
+            {
+                "targets": [ 9 ],
+                "visible": false,
+                "searchable": false
+            },
+            
+            {
+                "targets": [ 10 ],
+                "visible": false,
+                "searchable": false
             }
         ]
-        
-        
     } );
+    
+    /* Row reordering handling ajax */
+    table.on( 'row-reorder', function ( e, diff, edit ) {
+        var result  = edit.triggerRow.data()[0];
+
+        for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+            var rowData = table.row( diff[i].node ).data();
+            var graph_id = rowData[1];
+            var category_id = rowData[5];
+
+              var url = '/categories/'+ category_id +'/graphs/'+ graph_id;
+
+              var data = {
+                  graph:{order_num:diff[i].newData}
+               };
+
+                //alert(data.order_num);
+              $.ajax({
+                type: 'put',
+                url: url,
+                dataType: "json",
+                data:data,
+                error: function(data){
+                  //alert('Error occurred while updating the record.');
+                }, 
+                success: function(data){
+                  //alert('Record updated successfully.');
+                }
+            });
+        }
+        //alert(diff.length);
+        //alert(result);
+        //alert(diff[0].oldData);
+        //alert(diff[0]);
+        //alert(rowData[1]);
+    });
+    /* reording code ends here */
 
     $('#demo').on('show.bs.modal', function () {
       $('.modal .modal-body').css('overflow-y', 'auto'); 
       $('.modal #container').css('height', $(window).height() * 0.95 );
 
       $('.modal .modal-body').css('min-height', $(window).height() * 1.2);
-
-      
 
       if (window.chart){
           window.chart.redraw();
@@ -136,14 +193,14 @@
        seriesOptions = [];
        seriesCounter = 0;
        
-        var d      = table.row( this ).data();
-        sp_id      =  d[3];
-        var ids    =  d[4].split(',');
-        var colors =  d[5].split(',');
-        var legends =  d[6].split(',');
-        var graph_types =  d[7].split(',');
-        var graph_definition = d[8].replace(/&amp;/g, '&');
-        var graph_name = d[0].replace(/&amp;/g, '&');
+        var d       = table.row( this ).data();
+        sp_id       =  d[5];
+        var ids     =  d[6].split(',');
+        var colors  =  d[7].split(',');
+        var legends =  d[8].split(',');
+        var graph_types =  d[9].split(',');
+        var graph_definition = d[10].replace(/&amp;/g, '&');
+        var graph_name  = d[2].replace(/&amp;/g, '&');
 
         $("#graph_definition").html("<p>"+graph_definition +"</p>");
     /***************  static graph fetching *************/
@@ -166,11 +223,7 @@
           //alert(val);
             //alert('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?');
             $.getJSON(base_url + adt_path + val,    function (data) {
-
-                
-                
                 seriesOptions[i+1] = {
-                    
                     name: legends[i],
                     data: data,
                     color: colors[i],
@@ -186,7 +239,6 @@
                 seriesCounter += 1;
 
                 if (seriesCounter === ids.length) {
-
                     titleOptions = {
                         text: graph_name,
                         style: {
@@ -207,16 +259,10 @@
       });
     });
 
-
-
-
     function createChart() {
-          
        window.chart = new Highcharts.StockChart({
-
             chart: {
                 renderTo: "container",
-
             },
 
             navigator: {
@@ -226,8 +272,6 @@
             exporting: {
                 sourceWidth: 1600,
                 sourceHeight: 800,
-
-                // scale: 2 (default)
               
             },
             rangeSelector : {
@@ -343,3 +387,7 @@
     } 
 });
 </script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.1.2/js/dataTables.rowReorder.min.js"></script>

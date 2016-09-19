@@ -46,7 +46,12 @@ class GraphsController < ApplicationController
   def update
     #debugger
     if @graph.update(graph_params)
-      redirect_to category_path(@category), notice: 'Graph was successfully updated.'
+      respond_to do |format|
+        format.html 
+          redirect_to category_path(@category), notice: 'Graph was successfully updated.'
+        format.js 
+      end
+      
     else
       render :edit
     end

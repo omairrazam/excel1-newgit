@@ -241,3 +241,17 @@ p{
     padding: 5px !important;
     
 }
+
+.table-handle{
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: FontAwesome;
+    cursor:move
+}
+
+
+.table-handle:after {
+    content: "\f047";
+    
+}
+
