@@ -47,13 +47,13 @@ class GraphsController < ApplicationController
     #debugger
     if @graph.update(graph_params)
       respond_to do |format|
-        format.html 
-          redirect_to category_path(@category), notice: 'Graph was successfully updated.'
-        format.js 
+        format.html {redirect_to category_path(@category), notice: 'Graph was successfully updated.'}
+        format.json {   }
       end
-      
     else
-      render :edit
+       format.html { render :edit }
+       format.json { render  status: :unprocessable_entity }
+      
     end
   end
 
