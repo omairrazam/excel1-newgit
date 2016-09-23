@@ -3,12 +3,14 @@ require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
   
+  
   ActiveAdmin.routes(self)
   devise_for :users,controllers: { registrations: 'registrations' }
   resources :categories do
-    match "/update_data/:category_id" => "categories#update_data", as: :update_data, via: :get
-    match "/graph/update_data/:graph_id" => "graphs#update_data",  as: :graph_update_data, via: :get
-    resources :excelsheets
+    match "/update_data/:category_id" => "categories#update_data",   as: :update_data, via: :get
+    match "/graph/update_data/:graph_name" => "graphs#update_data",  as: :graph_update_data, via: :get
+    resources :eod_sheets
+    resources :excelsheets, only:[:new, :create]
     resources :graphs do
         resources :adts
         match "/adt/update_data/:adt_id" => "adts#update_data", as: :adt_update_data, via: :get
@@ -36,7 +38,5 @@ Rails.application.routes.draw do
   
   mount Sidekiq::Web, at: '/sidekiq'
 
-
-  
   root 'market_studies#index'
 end

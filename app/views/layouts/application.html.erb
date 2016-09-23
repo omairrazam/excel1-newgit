@@ -64,30 +64,40 @@
   <div id = "nav">
    <center>
       <nav class="blog-nav">
-            <%= nav_link 'Market Studies', root_path %>
-            <%= nav_link 'Active Studies', active_studies_path %>
-            <% if Category.first.present? %>
-            <%= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
-            <% end %>
-            <%= nav_link 'Market Internals', market_internals_path %>
-            <%= nav_link 'General Market Studies', general_market_studies_path %>
-            <%#= nav_link 'Interested?', interesteds_path %>
-            <%= nav_link 'Contact Us', contact_us_path %>
+        <%= nav_link 'Market Studies', root_path %>
+        <%= nav_link 'Active Studies', active_studies_path %>
+        <% if Category.first.present? %>
+        <%= nav_link 'Interactive Charts', show_by_category_path(Category.first.try(:id)) %>
+        <% end %>
+        <%= nav_link 'Market Internals', market_internals_path(:category_id => Category.first.id), 'market_internals' %>
+        <%= nav_link 'General Market Studies', general_market_studies_path %>
+        <%#= nav_link 'Interested?', interesteds_path %>
+        <%= nav_link 'Contact Us', contact_us_path %>
       </nav>
     </center>
   </div>
 
-  
+  <% if params["controller"] == "market_internals" %>
+    <div id = "nav">
+      <center>
+        <nav class="blog-nav">
+          <% if @categories.present? %>
+            <% @categories.each do |cat| %>
+              <%= link_to cat.name, market_internals_path(:category_id => cat.id), class:'blog-nav-item ' + ic_sidebar_link_class( cat.id)  %>
+            <% end %>
+          <% end %>
+        </nav>
+      </center>
+    </div>
+  <% end %>
 
-
-  
   <div class="container-content">
     <div class="row">
     	<%= render :partial => "/print_flash_messages" %>
     </div>
 
     <!-- ONly for Admin panel -->
-    <% if  (params["controller"] == "categories" and params["action"] != "index") or params["controller"] == "graphs" or params["controller"] == "adts" %>
+    <% if  (params["controller"] == "categories" and params["action"] != "index") or params["controller"] == "graphs" or params["controller"] == "adts" or params["controller"] == "eod_sheets" %>
       <ol class="breadcrumb">
        <%= render_breadcrumbs :tag => :li, :separator => "" %>
       </ol>
@@ -108,8 +118,5 @@
   </footer>
  <%= render :partial => "shared/terms_modal" %>
   
-
-
-
 </body>
 </html>

@@ -10,7 +10,6 @@
 
 
 <div class="row">
-
 	<div class="col-md-12">
       <table id="example" class="display" cellspacing="0" width="100%">
       <col width="20">
@@ -64,7 +63,6 @@
 
 
 <%= render :partial => "chart_modal" %>
-
 
 
 
@@ -258,6 +256,8 @@
 
       });
     });
+    
+     
 
     function createChart() {
        window.chart = new Highcharts.StockChart({
@@ -272,8 +272,8 @@
             exporting: {
                 sourceWidth: 1600,
                 sourceHeight: 800,
-              
             },
+
             rangeSelector : {
                 allButtonsEnabled: true,
                 buttons: [{
@@ -381,13 +381,36 @@
             legend: {
                 enabled: true, 
             },
-
             series: seriesOptions
-        });
+
+        }, function (chart) {
+
+            // apply the date pickers
+            
+            setTimeout(function(){
+            $('input.highcharts-range-selector', $('#' + window.chart.options.chart.renderTo))
+                    .datepicker();  
+            },0);
+
+        });  
+        
+        
+
+        // Set the datepicker's date format
+        // $.datepicker.setDefaults({
+        //     dateFormat: 'yy-mm-dd',
+        //     onSelect: function () {
+        //         this.onchange();
+        //         this.onblur();
+        //     }
+        // });
     } 
+
 });
 </script>
 
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.1.2/js/dataTables.rowReorder.min.js"></script>
+
+

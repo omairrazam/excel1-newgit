@@ -2,8 +2,10 @@ class Category < ActiveRecord::Base
 	#validate :verify_sheet_exists 
 	#validate :verify_cols_exist , on: :fetch_sp_csv
 	has_one      :excelsheet
-	has_many     :graphs, :dependent => :nullify
-	has_many     :sp_graphs, :dependent => :nullify
+	has_many	 :eod_sheets, :dependent => :destroy
+	has_many     :graphs,     :dependent => :nullify
+	has_many     :sp_graphs,  :dependent => :nullify
+	has_many     :eod_datums, :dependent => :destroy
 	#after_create :fetch_sp_csv
 
 	accepts_nested_attributes_for :graphs, reject_if: :all_blank, allow_destroy: true
@@ -59,6 +61,45 @@ class Category < ActiveRecord::Base
   		
 	end
 
+	def load_eod_data(dat)
+
+	    data     = CSV.read(Rails.root.to_s +  "/eodsheet/category_#{self.id}_#{dat.gsub("/","")}.csv")
+	   	eoddata  = []
+	   	header   = data[0]
+	   	date  	 = header[1]
+	   	datee 	 = date[0..3] + '-' + date[4..5] + '-' + date[6..7]
+	    datee 	 = datee.to_datetime.strftime('%d/%m/%Y')
+	   	#debugger
+	   	if datee != dat
+	   		puts "------------------------------- Error : panel date mismatches sheet date --------------------"
+	   		return
+	   	end
+
+	   	# delete old data of this date and enter latest
+	   	oldDatums = self.eod_datums.where('datee =?', datee.to_s)
+	   	oldDatums.destroy_all
+
+	    (1..data.count-1).each do |i| 
+	    	
+	    	if data[i].blank? or data[i][0].blank?
+	    		next
+	    	end
+
+	    	e       	  = EodDatum.new
+	    	e.txt   	  = data[i][0]
+	    	e.value 	  = data[i][1]
+	    	e.datee 	  = datee.to_s
+	    	e.category_id = self.id
+			eoddata << e
+		end
+	   
+	    EodDatum.import eoddata
+	end
+
+	def remove_eod_datums(dat)
+		data = self.eod_datums.where('datee=?',dat)
+		data.destroy_all
+	end
 
     def verify_cols_exist
 		data     = CSV.read(Rails.root.to_s +  "/excelsheet/category_#{self.id}.csv")
@@ -82,6 +123,14 @@ class Category < ActiveRecord::Base
 
 	def verify_sheet_exists
       if !File.exist?(Rails.root.to_s +  "/excelsheet/category_#{self.id}.csv") 
+      	return false
+      else 
+      	return true
+      end
+    end
+
+    def verify_eod_sheet_exists
+      if !File.exist?(Rails.root.to_s +  "/eodsheet/category_#{self.id}.csv") 
       	return false
       else 
       	return true

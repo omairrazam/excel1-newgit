@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= link_to 'New Eod sheet', new_category_eod_sheet_path(@category), class: "btn btn-primary" %>
+  </div>
+  <div class="panel-body">
+    <table id="eodTable" class="display" cellspacing="0" width="100%">
+      <col width="380">
+      <col width="10">
+      <col width="10">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @eod_sheets.each do |e| %>
+          <tr>
+            <td><%= e.datee %></td>
+            <td><%= link_to 'Edit', edit_category_eod_sheet_path(@category,e) %></td>
+            <td><%= link_to 'Destroy', category_eod_sheet_path(@category,e), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<br>
+
+<script type="text/javascript">
+
+ $(document).ready(function() {
+  /* datatable */
+  $('#eodTable').DataTable({
+         "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]]
+      });
+  } );
+
+ /* datepicker */
+ $( "#datepicker" ).datepicker();
+
+</script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

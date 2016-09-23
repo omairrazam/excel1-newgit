@@ -1,11 +1,11 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_category_category_id, only: [:update_data, :update_eod] 
   
   
   # GET /categories
   def index
-    @categories = Category.all
+    @categories = Category.all.order('id asc')
     
   end
 
@@ -66,11 +66,13 @@ class CategoriesController < ApplicationController
     Sidekiq::Status::message job_id #=> "Almost done"
     Sidekiq::Status::pct_complete job_id #=> 5
 
-    category     = Category.find(params[:category_id])
-    redirect_to category_path(category), notic: 'Category is updating in background'
+    
+    redirect_to category_path(@category), notice: 'Category is updating in background'
   end 
 
-   def api_get_sp_data
+  
+
+  def api_get_sp_data
     @data   = []
     
     category   = Category.find(params[:category_id])
@@ -86,6 +88,10 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
+    end
+
+    def set_category_category_id
+      @category = Category.find(params[:category_id])
     end
 
     

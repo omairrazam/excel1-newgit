@@ -1,0 +1,39 @@
+
+<%= form_for([@category,@eod_sheet]) do |f| %>
+  <% if @eod_sheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@eod_sheet.errors.count, "error") %> prohibited this eod_sheet from being saved:</h2>
+
+      <ul>
+      <% @eod_sheet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :filename %><br>
+    <%= f.file_field :filename, :required => true %>
+    <br>
+    <%= f.label :Date %><br>
+    <% if params[:action] == 'edit' %>
+     <%= f.label @eod_sheet.datee %>
+    <% else %>
+    <%= f.text_field :datee, id: 'eod_datepicker', :required => true %>
+    <% end %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+  /* datepicker */
+  $( "#eod_datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+ });
+
+
+</script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918183604) do
+ActiveRecord::Schema.define(version: 20160923053135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,25 @@ ActiveRecord::Schema.define(version: 20160918183604) do
     t.datetime "updated_at",  null: false
     t.string   "typee"
     t.string   "priceTarget"
+  end
+
+  create_table "eod_data", force: :cascade do |t|
+    t.string   "txt"
+    t.float    "value"
+    t.string   "datee"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+  end
+
+  add_index "eod_data", ["category_id"], name: "index_eod_data_on_category_id", using: :btree
+
+  create_table "eod_sheets", force: :cascade do |t|
+    t.string   "filename"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "category_id"
+    t.string   "datee"
   end
 
   create_table "excelsheets", force: :cascade do |t|
@@ -242,4 +261,5 @@ ActiveRecord::Schema.define(version: 20160918183604) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "eod_data", "categories"
 end

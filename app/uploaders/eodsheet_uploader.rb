@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ExcelsheetUploader < CarrierWave::Uploader::Base
+class EodsheetUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -13,7 +13,7 @@ class ExcelsheetUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{Rails.root}/excelsheet/"
+    "#{Rails.root}/eodsheet/"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -47,7 +47,7 @@ class ExcelsheetUploader < CarrierWave::Uploader::Base
    def filename
      #{}"something.jpg" if original_filename
      #{}"actual.csv"
-     "category_#{model.category.id}.csv" if original_filename
+     "category_#{model.category.id}_#{model.datee.gsub("/","")}.csv" if original_filename
 
    end
 

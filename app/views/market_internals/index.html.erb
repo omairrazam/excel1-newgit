@@ -1,43 +1,54 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<%#= debugger %>
+<div class="row">
+  <div class = "col-md-12 col-md-offset-5" >
+        <%= form_tag market_internals_path, :method => 'get' , :id => 'date_field' do %>
+        <span>Pick date to search in archives</span>
+        <p>
+          <%= hidden_field_tag "category_id", params[:category_id] if params[:category_id].present? %>
+          <%= text_field_tag :date, @date, id: 'datepicker', :required => true %>
+         
+           <%= submit_tag "Search", :name => nil %>
+        </p>
 
-<div class="row narrow-container">
-
-  <h2>Market Internals</h2>
-  <hr>
-  
-  <table class="table table-striped">
-  <thead>
-    <thead>
-      <tr>
-        <th>Date of Post</th>
-        <th>Post Title</th>
-        <th>Content</th>
-        
-        <% if current_user.present? and current_user.is_admin? %>
-          <th></th>
-          <th></th>
         <% end %>
-      </tr>
-    </thead>
+  </div>
+</div>
+<br>
+<hr>
+<table id="eodTable" class="display" cellspacing="0" width="100%">     
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Value</th>
+    </tr>
   </thead>
   <tbody>
-    <% @market_internals.each do |internal| %>
+    <% @market_internals.each do |m| %>
       <tr>
-      <td><%= internal.created_at.strftime("%B %d, %Y") %></td>
-      <td><%= link_to internal.title, market_internal_path(internal) %></td>
-      <td><%= internal.content.html_safe %></td>
-
-
-      <% if current_user.present? and current_user.is_admin? %>
-        <td><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> &nbsp;&nbsp;<%= link_to 'Edit', edit_market_internal_path(internal) %></td>
-
-        <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> &nbsp;&nbsp;<%= link_to 'Delete', internal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tr>
-      <% end %>
-    
+       
+        <td><%= m.txt %></td>
+        <td><%= m.value %></td>
+       
+      </tr>
+    <% end %>
   </tbody>
+</table>
 
-  </table>
+<br>
+<br>
 
-  <center><%= paginate @market_internals %></center>
-</div>
+<script type="text/javascript">
+ $(document).ready(function() {
+  /* datatable */
+  $('#eodTable').DataTable({
+         "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]]
+      });
+  } );
+
+ /* datepicker */
+ $( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+
+</script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

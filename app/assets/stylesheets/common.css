@@ -255,3 +255,11 @@ p{
     
 }
 
+.ui-widget-header .ui-icon {
+    background-image: image-url("ui-icons_222222_256x240.png") !important;
+}
+
+.ui-icon {
+   
+    background-image: image-url("ui-icons_222222_256x240.png") !important;
+}
