@@ -20,8 +20,8 @@
 /test
 
 
-/excelsheet/*
+
 config/database.yml
 config/application.yml
-/eodsheet/*
+
 
