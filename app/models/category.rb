@@ -85,12 +85,14 @@ class Category < ActiveRecord::Base
 	    		next
 	    	end
 
-	    	e       	   = EodDatum.new
-	    	e.txt   	   = data[i][0]
-	    	e.value 	   = data[i][1]
-	    	e.datee 	   = datee.to_s
-	    	e.category_id  = self.id
-	    	e.order_number = i
+	    	e       	       = EodDatum.new
+	    	e.txt   	       = data[i][0]
+	    	e.latest_close 	   = data[i][1]
+	    	e.previous_close   = data[i][2]
+	    	e.week_ago         = data[i][3]
+	    	e.datee 	       = datee.to_s
+	    	e.category_id      = self.id
+	    	e.order_number     = i
 	    	
 			eoddata << e
 		end

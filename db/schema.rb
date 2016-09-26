@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926035656) do
+ActiveRecord::Schema.define(version: 20160926131819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,10 +84,13 @@ ActiveRecord::Schema.define(version: 20160926035656) do
     t.string   "txt"
     t.float    "value"
     t.string   "datee"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "category_id"
     t.integer  "order_number"
+    t.float    "latest_close"
+    t.float    "previous_close"
+    t.float    "week_ago"
   end
 
   add_index "eod_data", ["category_id"], name: "index_eod_data_on_category_id", using: :btree

@@ -5,11 +5,9 @@ class CategoriesController < BaseAdminController
   skip_authorize_resource only: :api_get_sp_data
   #skip_authorization_check
   
-  
   # GET /categories
   def index
-    @categories = Category.all.order('id asc')
-    
+    @categories = Category.all.order('id asc')  
   end
 
   # GET /categories/1

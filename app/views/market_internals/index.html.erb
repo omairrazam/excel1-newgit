@@ -33,7 +33,9 @@
         <th>eod id </th>
         <th>category id </th>
         <th>Name</th>
-        <th>Value</th>
+        <th>Latest Close</th>
+        <th>Previous Close</th>
+        <th>Week Ago</th>
     </tr>
   </thead>
   <tbody>
@@ -43,7 +45,9 @@
         <td><%= m.id %> </td>
         <td><%= m.category.id %> </td>
         <td><%= m.txt %></td>
-        <td><%= m.value %></td>
+        <td><%= m.latest_close %></td>
+        <td><%= m.previous_close %></td>
+        <td><%= m.week_ago %></td>
        
       </tr>
     <% end %>
