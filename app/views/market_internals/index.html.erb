@@ -3,12 +3,12 @@
 <hr>
 <div class="row">
   
-  <div class="col-md-5"></div>
-  <div class = "col-md-2 md-center">
+  <div class="col-md-4"></div>
+  <div class = "col-md-3 md-center">
 
-  <label ><%= @date%></label>
+  <label ><%= @date.to_datetime.strftime('%A, %B %d, %Y') %></label>
   </div>
-  <div class = "col-md-3 col-md-offset-2" >
+  <div class = "col-md-3 col-md-offset-1" >
         <%= form_tag market_internals_path, :method => 'get' , :id => 'date_field' do %>
         
         <p>
