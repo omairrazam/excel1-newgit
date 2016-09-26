@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   
   
   ActiveAdmin.routes(self)
-  #devise_for :users,controllers: { registrations: 'registrations' }
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions/sessions' }
+  devise_for :users,controllers: { registrations: 'registrations' }
+  #devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions/sessions' }
   resources :categories do
     match "/update_data/:category_id" => "categories#update_data",   as: :update_data, via: :get
     match "/graph/update_data/:graph_name" => "graphs#update_data",  as: :graph_update_data, via: :get
