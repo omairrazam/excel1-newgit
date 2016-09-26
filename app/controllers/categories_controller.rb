@@ -59,6 +59,12 @@ class CategoriesController < BaseAdminController
 
   def update_data
     #debugger
+
+    if !File.exist?(Rails.root.to_s +  "/excelsheet/category_#{params[:category_id]}.csv") 
+        redirect_to category_path(@category), alert: 'Sheet missing'
+        return 
+    end
+
     job_id = CategoryWorker.perform_async(params[:category_id])
 
     data = Sidekiq::Status::get_all job_id

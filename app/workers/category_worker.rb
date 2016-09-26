@@ -20,7 +20,7 @@ class CategoryWorker
     	status = category.fetch_sp_csv
 
 	    if status == -1
-	    	puts "-----------------Sheed doesn't exist-----------------"
+	    	puts "-----------------Sheet doesn't exist-----------------"
 	    	return
 	    elsif status == -2
 	    	puts "-----------------Column name(s) not correct------------"

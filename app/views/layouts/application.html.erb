@@ -97,7 +97,7 @@
     </div>
 
     <!-- ONly for Admin panel -->
-    <% if  (params["controller"] == "categories" and params["action"] != "index") or params["controller"] == "graphs" or params["controller"] == "adts" or params["controller"] == "eod_sheets" %>
+    <% if  (params["controller"] == "categories" and params["action"] != "index") or params["controller"] == "graphs" or params["controller"] == "adts" or params["controller"] == "eod_sheets"or params["controller"] == "excelsheets" %>
       <ol class="breadcrumb">
        <%= render_breadcrumbs :tag => :li, :separator => "" %>
       </ol>

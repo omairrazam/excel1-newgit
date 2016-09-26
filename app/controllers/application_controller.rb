@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
    #load_and_authorize_resource :unless => :devise_controller? 
    #check_authorization :unless => :devise_controller?
    #before_filter {|controller| controller.instance_variable_set(:@_authorized, true) if controller.devise_controller? }
+  
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message

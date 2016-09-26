@@ -9,6 +9,9 @@ class ExcelsheetsController < BaseAdminController
       @category.excelsheet.delete
     end
     @excelsheet = @category.build_excelsheet
+
+    add_breadcrumb "Categories", :categories_path
+    add_breadcrumb "Graphs", category_path(@category)
   end
 
   # GET /excelsheets/1/edit
@@ -26,8 +29,6 @@ class ExcelsheetsController < BaseAdminController
       render :new
     end
   end
-
-
 
   private
 
