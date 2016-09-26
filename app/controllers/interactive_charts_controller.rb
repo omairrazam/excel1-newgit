@@ -1,4 +1,4 @@
-class InteractiveChartsController < ApplicationController
+class InteractiveChartsController < BaseAdminController
 	require 'roo'
 	before_action :get_all_categories
 	skip_authorize_resource only: :show_by_category 

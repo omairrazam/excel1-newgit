@@ -1,4 +1,4 @@
-class MarketInternalsController < ApplicationController
+class MarketInternalsController < BaseAdminController
  
   # GET /market_internals
   def index

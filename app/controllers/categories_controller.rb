@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < BaseAdminController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :set_category_category_id, only: [:update_data, :update_eod] 
   

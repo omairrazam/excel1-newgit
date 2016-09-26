@@ -1,4 +1,4 @@
-class EodSheetsController < ApplicationController
+class EodSheetsController < BaseAdminController
   before_filter :set_category, only: [:index, :new, :create, :update, :edit, :destroy]
   
 

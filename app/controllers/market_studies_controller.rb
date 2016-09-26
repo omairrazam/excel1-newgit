@@ -1,4 +1,4 @@
-class MarketStudiesController < ApplicationController
+class MarketStudiesController < BaseAdminController
   before_action :set_market_study, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only:[:show]
   skip_authorize_resource :only => :active_studies

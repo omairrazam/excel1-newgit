@@ -1,4 +1,4 @@
-class GraphsController < ApplicationController
+class GraphsController < BaseAdminController
   before_action :set_graph, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb "Categories", :categories_path

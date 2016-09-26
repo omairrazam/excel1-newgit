@@ -1,4 +1,4 @@
-class EodDatumController < ApplicationController
+class EodDatumController < BaseAdminController
 	
 	def update
 		@eod = EodDatum.find(params[:id])

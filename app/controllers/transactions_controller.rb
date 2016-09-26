@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
 	protect_from_forgery except: [:hook]
 	before_filter :authenticate_user!, except: [:paypal_hook,:paypal_return]
+	
 	def show
 		@transaction = Transaction.find params[:id]
 	end

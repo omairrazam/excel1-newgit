@@ -15,6 +15,7 @@ class Ability
         can    :manage, User
         # can :manage, Category
         can :manage, ContactUs::Contact
+
         # can :create,ContactsController
         # can :read, MarketStudies
     end

@@ -1,4 +1,4 @@
-class GeneralMarketStudiesController < ApplicationController
+class GeneralMarketStudiesController < BaseAdminController
   before_action :set_general_market_study, only: [:show, :edit, :update, :destroy]
 
   # GET /general_market_studies

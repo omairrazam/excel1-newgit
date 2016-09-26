@@ -1,4 +1,4 @@
-class InterestedsController < ApplicationController
+class InterestedsController < BaseAdminController
   before_action :set_interested, only: [:show, :edit, :update, :destroy]
 
   # GET /interesteds

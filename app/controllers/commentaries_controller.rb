@@ -1,4 +1,4 @@
-class CommentariesController < ApplicationController
+class CommentariesController < BaseAdminController
   before_action :set_commentary, only: [:show, :edit, :update, :destroy]
 
   before_filter :authenticate_user!, only:[:show]

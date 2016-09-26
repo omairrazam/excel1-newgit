@@ -1,4 +1,4 @@
-class ExcelsheetsController < ApplicationController
+class ExcelsheetsController < BaseAdminController
   
 
   # GET /excelsheets/new
