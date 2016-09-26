@@ -222,6 +222,8 @@ p{
 }
 .form-control-nav{
   margin-bottom: 0 !important;
+  /*width: 100px !important;
+  font-size: 10px !important;*/
 }
 .navbar-form {
   margin-top: 0px;
