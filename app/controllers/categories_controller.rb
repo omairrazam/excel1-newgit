@@ -2,6 +2,9 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :set_category_category_id, only: [:update_data, :update_eod] 
   
+  skip_authorize_resource only: :api_get_sp_data
+  #skip_authorization_check
+  
   
   # GET /categories
   def index

@@ -3,7 +3,7 @@ class AdtsController < ApplicationController
   after_action :set_breadcrumb, only: [:new, :edit]
 
   add_breadcrumb "Categories", :categories_path
-
+  skip_authorize_resource only: :api_get_adt_data
   # GET /graphs
   def index
     #@graphs = Graph.all

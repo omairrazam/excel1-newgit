@@ -5,15 +5,17 @@ Rails.application.routes.draw do
   
   
   ActiveAdmin.routes(self)
-  devise_for :users,controllers: { registrations: 'registrations' }
+  #devise_for :users,controllers: { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions/sessions' }
   resources :categories do
     match "/update_data/:category_id" => "categories#update_data",   as: :update_data, via: :get
     match "/graph/update_data/:graph_name" => "graphs#update_data",  as: :graph_update_data, via: :get
     resources :eod_sheets
+    resources :eod_datum, only: :update
     resources :excelsheets, only:[:new, :create]
     resources :graphs do
-        resources :adts
-        match "/adt/update_data/:adt_id" => "adts#update_data", as: :adt_update_data, via: :get
+      resources :adts
+      match "/adt/update_data/:adt_id" => "adts#update_data", as: :adt_update_data, via: :get
     end
   end
   

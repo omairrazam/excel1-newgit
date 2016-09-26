@@ -19,7 +19,7 @@ class MarketInternalsController < ApplicationController
     # for view
     @categories = Category.all.order('id ASC')
     
-    @market_internals = @category.eod_datums.all.where('datee =?', @date)
+    @market_internals = @category.eod_datums.all.order('order_number asc').where('datee =?', @date)
     
     
   end

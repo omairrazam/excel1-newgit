@@ -1,7 +1,8 @@
 class MarketStudiesController < ApplicationController
   before_action :set_market_study, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_admin_user!, only:[:create, :update , :delete, :new]
   before_filter :authenticate_user!, only:[:show]
+  skip_authorize_resource :only => :active_studies
+  skip_authorization_check
   # GET /market_studies
   def index
     
@@ -51,7 +52,6 @@ class MarketStudiesController < ApplicationController
   end
 
   def active_studies
-    authenticate_user!
     @active_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(20)
   end
 

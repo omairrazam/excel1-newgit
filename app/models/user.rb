@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_many :commentaries
   has_many :market_studies
-  validates_presence_of :agreed, :message => "? (You must be agreed to Terms & Conditions)" 
+  validates_presence_of :agreed, :message => "? (You must be agreed to Terms & Conditions)", :on => :create 
+
 	def active_for_authentication?
 	# Uncomment the below debug statement to view the properties of the returned self model values.
 	# logger.debug self.to_yaml

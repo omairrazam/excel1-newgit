@@ -1,5 +1,8 @@
 class ContactUs::ContactsController < ApplicationController
   before_filter :authenticate_user!, except:[:create, :new]
+  skip_authorize_resource except: :create
+  skip_authorization_check
+
   def create
     @contact = ContactUs::Contact.new(params[:contact_us_contact])
 
@@ -17,7 +20,6 @@ class ContactUs::ContactsController < ApplicationController
   end
 
   protected
-
     def render_new_page
       case ContactUs.form_gem
       when 'formtastic'  then render 'new_formtastic'
@@ -26,5 +28,4 @@ class ContactUs::ContactsController < ApplicationController
         render 'new'
       end
     end
-
 end

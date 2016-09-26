@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
    protect_from_forgery with: :exception
    before_filter :authenticate_user!
    before_action :configure_permitted_parameters, if: :devise_controller?
+   load_and_authorize_resource
+   #check_authorization :unless => :devise_controller?
+   #before_filter {|controller| controller.instance_variable_set(:@_authorized, true) if controller.devise_controller? }
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 
   def authenticate_admin_user!
     raise SecurityError unless current_user.is_admin 
@@ -30,3 +37,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 end
+

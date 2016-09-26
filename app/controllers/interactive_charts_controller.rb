@@ -1,6 +1,8 @@
 class InteractiveChartsController < ApplicationController
 	require 'roo'
 	before_action :get_all_categories
+	skip_authorize_resource only: :show_by_category 
+  	skip_authorization_check
 
 
 	def show_page
@@ -17,7 +19,7 @@ class InteractiveChartsController < ApplicationController
 	end
 
 	def show_by_category
-		#debugger
+		
 		# if params[:category_id]
 		# 	@selected_category = Category.find(params[:category_id])
 		# else

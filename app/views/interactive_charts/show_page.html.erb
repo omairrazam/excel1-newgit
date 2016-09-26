@@ -11,8 +11,10 @@
 
 <div class="row">
 	<div class="col-md-12">
-      <table id="example" class="display" cellspacing="0" width="100%">
-      <col width="20">
+      <table id="ic_table" class="display" cellspacing="0" width="100%">
+       <% if current_user.is_admin? %>
+       <col width="20">
+       <% end %>
        <col width="400">
        <col width="300">
        <col width="300">
@@ -76,7 +78,7 @@
     var adt_path = "/adt/api_get_adt_data/";
     var static_graph_path = "/category/api_get_sp_data/";
 
-    var table = $('#example').DataTable( {
+    var table = $('#ic_table').DataTable( {
         "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
         rowReorder: true,
         "aoColumnDefs": [
@@ -141,15 +143,15 @@
             var graph_id = rowData[1];
             var category_id = rowData[5];
 
-              var url = '/categories/'+ category_id +'/graphs/'+ graph_id;
+              var url = '/categories/'+ category_id +'/graphs/'+ graph_id+'.json';
 
               var data = {
                   graph:{order_num:diff[i].newData}
                };
-
+            <% if current_user.is_admin? %>
                 //alert(data.order_num);
               $.ajax({
-                type: 'put',
+                type: 'patch',
                 url: url,
                 dataType: "json",
                 data:data,
@@ -159,7 +161,8 @@
                 success: function(data){
                   //alert('Record updated successfully.');
                 }
-            });
+                });
+            <% end %>
         }
         //alert(diff.length);
         //alert(result);
@@ -186,7 +189,7 @@
        $("#container_processor").show();
     });
 
-    $('#example tbody').on( 'click', 'tr', function () {
+    $('#ic_table tbody').on( 'click', 'tr', function () {
 
        seriesOptions = [];
        seriesCounter = 0;

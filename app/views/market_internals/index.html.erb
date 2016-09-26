@@ -1,10 +1,17 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-<%#= debugger %>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.1.2/css/rowReorder.dataTables.min.css">
+
 <div class="row">
-  <div class = "col-md-12 col-md-offset-5" >
+  <div class="col-md-5"></div>
+  <div class = "col-md-2 md-center">
+
+  <label ><%= @date%></label>
+  </div>
+  <div class = "col-md-3 col-md-offset-2" >
         <%= form_tag market_internals_path, :method => 'get' , :id => 'date_field' do %>
-        <span>Pick date to search in archives</span>
+        
         <p>
+        <label>Archive</label> &nbsp; &nbsp;
           <%= hidden_field_tag "category_id", params[:category_id] if params[:category_id].present? %>
           <%= text_field_tag :date, @date, id: 'datepicker', :required => true %>
          
@@ -16,9 +23,15 @@
 </div>
 <br>
 <hr>
-<table id="eodTable" class="display" cellspacing="0" width="100%">     
+<table id="eodTable" class="display" cellspacing="0" width="80%">     
+       <col width="20">
+       <col width="300">
+       <col width="300">
   <thead>
     <tr>
+        <th>order </th>
+        <th>eod id </th>
+        <th>category id </th>
         <th>Name</th>
         <th>Value</th>
     </tr>
@@ -26,7 +39,9 @@
   <tbody>
     <% @market_internals.each do |m| %>
       <tr>
-       
+        <td><%= m.order_number %> </td>
+        <td><%= m.id %> </td>
+        <td><%= m.category.id %> </td>
         <td><%= m.txt %></td>
         <td><%= m.value %></td>
        
@@ -41,14 +56,78 @@
 <script type="text/javascript">
  $(document).ready(function() {
   /* datatable */
-  $('#eodTable').DataTable({
-         "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]]
+  var table = $('#eodTable').DataTable({
+        "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
+        rowReorder: true,
+        bFilter: false,
+        bPaginate: false,
+        bInfo: false,
+        "aoColumnDefs": [
+
+            {
+                "targets": [ 0 ],
+                "visible": <%= current_user.is_admin? %>,
+                "searchable": false
+            },
+
+            {
+                "targets": [ 1 ],
+                "visible": false,
+                "searchable": false
+            },
+
+            {
+                "targets": [ 2 ],
+                "visible": false,
+                "searchable": false
+            }
+        ]
       });
-  } );
+  
+
+ /* Row reordering handling ajax */
+  table.on( 'row-reorder', function ( e, diff, edit ) {
+     
+      var result  = edit.triggerRow.data()[0];
+
+      
+      for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+          var rowData     = table.row( diff[i].node ).data();
+          var eod_id      = rowData[1];
+          var category_id = rowData[2];
+
+            var url = '/categories/'+ category_id +'/eod_datum/'+ eod_id+'.json';
+            var data = {
+                eod:{order_number:diff[i].newData}
+             };
+
+              
+          $.ajax({
+            type: 'patch',
+            url: url,
+            dataType: "json",
+            data:data,
+            error: function(data){
+              
+            }, 
+            success: function(data){
+              
+            }
+          });
+      }
+      //alert(diff.length);
+      //alert(result);
+      //alert(diff[0].oldData);
+      //alert(diff[0]);
+      //alert(rowData[1]);
+  });
+  /* reording code ends here */
 
  /* datepicker */
  $( "#datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
+} );/* document ready ends here */
 </script>
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.1.2/js/dataTables.rowReorder.min.js"></script>

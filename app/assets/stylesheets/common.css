@@ -263,3 +263,13 @@ p{
    
     background-image: image-url("ui-icons_222222_256x240.png") !important;
 }
+
+#eodTable tbody, #ic_table tbody{
+  font-size: 12px;
+  
+}
+
+
+#eodTable th, #eodTable td{
+  text-align: center;
+}
