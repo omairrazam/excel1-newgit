@@ -10,6 +10,6 @@ Research')
   def admin_email(admin, new_user)
   	@user = admin
   	@new_user = new_user
-    mail(to: @user.email, subject: 'New Subscriber on your site')
+    mail(to: "scr.ownerr@gmail.com", subject: 'New Subscriber on your site')
   end
 end
