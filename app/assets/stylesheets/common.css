@@ -301,6 +301,10 @@ p{
   width: 100%;
   height: 100%;
 }
+
+.btn-info{
+  background-color: #337ab7 !important;
+}
 /*.ekko-lightbox.modal .modal-dialog{
   width: 100% !important;
 }
