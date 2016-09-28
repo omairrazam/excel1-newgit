@@ -286,3 +286,12 @@ p{
   padding-top: 2px;
   padding-bottom: 2px;
 }
+
+.market-study .modal-dialog{
+  width: 100%;
+  height: 100%;
+}
+/*.ekko-lightbox.modal .modal-dialog{
+  width: 100% !important;
+}
+*/
