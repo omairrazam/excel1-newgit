@@ -17,7 +17,7 @@
       <span><i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;<%= mail_to "info@indextresearch.com" %></span>
     </div>
     <div class="col-md-2  col-md-offset-0 md-center"><%= link_to image_tag('indexT-circle.jpg'),root_path %></div>
-    <div class="col-md-5  col-md-offset-0 links md-center">
+    <div class="col-md-5  col-md-offset-0 links md-center padding-zero">
       <% if current_user.present? %>
         <span>Signed in as <span class = "site-label"><%= current_user.email %>
         </span></span>
@@ -89,6 +89,8 @@
         </nav>
       </center>
     </div>
+  <% else %>
+    <br><br>
   <% end %>
 
   <div class="container-content">
@@ -103,7 +105,7 @@
       </ol>
     <% end %>
     <!-- end breadcrumbs -->
-
+     
      <%= yield %>
   </div>
 

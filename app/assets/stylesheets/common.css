@@ -187,7 +187,7 @@ body {
     width: 1270px;
     margin: 0 auto;
     min-height: 500px;
-    margin-top: 70px;
+    margin-top: 35px;
 }
 
 a{
@@ -228,8 +228,17 @@ p{
 .navbar-form {
   margin-top: 0px;
   margin-bottom: 0px;
+  margin:0px;
+  padding: 0px;
 }
 
+.margin-zero{
+  margin: 0px !important;
+}
+
+.padding-zero{
+  padding: 0px !important;
+}
 .modal-dialog-full{
   width: inherit !important;
   margin: 5px;
@@ -278,13 +287,14 @@ p{
 
 @media (min-width: 768px){
   .navbar-form .form-control {
-    height: 25px;
+    height: 20px;
   }
 }
 
 .navbar-form .btn {
   padding-top: 2px;
   padding-bottom: 2px;
+  font-size: 11px;
 }
 
 .market-study .modal-dialog{
