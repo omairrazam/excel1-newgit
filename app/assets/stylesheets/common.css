@@ -154,9 +154,9 @@ body {
 }
 
 @media screen and (min-width: 1200px) {
-    .md-center{
-      text-align: center;
-    }
+  .md-center{
+    text-align: center;
+  }
 }
 
 #header-top .navbar-right{
@@ -253,24 +253,20 @@ p{
 
 
 .table-handle:after {
-    content: "\f047";
-    
+  content: "\f047";  
 }
 
 .ui-widget-header .ui-icon {
-    background-image: image-url("ui-icons_222222_256x240.png") !important;
+  background-image: image-url("ui-icons_222222_256x240.png") !important;
 }
 
 .ui-icon {
-   
-    background-image: image-url("ui-icons_222222_256x240.png") !important;
+  background-image: image-url("ui-icons_222222_256x240.png") !important;
 }
 
 #eodTable tbody, #ic_table tbody{
   font-size: 12px;
-  
 }
-
 
 #eodTable th, #eodTable td{
   text-align: center;
@@ -278,6 +274,15 @@ p{
 
 .btn-subscrb{
     min-height: 60px !important;
-    
+}
 
+@media (min-width: 768px){
+  .navbar-form .form-control {
+    height: 25px;
+  }
+}
+
+.navbar-form .btn {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }

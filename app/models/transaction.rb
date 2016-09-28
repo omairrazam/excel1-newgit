@@ -16,10 +16,10 @@ class Transaction < ActiveRecord::Base
             a3: package.amount,
             p3: 1,
             src: 1,
-            #srt: package.cycles,
-            srt: 2,
-            #t3: user.period.first,
-            t3: 'D'
+            srt: package.cycles,
+            #srt: 2,
+            t3: user.period.first,
+            #t3: 'D'
             #rm:2
 	    }
 	
