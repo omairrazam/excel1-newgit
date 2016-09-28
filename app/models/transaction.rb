@@ -1,7 +1,8 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :user
 	 def paypal_url(return_path)
-	 	
+	 	package = PaypalPackage.find_by_subscription_type(user.period.first)
+
 	    values = {
 	    	#ip: request.remote_ip
 	        business: "omairr.azam-facilitator@gmail.com",
@@ -12,10 +13,13 @@ class Transaction < ActiveRecord::Base
 	        item_name: user.email,
 	        notify_url: "#{Rails.application.secrets.app_host}/hook",  
 	        cmd: "_xclick-subscriptions",
-            a3: 12,
+            a3: package.amount,
             p3: 1,
-            srt: user.cycles,
-            t3: user.period.first,
+            src: 1,
+            #srt: package.cycles,
+            srt: 2,
+            #t3: user.period.first,
+            t3: 'D'
             #rm:2
 	    }
 	

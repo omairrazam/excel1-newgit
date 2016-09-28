@@ -7,7 +7,7 @@ class BaseAdminController < ApplicationController
     	params[resource] &&= send(method) if respond_to?(method, true)
   	end
 
-	load_and_authorize_resource
-	#load_and_authorize_resource except: [:create]
+	load_and_authorize_resource 
+	
 	
 end

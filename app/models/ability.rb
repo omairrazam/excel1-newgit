@@ -5,6 +5,8 @@ class Ability
 
     if user and user.is_admin?
         can :manage, :all
+    elsif  user and !user.account_active?
+        can [:index], MarketStudy
     else
         can    :read, :all
         cannot :read, Category
@@ -13,11 +15,10 @@ class Ability
 
         can    :manage, Registration
         can    :manage, User
-        # can :manage, Category
+       
         can :manage, ContactUs::Contact
 
-        # can :create,ContactsController
-        # can :read, MarketStudies
+        
     end
     # Define abilities for the passed in user here. For example:
     #

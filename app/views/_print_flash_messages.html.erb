@@ -8,4 +8,50 @@
           </div>
         </div>
     </div>
+
+
 <% end %>
+
+<% if current_user.present? %>
+<% unless current_user.account_active?  %>
+    <div class="row">
+        <div class="info-display">
+          <div class="message error">
+            <strong>Please <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#subscription_modal">Subscribe</button> again.. Your account is not active</strong> 
+          </div>
+        </div>
+    </div>
+<% end %>
+<% end %>
+
+
+<%#= link_to 'subscribe', subsciptions_create_path, class: "btn btn-success btn-xs" %>
+
+
+<!-- Modal -->
+<div id="subscription_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><center>Pick you package</center></h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+        <%= link_to 'Monthly ($60)', subsciptions_create_path(:package => "Monthly"), class: "btn btn-default col-md-6 btn-subscrb" %>
+        <%= link_to 'Yearly ($612)', subsciptions_create_path(:package => "Yearly"), class: "btn btn-default col-md-6 btn-subscrb" %>
+        
+        </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

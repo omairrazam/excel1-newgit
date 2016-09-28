@@ -8,3 +8,5 @@
 
 users = User.create({email: 'admin@example.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 'true', account_active: 'true'})
 
+PaypalPackage.create({subscription_type: 'M', amount:60, period: 24, cycles: 24 })
+PaypalPackage.create({subscription_type: 'Y', amount:612, period: 5, cycles: 5 })

@@ -5,7 +5,7 @@
 
   
 <div  class="col-md-9" >
-  <div  id="tab1" class="profile-content">
+  <div  id="tab1" class="profile-content well">
     <div class="tab-content clearfix ">
       <div class="" >
       <div class="row">
@@ -21,25 +21,21 @@
               <tr>
                 <th>Type</th>
                 <th>Charged</th>
-                <th>Rate</th>
+                <th>Rate($)</th>
               </tr>
             </thead>
           </thead>
           <tbody>
-            
               <tr>
               <td>Recurring</td>
-              <td>Monthly</td>
-              <td>$12</td>
-
-            </tr>
-          
-            
+              <td><%= current_user.period %></td>
+              <td><%= @package.amount %></td>
+              </tr>
           </tbody>
 
           </table>
           
-          <center><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=SGGGX43FAKKXN">
+          <center><a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=QKTS3HFTGS3TS">
           <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
         </a></center>
 
@@ -81,6 +77,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <br>
 <br>

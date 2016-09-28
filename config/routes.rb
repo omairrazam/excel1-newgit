@@ -4,6 +4,9 @@ require 'sidekiq-status/web'
 Rails.application.routes.draw do
   
   
+  
+  get 'subsciptions/create'
+
   ActiveAdmin.routes(self)
   devise_for :users,controllers: { registrations: 'registrations' }
   #devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions/sessions' }
@@ -27,14 +30,15 @@ Rails.application.routes.draw do
   resources :home
   resources :transactions
   resources :users
-
+  resources :interactive_charts, only: :index
+  resources :active_studies, only: :index
   match "/category/api_get_sp_data/:category_id" => "categories#api_get_sp_data",  as: :api_get_adt_data, via: :get
   match "/adt/api_get_adt_data/:adt_id" => "adts#api_get_adt_data",  as: :api_get_sp_data, via: :get
 
   get "/paypal_return" => "transactions#paypal_return"
   post "/hook" => "transactions#paypal_hook"
-  get "/active_studies" => "market_studies#active_studies"
-  get "/interactive_charts" => "interactive_charts#show_page"
+  
+  #get "/interactive_charts" => "interactive_charts#show_page"
   get '/show_by_category/:category_id' => 'interactive_charts#show_by_category', as: :show_by_category
   get "show_paypal_info" => "users#show_paypal_info"
   

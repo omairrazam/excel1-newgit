@@ -1,8 +1,8 @@
 class MarketStudiesController < BaseAdminController
   before_action :set_market_study, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only:[:show]
-  skip_authorize_resource :only => :active_studies
-  skip_authorization_check
+  #skip_authorize_resource :only => :active_studies
+  #skip_authorization_check
   # GET /market_studies
   def index
     

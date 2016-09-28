@@ -1,9 +1,13 @@
 class InteractiveChartsController < BaseAdminController
 	require 'roo'
 	before_action :get_all_categories
-	skip_authorize_resource only: :show_by_category 
-  	skip_authorization_check
+	#skip_authorize_resource only: :show_by_category 
+  	#skip_authorization_check
 
+  	def index
+  		@graphs = Graph.all
+		render "show_page"
+  	end
 
 	def show_page
 		

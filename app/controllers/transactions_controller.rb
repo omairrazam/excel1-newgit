@@ -11,10 +11,9 @@ class TransactionsController < ApplicationController
 		params.permit! # Permit all Paypal input params
 		status = params[:payment_status]
 		type   = params[:txn_type]
-		 u = User.find_by_email(params['item_name'])
+		u = User.find_by_email(params['item_name'])
 	    
 	    if type == "subscr_payment"
-	    	#debugger
 			if u.present?
 				u.transactions.build(paypal_hook_params)
 				if status == "Completed"
@@ -23,16 +22,13 @@ class TransactionsController < ApplicationController
 				end
 				 	u.save!
 			end
-			
 		elsif type == "subscr_signup"
-			#debugger
 			if u.present?
 				u.account_active = true
 				u.transactions.build(paypal_return_params)
 				u.save!
 			end
 		elsif type == "subscr_eot"
-			#debugger
 			#deactivate account here
 			if u.present?
 				u.account_active = false
@@ -40,7 +36,10 @@ class TransactionsController < ApplicationController
 				u.save!
 			end	
 		elsif type == "subscr_cancel"
-			
+			if u.present?
+				u.transactions.build(paypal_return_params)
+				u.save!
+			end	
 		elsif type == "subscr_failed"
 			#debugger
 			#trigger email to warn user
@@ -64,9 +63,7 @@ class TransactionsController < ApplicationController
       			ExampleMailer.admin_email(admin,u).deliver
 				flash.clear
 				flash[:success] =  "Thanks for subscribing, you can view your subscription details in Settings. You are now logged in"
-				sign_in_and_redirect(u)
-			
-			    
+				sign_in_and_redirect(u)   
 		else
 			flash.clear
 			flash[:success] =  "Transaction was not processed"
@@ -84,7 +81,7 @@ class TransactionsController < ApplicationController
 					  :receiver_email, :payer_id,  :invoice, :reattempt,
 					  :recur_times, :subscr_date, :charset, :period3, :mc_amount3,
 					  :auth
-					  )
+					)
 	end
 
 	def paypal_hook_params
@@ -97,7 +94,6 @@ class TransactionsController < ApplicationController
 					  :txn_id, :receiver_email, :first_name, :invoice,
 					  :payer_id, :receiver_id, :payment_status, :payment_fee,
 					  :mc_fee, :mc_gross, :notify_version, :ipn_track_id
-
-					  )
+					)
 	end
 end

@@ -1,6 +1,5 @@
   
-<div class="profile-sidebar">
-  
+<div class="profile-sidebar well">
   <div class="profile-usertitle">
     <div class="profile-usertitle-name">
       <%= current_user.username %>
@@ -23,8 +22,7 @@
       <li class="<%= profile_active_link(show_paypal_info_path) %>">
         <%= link_to  show_paypal_info_path do%>
           <i class="glyphicon glyphicon-credit-card"></i>Paypal
-        <% end %>
-           
+        <% end %>   
       </li>
       <li>
         
