@@ -55,6 +55,12 @@ class MarketStudiesController < BaseAdminController
     @active_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(20)
   end
 
+  def download_image
+    market_study = MarketStudy.find(params[:id])
+    send_file "#{Rails.root}/public#{market_study.image_url}", :type=>"application/png", :x_sendfile=>true
+    #redirect_to :back
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_market_study
@@ -63,6 +69,6 @@ class MarketStudiesController < BaseAdminController
 
     # Only allow a trusted parameter "white list" through.
     def market_study_params
-      params.require(:market_study).permit(:title, :content,:typee, :price_target)
+      params.require(:market_study).permit(:title, :content,:typee, :price_target, :image)
     end
 end

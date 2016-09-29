@@ -79,7 +79,7 @@ gem 'sinatra', require: false
 gem 'slim'
 
 gem "breadcrumbs_on_rails"
-
+gem "rmagick"
 gem "cancan"
 
 gem "activerecord-import"

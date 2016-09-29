@@ -2,9 +2,6 @@ require 'sidekiq/web'
 require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
-  
-  
-  
   get 'subsciptions/create'
 
   ActiveAdmin.routes(self)
@@ -38,6 +35,7 @@ Rails.application.routes.draw do
   get "/paypal_return" => "transactions#paypal_return"
   post "/hook" => "transactions#paypal_hook"
   
+  get "download_image" => "market_studies#download_image", as: :download_image
   #get "/interactive_charts" => "interactive_charts#show_page"
   get '/show_by_category/:category_id' => 'interactive_charts#show_by_category', as: :show_by_category
   get "show_paypal_info" => "users#show_paypal_info"

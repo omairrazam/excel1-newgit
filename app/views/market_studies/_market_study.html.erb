@@ -3,17 +3,24 @@
 
   <h2 class="blog-post-title"><%=link_to  market_study.title, market_study %></h2>
   <p class="blog-post-meta"><%= time_ago_in_words(market_study.created_at) %> ago by <a href="#"><%= market_study.user.email %></a></p>
+
+
+  
   <a href="#"   data-toggle="modal" data-target="#img-modal">
-    <img class="img-responsive" src="http://placehold.it/1300x500" alt="">
+    <%= image_tag market_study.image_url(:thumb).to_s %>
   </a>
   <br>
   <% if user_signed_in? and current_user.is_admin? %>
   <div >
+    <br>
     <%= link_to 'Show', market_study , :class =>"btn btn-info btn-xs"%>
     <%= link_to 'Edit', edit_market_study_path(market_study) , :class =>"btn btn-info btn-xs"%>
     <%= link_to 'Destroy', market_study, :class =>"btn btn-info btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
   <% end %>
+  <p >
+    <span class="pull-right"><%= link_to "Download Full Chart", download_image_path(:id => market_study.id) %></span>
+  </p>
   <p>
     <%= market_study.content[0..150].gsub(/\s\w+\s*$/,'...').html_safe  %><span class = "read_more"><%= link_to 'read more >>>', market_study %></span>
   </p>
@@ -33,7 +40,8 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <img class="img-responsive" src="http://placehold.it/1400x600" alt="">
+        <%= image_tag market_study.image_url(:full_screen).to_s %>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

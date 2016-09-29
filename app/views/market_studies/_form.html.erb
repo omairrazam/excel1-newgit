@@ -1,4 +1,4 @@
-<%= form_for(@market_study) do |f| %>
+<%= form_for(@market_study, :html => {:multipart => true})  do |f| %>
   <% if @market_study.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@market_study.errors.count, "error") %> prohibited this commentary from being saved:</h2>
@@ -13,8 +13,13 @@
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class:  "form-control" %>
-    
   </div>
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :image, class:  "form-control" %>
+  </div>
+
   <div class="form-group">
     <%= f.label :type %>
     <%= f.text_field :typee, class:  "form-control" %>
