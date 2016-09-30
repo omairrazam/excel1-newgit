@@ -1,7 +1,7 @@
 class MarketStudiesController < BaseAdminController
   before_action :set_market_study, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, only:[:show]
-  #skip_authorize_resource :only => :active_studies
+  skip_authorize_resource :only => :download_image
   #skip_authorization_check
   # GET /market_studies
   def index
@@ -51,9 +51,7 @@ class MarketStudiesController < BaseAdminController
     redirect_to market_studies_url, notice: 'Market study was successfully destroyed.'
   end
 
-  def active_studies
-    @active_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(20)
-  end
+  
 
   def download_image
     market_study = MarketStudy.find(params[:id])
