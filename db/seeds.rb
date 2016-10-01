@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users = User.create({email: 'admin@example.com', password: 'admin123', password_confirmation: 'admin123', is_admin: 'true', account_active: 'true'})
+users = User.create({email: 'admin@example.com', password: '11159357', password_confirmation: '11159357', is_admin: 'true', account_active: 'true'})
 
-PaypalPackage.create({subscription_type: 'M', amount:60, period: 24, cycles: 24 })
-PaypalPackage.create({subscription_type: 'Y', amount:612, period: 5, cycles: 5 })
+#PaypalPackage.create({subscription_type: 'M', amount:60, period: 24, cycles: 24 })
+#PaypalPackage.create({subscription_type: 'Y', amount:612, period: 5, cycles: 5 })
