@@ -15,11 +15,11 @@ class Transaction < ActiveRecord::Base
 	        cmd: "_xclick-subscriptions",
             a3: package.amount,
             p3: 1,
-            src: 1,
-            srt: package.cycles,
+            src: 1, # recurring payments, 1 for true
+            srt: package.cycles, #Recurring times. 
             #srt: 2,
-            t3: user.period.first,
-            #t3: 'D'
+            #t3: user.period.first,
+            t3: 'D'
             #rm:2
 	    }
 	
