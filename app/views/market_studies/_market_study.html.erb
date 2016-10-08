@@ -4,26 +4,25 @@
   <h2 class="blog-post-title"><%=link_to  market_study.title, market_study %></h2>
   <p class="blog-post-meta"><%= time_ago_in_words(market_study.created_at) %> ago by <a href="#"><%= market_study.user.email rescue 'unknown' %></a></p>
 
-
-  
-  <a href="#"   data-toggle="modal" data-target="#img-modal">
-    <%= image_tag market_study.image_url(:thumb).to_s , :class => "market_image", :data => { :modal_url => "#{market_study.image_url(:full_screen)}" }%>
-  </a>
-  <br>
   <% if user_signed_in? and current_user.is_admin? %>
   <div >
-    <br>
+    
     <%= link_to 'Show'   , market_study , :class =>"btn btn-info btn-xs"%>
     <%= link_to 'Edit'   , edit_market_study_path(market_study) , :class =>"btn btn-info btn-xs"%>
     <%= link_to 'Destroy', market_study, :class =>"btn btn-info btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
   <% end %>
-  <p >
-    <span class="pull-right"><%= link_to "Download Full Chart", download_image_path(:id => market_study.id) %></span>
-  </p>
-  <br>
+ <!--  <p >
+  <span class="pull-right"><%#= link_to "Download Full Chart", download_image_path(:id => market_study.id) %></span>
+  </p> -->
+ 
+
   <p>
+   <% if params[:action] == "index" %>
     <%= market_study.content[0..150].gsub(/\s\w+\s*$/,'...').html_safe  %><span class = "read_more"><%= link_to 'read more >>>', market_study %></span>
+   <% else %>
+    <%= market_study.content.html_safe %> 
+   <% end %>
   </p>
 </div><!-- /.blog-post -->
 

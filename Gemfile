@@ -84,3 +84,4 @@ gem "cancan"
 
 gem "activerecord-import"
 gem 'sidekiq-status'
+gem "mini_magick"

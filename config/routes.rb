@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   get 'subsciptions/create'
 
   ActiveAdmin.routes(self)
