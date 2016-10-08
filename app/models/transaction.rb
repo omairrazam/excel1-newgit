@@ -9,7 +9,7 @@ class Transaction < ActiveRecord::Base
 	        no_shipping: 1,
 	        upload: 1,
 	        return: "#{Rails.application.secrets.app_host}#{return_path}",
-	        invoice: id,
+	        invoice: id + 5000,
 	        item_name: user.email,
 	        notify_url: "#{Rails.application.secrets.app_host}/hook",  
 	        cmd: "_xclick-subscriptions",
