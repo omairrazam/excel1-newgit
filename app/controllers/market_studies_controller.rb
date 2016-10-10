@@ -51,8 +51,6 @@ class MarketStudiesController < BaseAdminController
     redirect_to market_studies_url, notice: 'Market study was successfully destroyed.'
   end
 
-  
-
   def download_image
     market_study = MarketStudy.find(params[:id])
     send_file "#{Rails.root}/public#{market_study.image_url}", :type=>"application/png", :x_sendfile=>true
