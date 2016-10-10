@@ -12,7 +12,7 @@ class GeneralMarketStudiesController < BaseAdminController
 
   # GET /general_market_studies/new
   def new
-    @general_market_study = GeneralMarketStudy.new
+    @general_market_study = current_user.general_market_studies.build
   end
 
   # GET /general_market_studies/1/edit
@@ -21,8 +21,7 @@ class GeneralMarketStudiesController < BaseAdminController
 
   # POST /general_market_studies
   def create
-    @general_market_study = GeneralMarketStudy.new(general_market_study_params)
-
+    @general_market_study = current_user.general_market_studies.build(general_market_study_params)
     if @general_market_study.save
       redirect_to @general_market_study, notice: 'General market study was successfully created.'
     else
