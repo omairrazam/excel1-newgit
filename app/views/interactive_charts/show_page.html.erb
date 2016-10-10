@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.1.2/css/rowReorder.dataTables.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highstock/4.2.7/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
 
@@ -267,7 +267,11 @@
        window.chart = new Highcharts.StockChart({
             chart: {
                 renderTo: "container",
-            },
+          events: {
+                load: function(event) {this.renderer.image(base_url+'/assets/watermark.jpg',600,300,250,50).add();
+                }
+            }              
+             },
 
             navigator: {
                 enabled: false
@@ -417,4 +421,9 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.1.2/js/dataTables.rowReorder.min.js"></script>
 
+<style type="text/css">
+    .highcharts-root image{
+        display: none;
+    }
+</style>
 
