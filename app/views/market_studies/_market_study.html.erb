@@ -16,7 +16,7 @@
   <span class="pull-right"><%#= link_to "Download Full Chart", download_image_path(:id => market_study.id) %></span>
   </p> -->
  
-  <% market_study.content.gsub("<img", "<img class = 'market_image ms_hide'") %>
+  <% market_study.content = market_study.content.gsub("<img", "<img class = 'market_image ms_hide'") %>
   <p>
    <% if params[:action] == "index" %>
     <%= market_study.content[0..150].gsub(/\s\w+\s*$/,'...').html_safe  %><span class = "read_more pull-right"><%= link_to 'read more >>>', market_study %></span>
