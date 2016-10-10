@@ -11,7 +11,7 @@
       <tr>
         <th>Date of Post</th>
         <th>Post Title</th>
-        <th>Type</th>
+        
         
         <% if current_user.present? and current_user.is_admin? %>
           <th></th>
@@ -25,7 +25,7 @@
       <tr>
       <td><%= gstudy.created_at.strftime("%B %d, %Y") %></td>
       <td><%= link_to gstudy.title, general_market_study_path(gstudy) %></td>
-      <td><%= gstudy.content.html_safe %></td>
+      
 
 
       <% if current_user.present? and current_user.is_admin? %>

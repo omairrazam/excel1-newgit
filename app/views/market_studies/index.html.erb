@@ -10,9 +10,6 @@
   </div><!-- /.blog-main -->
 </div><!-- /.row -->
 
-
-
-
 <!-- Modal -->
 <div id="img-modal" class="modal fade market-study" role="dialog">
   <div class="modal-dialog">
@@ -24,7 +21,7 @@
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-       
+       <h1>hello</h1>
 
       </div>
       <div class="modal-footer">
@@ -38,15 +35,25 @@
 <script type="text/javascript">
   $(function(){
     $(".market_image").click(function(){
-      //alert($(this).attr('data-modal-url'));
-      $("#img-modal .modal-body").html('<img src= "'+$(this).attr('data-modal-url')+'">');
+      $('#img-modal').modal('show');
+      $("#img-modal .modal-body").html('<img src= "'+$(this).attr('src')+'">');
     });
   });
 </script>
 
 <style type="text/css">
- /* to hide ckeditor image, custom class is given to it*/
+  /* to hide ckeditor image, custom class is given to it*/
   .ms_hide{
     display:none;
+  }
+  .market_image:hover{
+    cursor: pointer;
+  }
+  /* Important part */
+  .modal-dialog{
+      overflow-x: initial !important
+  }
+  .modal-body{
+      overflow-x: auto;
   }
 </style>
