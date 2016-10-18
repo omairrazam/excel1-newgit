@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-	protect_from_forgery except: [:hook]
+	protect_from_forgery except: [:paypal_hook]
 	before_filter :authenticate_user!, except: [:paypal_hook,:paypal_return]
 	
 	def show
