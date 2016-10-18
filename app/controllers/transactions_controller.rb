@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
 				else
 					u.account_active = false
 				end
-				 	u.save!
+				 u.save!
 			end
 		elsif type == "subscr_signup"
 			if u.present?
@@ -30,12 +30,16 @@ class TransactionsController < ApplicationController
 			end
 		elsif type == "subscr_eot"
 			#deactivate account here
+			#send emil here if this has received.
+			ExampleMailer.test_email(admin,u, "eot").deliver
 			if u.present?
 				u.account_active = false
 				u.transactions.build(paypal_return_params)
 				u.save!
 			end	
 		elsif type == "subscr_cancel"
+			#send email here for testing
+			ExampleMailer.test_email(admin,u, "cancel").deliver
 			if u.present?
 				u.transactions.build(paypal_return_params)
 				u.save!
