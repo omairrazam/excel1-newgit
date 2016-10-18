@@ -13,8 +13,8 @@ Research')
     mail(to: "scr.ownerr@gmail.com", subject: 'New Subscriber on your site')
   end
 
-  def test_email(admin,new_user, type)
-    @user = admin
+  def test_email(new_user, type)
+    
     @type = type
     @new_user = new_user
     mail(to: "omairr.azam@gmail.com", subject: type)
