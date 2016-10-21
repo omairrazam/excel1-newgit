@@ -31,15 +31,13 @@ class TransactionsController < ApplicationController
 		elsif type == "subscr_eot"
 			#deactivate account here
 			#send emil here if this has received.
-			ExampleMailer.test_email(u, "eot").deliver
 			if u.present?
+				ExampleMailer.account_suspend_email(u).deliver
 				u.account_active = false
 				u.transactions.build(paypal_return_params)
 				u.save!
 			end	
 		elsif type == "subscr_cancel"
-			#send email here for testing
-			ExampleMailer.test_email(u, "cancel").deliver
 			if u.present?
 				u.transactions.build(paypal_return_params)
 				u.save!
@@ -48,6 +46,9 @@ class TransactionsController < ApplicationController
 			#debugger
 			#trigger email to warn user
 			#3rd time subcr_eot will be called
+			if u.present?
+				ExampleMailer.payment_fail_email(u).deliver
+			end
 	    end
 
 	    render nothing: true

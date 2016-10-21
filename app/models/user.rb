@@ -10,11 +10,10 @@ class User < ActiveRecord::Base
   has_many :general_market_studies
   validates_presence_of :agreed, :message => "? (You must be agreed to Terms & Conditions)", :on => :create 
 
-	def active_for_authentication?
-	# Uncomment the below debug statement to view the properties of the returned self model values.
-	# logger.debug self.to_yaml
-		super #&& account_active
-	end
+	# def active_for_authentication?
+	
+	# 	super #&& account_active
+	# end
       
    
  private    

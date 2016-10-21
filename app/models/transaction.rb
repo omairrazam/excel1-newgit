@@ -4,12 +4,12 @@ class Transaction < ActiveRecord::Base
 	 	package = PaypalPackage.find_by_subscription_type(user.period.first)
 
 	    values = {
-	    	#ip: request.remote_ip
-	        business: "omairr.azam-facilitator@gmail.com",
+	    	#ip: request.remote_ip,
+	        business: "#{Rails.application.secrets.facilitator_account}",
 	        no_shipping: 1,
 	        upload: 1,
 	        return: "#{Rails.application.secrets.app_host}#{return_path}",
-	        invoice: id + 5000,
+	        invoice: 15000+id,
 	        item_name: user.email,
 	        notify_url: "#{Rails.application.secrets.app_host}/hook",  
 	        cmd: "_xclick-subscriptions",
@@ -19,11 +19,10 @@ class Transaction < ActiveRecord::Base
             srt: package.cycles, #Recurring times. 
             #srt: 2,
             #t3: user.period.first,
-            t3: 'D'
+            t3: 'D' # monthly or daily
             #rm:2
 	    }
-	
-	    #debugger
+
 	    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   	end  
 end
