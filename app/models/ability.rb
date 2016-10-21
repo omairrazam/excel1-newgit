@@ -8,7 +8,16 @@ class Ability
     elsif  user and !user.account_active?
         can [:index], MarketStudy
     else
-        can [:index], MarketStudy
+        can    :read, :all
+        cannot :read, Category
+        cannot :read, Graph
+        cannot :read, EodSheet
+
+        can    :manage, Registration
+        can    :manage, User
+       
+        can :manage, ContactUs::Contact
+  
     end
     # Define abilities for the passed in user here. For example:
     #
