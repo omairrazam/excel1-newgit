@@ -82,13 +82,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:4000'}
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.indextresearch.com",
     port: 587,
     authentication: "plain",
-    domain: "gmail.com",
+    domain: "indextresearch.com",
     enable_starttls_auto: true,
-    user_name:"scr.ownerr@gmail.com",
-    password: "scr.ownerr123"
+    user_name:"admin@indextresearch.com",
+    password: "@Rhys2016"
   }
 
   
