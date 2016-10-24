@@ -1,6 +1,6 @@
 <div class="blog-post">
 
-  <h3 class="blog-post-title"><%=link_to  @general_market_study.title, @general_market_study %></h3>
+  <h3 class="blog-post-title"><%=  @general_market_study.title %></h3>
   <p class="blog-post-meta"><%= format_datetime(@general_market_study.created_at) %>  <br>Post By: <%= @general_market_study.user.name rescue 'unknown' %></p>
 
   <% if user_signed_in? and current_user.is_admin? %>

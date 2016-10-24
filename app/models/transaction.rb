@@ -17,7 +17,7 @@ class Transaction < ActiveRecord::Base
             p3: 1,  # repeat every t3 value e.g for M, 1 means repeat every month
             src: 1, # recurring payments, 1 for true
             #srt: package.cycles, #Recurring times. 
-            srt: 52,
+            srt: 24,
             t3: user.period.first,
             #t3: 'D' # monthly or daily
             #rm:2
