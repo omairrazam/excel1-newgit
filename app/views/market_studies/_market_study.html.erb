@@ -1,7 +1,10 @@
 
 <div class="blog-post">
-
+<% if defined?(page) and page == "show" %>
+  <h3 class="blog-post-title"><%= market_study.title %></h3>
+<% else %>
   <h3 class="blog-post-title"><%=link_to  market_study.title, market_study %></h3>
+<% end %>
   
   <p class="blog-post-meta"><%= format_datetime(market_study.created_at) %> <br> <span>Post By: </span><%= market_study.user.name rescue 'unknown' %></p>
 
