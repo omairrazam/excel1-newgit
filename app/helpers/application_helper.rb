@@ -34,4 +34,11 @@ module ApplicationHelper
 	def devise_mapping
 		@devise_mapping ||= Devise.mappings[:user]
 	end
+
+	def format_datetime(datetime)
+		datetime.strftime("%I")+":"+
+		datetime.strftime("%M")+datetime.strftime("%p")+" "+
+		datetime.zone+","+ datetime.strftime("%A")+" "+
+		datetime.strftime("%B")+" "+datetime.strftime("%d")+","+datetime.strftime("%Y")
+	end
 end

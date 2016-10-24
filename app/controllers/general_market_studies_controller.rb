@@ -52,6 +52,6 @@ class GeneralMarketStudiesController < BaseAdminController
 
     # Only allow a trusted parameter "white list" through.
     def general_market_study_params
-      params.require(:general_market_study).permit(:title, :content)
+      params.require(:general_market_study).permit(:title, :content, :category)
     end
 end

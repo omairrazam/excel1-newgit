@@ -20,13 +20,13 @@ class AdtsController < ApplicationController
     @graph    =  @category.graphs.find(params[:graph_id])
     @adt      =  @graph.adts.new
     add_breadcrumb "Graphs", category_path(@category)
-    add_breadcrumb "Adts", category_graph_path(@category, @graph)
+    add_breadcrumb "Data Series", category_graph_path(@category, @graph)
   end
 
   # GET /graphs/1/edit
   def edit
     add_breadcrumb "Graphs", category_path(@category)
-    add_breadcrumb "Adts", category_graph_path(@category, @graph)
+    add_breadcrumb "Data Series", category_graph_path(@category, @graph)
   end
 
   # POST /graphs
@@ -38,7 +38,7 @@ class AdtsController < ApplicationController
     if @adt.save
       @adt.update_data_csv
       #AdtWorker.perform_async(@adt.id)
-      redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully created.'}
+      redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Data Series was successfully created.'}
     else
       render :new
     end
@@ -48,7 +48,7 @@ class AdtsController < ApplicationController
   def update
     #debugger
     if @adt.update(adt_params)
-      redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully updated.'}
+      redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Data Series was successfully updated.'}
     else
       render :edit
     end
@@ -57,7 +57,7 @@ class AdtsController < ApplicationController
   # DELETE /graphs/1
   def destroy
     @adt.destroy
-    redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt was successfully destroyed.'}
+    redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Data Series was successfully destroyed.'}
   end
 
   def update_data
@@ -83,7 +83,7 @@ class AdtsController < ApplicationController
     # if @new_adt.save
     @adt.update_data_csv
     #GraphWorker.perform_async(params[:graph_id])
-    redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Adt Data was successfully updated.'}
+    redirect_to category_graph_path(@category,@graph),  :flash => { :success => 'Data Series was successfully updated.'}
     #end
                                    
   end 
@@ -105,7 +105,7 @@ class AdtsController < ApplicationController
 
     def set_breadcrumb
       add_breadcrumb "Graphs", category_path(@category)
-      add_breadcrumb "Adts", category_graph_path(@category, @graph)
+      add_breadcrumb "Data Series", category_graph_path(@category, @graph)
     end
 
     def set_adt

@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
 	# 	super #&& account_active
 	# end
       
-   
+  def name
+     self.username.present? ? username : email
+  end
  private    
 	def password_required?
   		new_record? ? super : false

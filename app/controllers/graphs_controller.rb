@@ -12,7 +12,7 @@ class GraphsController < BaseAdminController
   # GET /graphs/1
   def show
     add_breadcrumb "Graphs", category_path(@category)
-    add_breadcrumb "Adts", category_graph_path(@category, @graph)
+    add_breadcrumb "Data Series", category_graph_path(@category, @graph)
   end
 
   # GET /graphs/new

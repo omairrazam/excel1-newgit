@@ -25,10 +25,13 @@
 </div>
 <br>
 <br>
-<table id="eodTable" class="display" cellspacing="0" width="80%">     
+<table id="eodTable" class="display" cellspacing="0" width="80%"> 
+      <% if current_user.is_admin? %>    
        <col width="20">
-       <col width="300">
-       <col width="300">
+      <% end %>
+       <col width="500">
+       <col width="20">
+
   <thead>
     <tr>
         <th>order </th>

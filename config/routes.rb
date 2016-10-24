@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
   
   resources :general_market_studies
-  resources :market_internals
+  resources :market_internals, only: :index
   resources :market_studies
   resources :interesteds
   resources :commentaries
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get "/paypal_return" => "transactions#paypal_return"
   post "/hook" => "transactions#paypal_hook"
   
-  get "/recruitments" => "home#recruitment"
+  get "/careers" => "home#recruitment"
 
   get "download_image" => "market_studies#download_image", as: :download_image
   #get "/interactive_charts" => "interactive_charts#show_page"
