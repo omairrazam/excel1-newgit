@@ -9,7 +9,7 @@ ContactUs.setup do |config|
   config.mailer_from = "dontreply@yourdomain.com"
 
   # Configure the e-mail address which should receive the contact form email notifications.
-  config.mailer_to = "scr.ownerr@gmail.com"
+  config.mailer_to = "info@indextresearch.com"
 
   # ==> Form Configuration
 

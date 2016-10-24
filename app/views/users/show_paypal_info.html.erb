@@ -34,10 +34,11 @@
           </tbody>
 
           </table>
-          
-          <center><a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=QKTS3HFTGS3TS">
-          <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
-        </a></center>
+          <% if current_user.account_active %>
+            <center><a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=QKTS3HFTGS3TS">
+            <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+          </a></center>
+          <% end %>
 
         </div>
         </div>
