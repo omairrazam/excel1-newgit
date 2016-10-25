@@ -3,8 +3,7 @@ class ExampleMailer < ApplicationMailer
   
   def sample_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Welcome to Stock Cloud
-Research')
+    mail(to: @user.email, subject: 'Welcome to IndextResearch')
   end
 
   def payment_fail_email(user)
