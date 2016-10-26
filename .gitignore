@@ -25,7 +25,7 @@ public/*
 
 config/database.yml
 config/application.yml
-
+config/secrets.yml
 
 
 # Ignore application configuration

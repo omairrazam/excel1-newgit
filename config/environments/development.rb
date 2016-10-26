@@ -40,11 +40,11 @@ Rails.application.configure do
 
 
   config.action_mailer.smtp_settings = {
-  :address        => 'smtp.office365.com',
+    :address        => 'smtp.office365.com',
     :port           => '587',
     :authentication => :login,
-    :user_name      => "admin@indextresearch.com",
-    :password       => "@Rhys2016",
+    :user_name      => "#{Rails.application.secrets.mail_username}",
+    :password       => "#{Rails.application.secrets.mail_password}",
     :domain         => 'indextresearch.com',
     :enable_starttls_auto => true
   }
