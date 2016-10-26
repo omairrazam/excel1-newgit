@@ -1,7 +1,7 @@
 <div class="blog-post">
 
   <h3 class="blog-post-title"><%=  @general_market_study.title %></h3>
-  <p class="blog-post-meta"><%= format_datetime(@general_market_study.created_at) %>  <br><strong class = "blue">Post By: </strong><%= @general_market_study.user.name rescue 'unknown' %></p>
+  <p class="blog-post-meta"><strong><%= format_datetime(@general_market_study.created_at) %>  </strong><br><strong class = "blue">Post By: <%= @general_market_study.user.name rescue 'unknown' %> </strong></p>
 
   <% if user_signed_in? and current_user.is_admin? %>
   <div >
