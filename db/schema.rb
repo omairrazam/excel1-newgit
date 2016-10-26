@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024052923) do
+ActiveRecord::Schema.define(version: 20161025203321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,22 @@ ActiveRecord::Schema.define(version: 20161024052923) do
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
   end
+
+  create_table "friendly_urls", force: :cascade do |t|
+    t.string   "path"
+    t.string   "slug"
+    t.string   "controller"
+    t.string   "action"
+    t.string   "defaults"
+    t.integer  "market_study_id"
+    t.integer  "general_market_study_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "friendly_urls", ["general_market_study_id"], name: "index_friendly_urls_on_general_market_study_id", using: :btree
+  add_index "friendly_urls", ["market_study_id"], name: "index_friendly_urls_on_market_study_id", using: :btree
+  add_index "friendly_urls", ["slug"], name: "index_friendly_urls_on_slug", unique: true, using: :btree
 
   create_table "general_market_studies", force: :cascade do |t|
     t.string   "title"
@@ -304,4 +320,6 @@ ActiveRecord::Schema.define(version: 20161024052923) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "eod_data", "categories"
+  add_foreign_key "friendly_urls", "general_market_studies"
+  add_foreign_key "friendly_urls", "market_studies"
 end

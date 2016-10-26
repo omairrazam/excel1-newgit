@@ -12,12 +12,32 @@
       </ul>
     </div>
   <% end %>
+
+   <% if @friendly_url && @friendly_url.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@friendly_url.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @friendly_url.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class:  "form-control" %>
     
   </div>
   
+   <div class="field">
+    <%= label_tag :friendly_url_slug %><br>
+    <%= text_field_tag 'friendly_url[slug]',nil, class: "form-control" %>
+  </div>
+
+
  
   <div class="form-group">
     <%= f.label :content %><br>

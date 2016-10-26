@@ -79,17 +79,16 @@ Rails.application.configure do
   #config.redis = { password: 'nothing' }
   config.assets.raise_runtime_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'localhost:4000'}
+  config.action_mailer.default_url_options = { :host => 'indextresearch.com'}
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.indextresearch.com",
-    port: 587,
-    authentication: "plain",
-    domain: "indextresearch.com",
-    enable_starttls_auto: true,
-    user_name:"admin@indextresearch.com",
-    password: "@Rhys2016"
+  :address        => 'smtp.office365.com',
+    :port           => '587',
+    :authentication => :login,
+    :user_name      => "admin@indextresearch.com",
+    :password       => "@Rhys2016",
+    :domain         => 'indextresearch.com',
+    :enable_starttls_auto => true
   }
 
-  
 end

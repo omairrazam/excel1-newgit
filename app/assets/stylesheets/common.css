@@ -1,5 +1,7 @@
 /* notification styling */
-
+strong.blue {
+  color: #337ab7 ;
+}
 body {
     font-family: arial !important;
 }

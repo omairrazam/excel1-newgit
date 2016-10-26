@@ -36,16 +36,17 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'localhost:4000'}
+  config.action_mailer.default_url_options = { :host => 'localhost:4011'}
+
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    authentication: "plain",
-    domain: "gmail.com",
-    enable_starttls_auto: true,
-    user_name:"scr.ownerr@gmail.com",
-    password: "scr.ownerr123"
+  :address        => 'smtp.office365.com',
+    :port           => '587',
+    :authentication => :login,
+    :user_name      => "admin@indextresearch.com",
+    :password       => "@Rhys2016",
+    :domain         => 'indextresearch.com',
+    :enable_starttls_auto => true
   }
 
 

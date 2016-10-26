@@ -5,7 +5,7 @@ class MarketStudiesController < BaseAdminController
   #skip_authorization_check
   # GET /market_studies
   def index
-    @market_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(5)
+    @market_studies = MarketStudy.includes(:friendly_url).all.order("created_at desc").page(params[:page]).per(5)
   end
 
   # GET /market_studies/1
@@ -24,8 +24,12 @@ class MarketStudiesController < BaseAdminController
   # POST /market_studies
   def create
     @market_study = current_user.market_studies.build(market_study_params)
+    @friendly_url = @market_study.build_friendly_url(friendly_url_params)
+    
+    
+
     respond_to do |format|
-      if @market_study.save
+      if @friendly_url.save
         format.html { redirect_to @market_study, notice: 'Commentary was successfully created.' }
         format.json { render :show, status: :created, location: @market_study }
       else
@@ -37,7 +41,8 @@ class MarketStudiesController < BaseAdminController
 
   # PATCH/PUT /market_studies/1
   def update
-    if @market_study.update(market_study_params)
+    
+    if @market_study.update(market_study_params) and @market_study.friendly_url.update(friendly_url_params)
       redirect_to @market_study, notice: 'Market study was successfully updated.'
     else
       render :edit
@@ -65,5 +70,9 @@ class MarketStudiesController < BaseAdminController
     # Only allow a trusted parameter "white list" through.
     def market_study_params
       params.require(:market_study).permit(:title, :content,:typee, :price_target, :image)
+    end
+
+     def friendly_url_params
+      params.require(:friendly_url).permit(:slug)
     end
 end

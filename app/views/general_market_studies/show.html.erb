@@ -1,13 +1,13 @@
 <div class="blog-post">
 
   <h3 class="blog-post-title"><%=  @general_market_study.title %></h3>
-  <p class="blog-post-meta"><%= format_datetime(@general_market_study.created_at) %>  <br>Post By: <%= @general_market_study.user.name rescue 'unknown' %></p>
+  <p class="blog-post-meta"><%= format_datetime(@general_market_study.created_at) %>  <br><strong class = "blue">Post By: </strong><%= @general_market_study.user.name rescue 'unknown' %></p>
 
   <% if user_signed_in? and current_user.is_admin? %>
   <div >
     
     <%= link_to 'Show', @general_market_study , :class =>"btn btn-info btn-xs"%>
-    <%= link_to 'Edit'   , edit_general_market_study_path(@general_market_study) , :class =>"btn btn-info btn-xs"%>
+    <%= link_to 'Edit', edit_general_market_study_path(@general_market_study) , :class =>"btn btn-info btn-xs"%>
     <%= link_to 'Destroy', @general_market_study, :class =>"btn btn-info btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
   <% end %>

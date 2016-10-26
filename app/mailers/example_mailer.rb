@@ -1,9 +1,9 @@
 class ExampleMailer < ApplicationMailer
-	default from: "from@example.com"
+	default from: "admin@indextresearch.com"
   
   def sample_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Welcome to IndextResearch')
+    mail(to: @user.email, subject: 'Welcome to Indext Research')
   end
 
   def payment_fail_email(user)
@@ -14,7 +14,7 @@ class ExampleMailer < ApplicationMailer
   def admin_email(admin, new_user)
   	@user = admin
   	@new_user = new_user
-    mail(to: "scr.ownerr@gmail.com", subject: 'New Subscriber on your site')
+    mail(to: "admin@indextresearch.com", subject: 'New Subscriber on your site')
   end
 
   def account_suspend_email(user)
@@ -29,5 +29,8 @@ class ExampleMailer < ApplicationMailer
     mail(to: "omairr.azam@gmail.com", subject: type)
   end
 
+  def dummy_email
+    mail(to: "omairr.azam@gmail.com", subject: "confirming")
+  end
 
 end
