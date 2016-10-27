@@ -35,7 +35,7 @@ class CategoryWorker
 	    	total_datasets_count += g.adts.count
 	    end
 	    
-	    unit_progress = 80/total_datasets_count
+	    unit_progress = 80.0.to_f/total_datasets_count
 
 	    category.graphs.each do |g|
 	      g.adts.each do |a|

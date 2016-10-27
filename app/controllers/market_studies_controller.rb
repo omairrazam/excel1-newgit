@@ -41,8 +41,11 @@ class MarketStudiesController < BaseAdminController
 
   # PATCH/PUT /market_studies/1
   def update
-    f_url = @market_study.friendly_url.find_or_create_by(slug: 'unknown')
-    if @market_study.update(market_study_params) and f_url.update(friendly_url_params)
+    if @market_study.friendly_url.blank?
+      @market_study.friendly_url.create
+    end
+
+    if @market_study.update(market_study_params) and @market_study.friendly_url.update(friendly_url_params)
       redirect_to @market_study, notice: 'Market study was successfully updated.'
     else
       render :edit
