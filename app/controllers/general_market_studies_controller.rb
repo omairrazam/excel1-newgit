@@ -34,7 +34,8 @@ class GeneralMarketStudiesController < BaseAdminController
   # PATCH/PUT /general_market_studies/1
   def update
     if @general_market_study.friendly_url.blank?
-      @general_market_study.friendly_url.create
+      f = @general_market_study.build_friendly_url
+      f.save
     end
 
     if @general_market_study.update(general_market_study_params) and @general_market_study.friendly_url.update(friendly_url_params)
