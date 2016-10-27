@@ -359,9 +359,19 @@
             },
 
             tooltip: {
-                // positioner: function(boxWidth, boxHeight, point) {         
-                //     return {x:point.plotX ,y:point.plotY+180};         
-                // }
+                positioner: function (labelWidth, labelHeight, point) {
+    var tooltipX, tooltipY;
+    if (point.plotX + labelWidth > chart.plotWidth) {
+        tooltipX = point.plotX + chart.plotLeft - labelWidth - 20;
+    } else {
+        tooltipX = point.plotX + chart.plotLeft + 20;
+    }
+    tooltipY = point.plotY + chart.plotTop - 20;
+    return {
+        x: tooltipX,
+        y: tooltipY
+    };
+}
             },
 
             yAxis:[{
