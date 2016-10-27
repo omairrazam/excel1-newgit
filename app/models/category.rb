@@ -55,8 +55,8 @@ class Category < ActiveRecord::Base
 
 			spgraphs << d
 		end
-	    #debugger
-	    SpGraph.import spgraphs
+	    columns_without_id = SpGraph.column_names.reject { |column| column == 'id' }
+	    SpGraph.import(columns_without_id,spgraphs)
 	   # SpGraph.import columns, data, validate: false
   		
 	end
