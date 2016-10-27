@@ -41,10 +41,6 @@ class MarketStudiesController < BaseAdminController
 
   # PATCH/PUT /market_studies/1
   def update
-    if @market_study.friendly_url.blank?
-      f = @market_study.build_friendly_url(:slug => "unknown")
-      f.save
-    end
 
     if @market_study.update(market_study_params) and @market_study.friendly_url.update(friendly_url_params)
       redirect_to @market_study, notice: 'Market study was successfully updated.'
