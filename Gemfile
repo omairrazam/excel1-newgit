@@ -85,4 +85,4 @@ gem "cancan"
 gem "activerecord-import"
 gem 'sidekiq-status'
 gem "mini_magick"
-gem 'rails_friendly_urls'
+#gem 'rails_friendly_urls'

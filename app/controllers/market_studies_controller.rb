@@ -5,8 +5,7 @@ class MarketStudiesController < BaseAdminController
   #skip_authorization_check
   # GET /market_studies
   def index
-    
-    @market_studies = MarketStudy.includes(:friendly_url).all.order("created_at desc").page(params[:page]).per(5)
+    @market_studies = MarketStudy.all.order("created_at desc").page(params[:page]).per(5)
   end
 
   # GET /market_studies/1
@@ -42,8 +41,8 @@ class MarketStudiesController < BaseAdminController
 
   # PATCH/PUT /market_studies/1
   def update
-
-    if @market_study.update(market_study_params) and @market_study.friendly_url.update(friendly_url_params)
+    
+    if @market_study.update(market_study_params) 
       redirect_to @market_study, notice: 'Market study was successfully updated.'
     else
       render :edit

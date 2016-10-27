@@ -3,8 +3,7 @@ require 'sidekiq-status/web'
 
 Rails.application.routes.draw do
 
-  RailsFriendlyUrls::Manager.inject_urls self
-
+  
  
   mount Ckeditor::Engine => '/ckeditor'
   get 'subsciptions/create'

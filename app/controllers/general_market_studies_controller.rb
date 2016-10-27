@@ -34,7 +34,7 @@ class GeneralMarketStudiesController < BaseAdminController
   # PATCH/PUT /general_market_studies/1
   def update
     
-    if @general_market_study.update(general_market_study_params) and @general_market_study.friendly_url.update(friendly_url_params)
+    if @general_market_study.update(general_market_study_params) 
       redirect_to @general_market_study, notice: 'General market study was successfully updated.'
     else
       render :edit
