@@ -33,7 +33,7 @@ class GeneralMarketStudiesController < BaseAdminController
 
   # PATCH/PUT /general_market_studies/1
   def update
-    f_url = @general_market_study.friendly_url.find_or_initialize_by(slug: 'unknown')
+    f_url = @general_market_study.friendly_url.find_or_create_by(slug: 'unknown')
     if @general_market_study.update(general_market_study_params) and f_url.update(friendly_url_params)
       redirect_to @general_market_study, notice: 'General market study was successfully updated.'
     else
