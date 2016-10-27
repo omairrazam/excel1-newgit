@@ -22,9 +22,9 @@ class GeneralMarketStudiesController < BaseAdminController
   # POST /general_market_studies
   def create
     @general_market_study = current_user.general_market_studies.build(general_market_study_params)
-    @friendly_url = @general_market_study.build_friendly_url(friendly_url_params)
+    
 
-    if @friendly_url.save
+    if @general_market_study.save
       redirect_to @general_market_study, notice: 'General market study was successfully created.'
     else
       render :new

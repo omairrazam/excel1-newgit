@@ -24,12 +24,10 @@ class MarketStudiesController < BaseAdminController
   # POST /market_studies
   def create
     @market_study = current_user.market_studies.build(market_study_params)
-    @friendly_url = @market_study.build_friendly_url(friendly_url_params)
-    
-    
+   
 
     respond_to do |format|
-      if @friendly_url.save
+      if @market_study.save
         format.html { redirect_to @market_study, notice: 'Commentary was successfully created.' }
         format.json { render :show, status: :created, location: @market_study }
       else
