@@ -5,6 +5,7 @@ class MarketStudiesController < BaseAdminController
   #skip_authorization_check
   # GET /market_studies
   def index
+    
     @market_studies = MarketStudy.includes(:friendly_url).all.order("created_at desc").page(params[:page]).per(5)
   end
 
