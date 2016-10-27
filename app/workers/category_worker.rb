@@ -45,7 +45,7 @@ class CategoryWorker
 	        a.update_data_csv
 	        "----------------- ADT #{a.name} data updates end------------"
 	        current_progress += unit_progress
-	        at current_progress, "#{current_progress}%"
+	        at current_progress.round(2), "#{current_progress}%"
 	      end
 	    end
 
