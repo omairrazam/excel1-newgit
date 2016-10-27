@@ -37,7 +37,10 @@ class Adt < ActiveRecord::Base
 
 			adtdatums << d
 		end
-	    AdtDatum.import adtdatums
+		columns_without_id = AdtDatum.column_names.reject { |column| column == 'id' }
+		
+
+	    AdtDatum.import(columns_without_id,adtdatums)
 	end
 
 	def verify_cols_exist
