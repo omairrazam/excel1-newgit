@@ -1,4 +1,7 @@
 /* notification styling */
+text.highcharts-credits{
+  display: none;
+}
 .blue {
   color: #337ab7 ;
 }
