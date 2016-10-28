@@ -50,7 +50,7 @@ class GeneralMarketStudiesController < BaseAdminController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_general_market_study
-      @general_market_study = GeneralMarketStudy.find(params[:id])
+      @general_market_study = GeneralMarketStudy.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -1,4 +1,10 @@
 class GeneralMarketStudy < ActiveRecord::Base
 	belongs_to :user
-	#has_one :friendly_url, validate: true, dependent: :destroy
+	extend FriendlyId
+	
+	friendly_id :title, use: [:slugged, :finders]
+
+	def should_generate_new_friendly_id?
+	  title_changed?
+	end
 end

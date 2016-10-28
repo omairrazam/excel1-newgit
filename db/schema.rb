@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025203321) do
+ActiveRecord::Schema.define(version: 20161028034847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,21 +126,18 @@ ActiveRecord::Schema.define(version: 20161025203321) do
     t.integer  "category_id"
   end
 
-  create_table "friendly_urls", force: :cascade do |t|
-    t.string   "path"
-    t.string   "slug"
-    t.string   "controller"
-    t.string   "action"
-    t.string   "defaults"
-    t.integer  "market_study_id"
-    t.integer  "general_market_study_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
   end
 
-  add_index "friendly_urls", ["general_market_study_id"], name: "index_friendly_urls_on_general_market_study_id", using: :btree
-  add_index "friendly_urls", ["market_study_id"], name: "index_friendly_urls_on_market_study_id", using: :btree
-  add_index "friendly_urls", ["slug"], name: "index_friendly_urls_on_slug", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "general_market_studies", force: :cascade do |t|
     t.string   "title"
@@ -149,7 +146,10 @@ ActiveRecord::Schema.define(version: 20161025203321) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "category"
+    t.string   "slug"
   end
+
+  add_index "general_market_studies", ["slug"], name: "index_general_market_studies_on_slug", unique: true, using: :btree
 
   create_table "graph_data", force: :cascade do |t|
     t.string   "x_values"
@@ -208,7 +208,10 @@ ActiveRecord::Schema.define(version: 20161025203321) do
     t.string   "price_target"
     t.integer  "user_id"
     t.string   "image"
+    t.string   "slug"
   end
+
+  add_index "market_studies", ["slug"], name: "index_market_studies_on_slug", unique: true, using: :btree
 
   create_table "paypal_packages", force: :cascade do |t|
     t.float    "amount"
@@ -244,6 +247,13 @@ ActiveRecord::Schema.define(version: 20161025203321) do
   end
 
   add_index "sp_graphs", ["category_id"], name: "index_sp_graphs_on_category_id", using: :btree
+
+  create_table "tests", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "transactions", force: :cascade do |t|
     t.text     "notification"
@@ -320,6 +330,4 @@ ActiveRecord::Schema.define(version: 20161025203321) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "eod_data", "categories"
-  add_foreign_key "friendly_urls", "general_market_studies"
-  add_foreign_key "friendly_urls", "market_studies"
 end

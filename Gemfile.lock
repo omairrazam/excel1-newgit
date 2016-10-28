@@ -145,6 +145,8 @@ GEM
     formtastic (3.1.4)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     has_scope (0.6.0)
@@ -343,6 +345,7 @@ DEPENDENCIES
   contact_us (~> 1.1.0)
   devise
   font-awesome-rails
+  friendly_id (~> 5.1.0)
   jquery-rails
   kaminari (~> 0.17.0)
   mini_magick
